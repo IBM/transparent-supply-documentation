@@ -1,2 +1,2 @@
-# bts-documentation
-Blockchain Transparent Supply (BTS) documentation.
+# transparent-supply-documentation
+IBM Blockchain Transparent Supply (BTS) documentation.
