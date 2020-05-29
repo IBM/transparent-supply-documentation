@@ -1,0 +1,110 @@
+- title: Modules
+  pages:
+    - title: Overview
+      path: /modules/modules-overview
+    - title: Activity
+      path: /modules/activity
+    - title: Data
+      path: /modules/data
+    - title: Documents
+      path: /modules/documents
+    - title: Home
+      path: /modules/home
+    - title: Onboarding
+      path: /modules/onboarding
+    - title: Trace
+      path: /modules/trace
+    - title: Users
+      path: /modules/users
+- title: Onboarding
+  pages:
+    - title: Onboarding overview
+      path: /onboarding/onboarding-overview
+    - title: Onboarding team
+      path: /onboarding/onboarding-team
+    - title: Data requirements
+      path: /onboarding/data-requirements
+    - title: Supplier data
+      path: /onboarding/supplier-data
+    - title: Register products
+      path: /onboarding/register-products
+    - title: Register facilities
+      path: /onboarding/register-facilities
+    - title: Upload XML
+      path: /onboarding/upload-xml
+    - title: Test data
+      path: /onboarding/test-data
+    - title: Use spreadsheets
+      path: /onboarding/use-spreadsheets
+    - title: Upload spreadsheets
+      path: /onboarding/upload-spreadsheets
+- title: Automation
+  pages:
+    - title: Automate data upload
+      path: /automation/automate-data-upload
+    - title: Configure applications
+      path: /automation/configure-applications
+    - title: Signature header
+      path: /automation/signature-header
+    - title: Cryptographic signatures
+      path: /automation/cryptographic-signatures
+- title: Managing users
+  pages:
+    - title: Authentication
+      path: /managing-users/authentication
+    - title: Authenticate human users
+      path: /managing-users/authenticate-human-users
+    - title: Authenticate system users
+      path: /managing-users/authenticate-system-users
+    - title: Add new users
+      path: /managing-users/add-new-users
+    - title: Assign user roles
+      path: /managing-users/assign-user-roles
+    - title: Java sample
+      path: /managing-users/java-sample
+    - title: TypeScript sample
+      path: /managing-users/typescript-sample
+    - title: IIB sample
+      path: /managing-users/iib-sample
+- title: How to
+  pages:
+    - title: Log in as new user
+      path: /how-to/login-new-user
+    - title: Trace products
+      path: /how-to/trace-products
+    - title: Manage documents
+      path: /how-to/manage-documents
+    - title: Monitor activity
+      path: /how-to/monitor-activity
+    - title: View usage
+      path: /how-to/view-usage
+    - title: View Trace usage
+      path: /how-to/view-trace-usage
+    - title: Whitelist custom URLs
+      path: /how-to/whitelist-custom-urls
+- title: APIs
+  pages:
+    - title: Swagger APIs
+      path: /apis/swagger-apis
+    - title: Trace API
+      path: /apis/trace-api
+    - title: Documents API
+      path: /apis/documents-api
+    - title: API error codes
+      path: /apis/api-error-codes
+    - title: Connector API error messages
+      path: /apis/connector-api-error-messages
+- title: Reference
+  pages:
+    - title: GS1 standards
+      path: /reference/gs1-standards
+    - title: Solution identifiers
+      path: /reference/solution-identifiers
+    - title: Data types
+      path: /reference/data-types
+    - title: Data entitlement mode
+      path: /reference/data-entitlement-mode
+    - title: Payload data
+      path: /reference/payloads
+    - title: Message codes
+      path: /reference/message-codes

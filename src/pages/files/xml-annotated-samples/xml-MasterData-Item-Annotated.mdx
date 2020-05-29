@@ -1,0 +1,71 @@
+---
+title: Master Data Item XML example
+description: Example of Master Data Item XML data for upload
+---
+
+<PageDescription>
+
+Master Data Item data is uploaded in XML format, as shown in the
+example below.
+
+</PageDescription>
+
+## Master Data Item XML example
+
+The following example shows example Master Data Item data in XML:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<item_data_notification:itemDataNotificationMessage
+    xmlns:item_data_notification="urn:gs1:ecom:item_data_notification:xsd:3"
+    xmlns:sh="http://www.unece.org/cefact/namespaces/StandardBusinessDocumentHeader"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:gs1:ecom:item_data_notification:xsd:3 ../Schemas/gs1/ecom/ItemDataNotification.xsd">
+    <sh:StandardBusinessDocumentHeader>
+        <sh:HeaderVersion>1.0</sh:HeaderVersion>
+        <!--Don't change-->
+        <sh:Sender>
+            <sh:Identifier Authority="GS1">4098765000010</sh:Identifier>
+            <!--Mandatory: GLN (global location number) for the party who sent this item information-->
+        </sh:Sender>
+        <sh:Receiver>
+            <sh:Identifier Authority="GS1">5412345000013</sh:Identifier>
+            <!--GLN for party that is recipient of this item information-->
+            <!--Mandatory, but can be left empty-->
+        </sh:Receiver>
+        <sh:DocumentIdentification>
+            <sh:Standard>GS1</sh:Standard>
+            <!--Don't change-->
+            <sh:TypeVersion>3.2</sh:TypeVersion>
+            <!--Don't change-->
+            <sh:InstanceIdentifier>ID37788</sh:InstanceIdentifier>
+            <!--Mandatory: Document identifier which uniquely identifies this message-->
+            <sh:Type>Item Data Notification</sh:Type>
+            <!--Don't change-->
+            <sh:MultipleType>false</sh:MultipleType>
+            <!--Don't change-->
+            <sh:CreationDateAndTime>2011-04-11T14:58:56.591Z</sh:CreationDateAndTime>
+            <!--Mandatory: Time when this message was created-->
+        </sh:DocumentIdentification>
+    </sh:StandardBusinessDocumentHeader>
+    <tradeItemData>
+        <tradeItemDescription languageCode="en">Ingredient ABC</tradeItemDescription>
+        <!--Mandatory: English language description of item-->
+        <gtin>40987650000346</gtin>
+        <!--Mandatory: GTIN (global trade identification number) or IBM Blockchain Transparent Supply™ Product ID for item-->
+        <!--IBM Blockchain Transparent Supply™ Product ID: urn:ibm:ift:product:class:<Company Prefix>.<Item Reference>-->
+        <sku>5512123221</sku>
+        <!--Mandatory: SKU for item-->
+        <dataSource>
+            <gln>4098765000010</gln>
+            <!--Mandatory: GLN identifying the party who sent this item information-->
+        </dataSource>
+        <dataRecipient>
+            <gln>5412345000013</gln>
+            <!--Optional: GLN identifying party that is recipient of this item information-->
+        </dataRecipient>
+        <!-- NOTE: <dataRecipient>, </dataRecipient> tags should not be omitted even if <gln> is omitted. -->
+    </tradeItemData>
+</item_data_notification:itemDataNotificationMessage>
+```
+
+<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>

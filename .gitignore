@@ -1,0 +1,12 @@
+# Gatsby - Generated folders
+.cache
+public
+
+# Dependencies
+node_modules
+
+# IDE - VSCode
+.vscode
+
+# System files
+.DS_Store

@@ -1,0 +1,161 @@
+---
+title: Receive Advice XML example
+description: Example of Receive Advice XML data for upload
+---
+
+<PageDescription>
+
+Receive Advice data is uploaded in XML format, as shown in the
+example below.
+
+</PageDescription>
+
+## Receive Advice XML example
+
+The following example shows example Receive Advice data in XML:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<receiving_advice:receivingAdviceMessage
+    xmlns:receiving_advice="urn:gs1:ecom:receiving_advice:xsd:3"
+    xmlns:sh="http://www.unece.org/cefact/namespaces/StandardBusinessDocumentHeader"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:gs1:ecom:receiving_advice:xsd:3 ../Schemas/gs1/ecom/ReceivingAdvice.xsd">
+    <sh:StandardBusinessDocumentHeader>
+        <sh:HeaderVersion>1.0</sh:HeaderVersion>
+        <sh:Sender>
+            <sh:Identifier Authority="GS1">5412345000013</sh:Identifier>
+        </sh:Sender>
+        <sh:Receiver>
+            <sh:Identifier Authority="GS1">4098765000010</sh:Identifier>
+        </sh:Receiver>
+        <sh:DocumentIdentification>
+            <sh:Standard>GS1</sh:Standard>
+            <sh:TypeVersion>3.2</sh:TypeVersion>
+            <sh:InstanceIdentifier>20051</sh:InstanceIdentifier>
+            <!-- Number to identify the document -->
+            <sh:Type>Receiving Advice</sh:Type>
+            <!--Identifies this is a RA document -->
+            <sh:MultipleType>false</sh:MultipleType>
+            <sh:CreationDateAndTime>2011-04-11T14:58:56.591Z</sh:CreationDateAndTime>
+        </sh:DocumentIdentification>
+    </sh:StandardBusinessDocumentHeader>
+    <!-- **********************************************************************************
+         NOTE : Comments for a field appear BELOW the field.
+         This is a Receive Advice, submitted from to a Retailer to a Supplier.
+         Currently, the supplier sends a copy ("shadows") of the DA, in this format to the Blockchain.
+         OPTIONAL fields are indicated.
+         ********************************************************************************** -->
+    <receivingAdvice>
+        <creationDateTime>2011-04-11T14:58:56.591Z</creationDateTime>
+        <!-- MANDATORY -->
+        <documentStatusCode>ORIGINAL</documentStatusCode>
+        <!-- Do not change. -->
+        <receivingAdviceIdentification>
+            <entityIdentification>urn:epcglobal:cbv:bt:5412345000037:20051</entityIdentification>
+            <!-- MANDATORY -->
+            <!-- Despatch Advice Number: The format for this is urn:epcglobal:cbv:bt:<gln>:<ra-number>
+                 where <gln> is the "shipTo" GLN (below) AND  <ra-number> should NOT contain a ":" character.
+                 Reference: https://www.gs1.org/sites/default/files/docs/epc/CBV-Standard-1-2-1-r-2017-05-05.pdf  [Section 8.5.2] -->
+            <!-- IBM Blockchain Transparent Supply™ Transaction ID format: urn:ibm:ift:bt:<Company Prefix>.<Location Reference>.<Transaction Id>-->
+            <!-- where <Company Prefix>.<Location Reference> are for the "shipTo" location-->
+        </receivingAdviceIdentification>
+        <receivingDateTime>2011-04-13T14:58:56.591Z</receivingDateTime>
+        <!--MANDATORY-->
+        <reportingCode>FULL_DETAILS</reportingCode>
+        <shipper>
+            <gln>4098765000010</gln>
+            <!-- MANDATORY: Shipper Corporate Identity GLN -->
+        </shipper>
+        <receiver>
+            <gln>5412345000013</gln>
+            <!-- MANDATORY: Retailer Corporate Identity GLN -->
+        </receiver>
+        <shipTo>
+            <gln>5412345000037</gln>
+            <!-- MANDATORY: Physical location where product is to be received -->
+        </shipTo>
+        <despatchAdvice>
+            <entityIdentification>urn:epcglobal:cbv:bt:5412345000037:3352-349875</entityIdentification>
+            <!-- OPTIONAL -->
+            <!-- DA (a.k.a. ASN) number to be filled in by the retailer -->
+            <!-- Either DA or PO number should be present -->
+            <!-- Top-level DA identifier. Line-item DA, if present, overrides this-->
+        </despatchAdvice>
+        <purchaseOrder>
+            <entityIdentification>urn:epcglobal:cbv:bt:5412345000037:3352</entityIdentification>
+            <!-- OPTIONAL -->
+            <!-- PO number to be filled in by the retailer -->
+            <!-- Either DA or PO number should be present -->
+            <!-- Recommendation: PO number should be included. DA should be included when available. -->
+            <!-- Top-level PO identifier. Line-item PO, if present, overrides this. -->
+        </purchaseOrder>
+        <receivingAdviceLogisticUnit>
+            <!-- First pallet, modular that was received -->
+            <packageTypeCode>PE</packageTypeCode>
+            <!--MANDATORY -->
+            <!--Code that indicates package type. -->
+            <!--Use Code Value from: http://apps.gs1.org/GDD/Pages/clDetails.aspx?semanticURN=urn:gs1:gdd:cl:PackageTypeCode&release=2-->
+            <!--"PE"=pallet, modular-->
+            <logisticUnitIdentification>
+                <sscc>409876506700001010</sscc>
+                <!--MANDATORY: Pallet SSCC or IBM Blockchain Transparent Supply™ logistic unit ID - EPC_SSCC, GS1_SSCC, FTLPN, or SSCC_LA -
+                  Refer to API Error Codes documentation for formats.-->
+                <!--IBM Blockchain Transparent Supply™ logistic unit ID: urn:ibm:ift:lpn:obj:<Company Prefix>.<Serial Reference>-->
+            </logisticUnitIdentification>
+            <receivingAdviceLineItem>
+                <lineItemNumber>1</lineItemNumber>
+                <quantityReceived measurementUnitCode="KGM">48</quantityReceived>
+                <!-- MANDATORY: How many units arrived -->
+                <!-- Two or three-character codes from UN/CEFACT Recommendation 20.-->
+                <!-- Examples: EA (each), LBR (pound), CS (case), KGM (kilogram).-->
+                <!-- See https://www.unece.org/fileadmin/DAM/cefact/recommendations/rec20/rec20_rev3_Annex2e.pdf and-->
+                <!-- https://www.unece.org/fileadmin/DAM/cefact/recommendations/rec20/rec20_rev3_Annex3e.pdf.-->
+                <quantityAccepted measurementUnitCode="KGM">38</quantityAccepted>
+                <!-- MANDATORY: How many units were accepted -->
+                <transactionalTradeItem>
+                    <gtin>08712345678906</gtin>
+                    <!-- MANDATORY: Product that was shipped -->
+                </transactionalTradeItem>
+                <requestedItemIdentification>
+                    <gtin>40987650000223</gtin>
+                    <!-- MANDATORY: Product that was requested -->
+                </requestedItemIdentification>
+                <despatchAdvice>
+                    <!-- OPTIONAL Field : DA at the line item level -->
+                    <-- Necessary for computing order-reconciliation metrics. -->
+                    <entityIdentification>urn:epcglobal:cbv:bt:5412345000037:3352-349875</entityIdentification>
+                    <!-- urn:epcglobal:cbv:bt:ShipToGLN:PONumber-ASNNumber -->
+                    <!-- The retailer should get the above filds from the PO and the ASN that he receives from the supplier -->
+                    <lineItemNumber>1</lineItemNumber>
+                </despatchAdvice>
+                <purchaseOrder>
+                    <!-- OPTIONAL Field : PO at the line item level -->
+                    <entityIdentification>urn:epcglobal:cbv:bt:5412345000037:3352</entityIdentification>
+                    <lineItemNumber>1</lineItemNumber>
+                </purchaseOrder>
+                <receivingConditionInformation>
+                    <receivingConditionCode>DAMAGED_PRODUCT_OR_CONTAINER</receivingConditionCode>
+                    <!-- MANDATORY in receivingConditionInformation element.-->
+                    <!-- Condition of product that was rejected.-->
+                    <!-- Code from: http://apps.gs1.org/GDD/Pages/clDetails.aspx?semanticURN=urn:gs1:gdd:cl:ReceivingConditionCode&release=1-->
+                    <receivingConditionQuantity measurementUnitCode="KGM">10</receivingConditionQuantity>
+                    <!-- MANDATORY in receivingConditionInformation element.-->
+                    <!-- How many units were rejected -->
+                </receivingConditionInformation>
+                <!-- OPTIONAL: Receiving condition information for subset of received products. This element can be omitted. -->
+                <receivingConditionInformation>
+                    <receivingConditionCode>GOOD_CONDITION</receivingConditionCode>
+                    <!-- MANDATORY in receivingConditionInformation element.-->
+                    <!-- Condition of the product that was accepted: The code should be from a set of GS1 codes -->
+                    <receivingConditionQuantity measurementUnitCode="KGM">38</receivingConditionQuantity>
+                    <!-- MANDATORY in receivingConditionInformation element.-->
+                    <!-- How many units were accepted -->
+                </receivingConditionInformation>
+                <!-- OPTIONAL: Receiving condition information for subset of received products. This element can be omitted -->
+            </receivingAdviceLineItem>
+        </receivingAdviceLogisticUnit>
+    </receivingAdvice>
+</receiving_advice:receivingAdviceMessage>
+```
+
+<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>

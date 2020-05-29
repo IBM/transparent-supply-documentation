@@ -1,0 +1,118 @@
+---
+title: IIB sample
+description: Using IBM Integration Bus (IIB) to programmatically exchange system user tokens
+---
+
+<PageDescription>
+
+**IBM Integration Bus (IIB)** is a message bus platform that allows for enterprise-level
+message handling. Use of IIB assumes that you are already familiar with IIB v10, as
+documented in
+the <a href="https://www.ibm.com/support/knowledgecenter/en/SSMKHH_10.0.0/com.ibm.etools.msgbroker.helphome.doc/help_home_msgbroker.htm" target="_blank">IBM Knowledge Center</a>.
+
+</PageDescription>
+
+## Usage
+
+The <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/IIB/IIB_IFT_authentication_library.zip'}>IIB_IFT_authentication_library.zip</a> zip
+file is a shared library that handles the communication interchange with the <SolutionName /> authentication service.
+
+The <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/IIB/IIB_IFT_submit_XML_API.zip'}>IIB_IFT_submit_XML_API.zip</a> zip
+file is a full end-to-end sample that includes the <SolutionName /> authentication library. It is
+an HTTP REST service that accepts an XML message and uploads it to the solution network. This
+can be dropped into your existing IIB environment and customized to fit your needs.
+
+Download the zip files and import them into your IIB Toolkit: **File -> Import... -> Project Interchange**.
+
+## Code walkthrough
+
+Because IIB handles messages in the SOAP format natively, some nodes were added to the flows to give the
+look and feel of a REST API. For example, instead of having subflows encapsulated in TryCatch nodes
+and throwing errors, local environment variables are set and checked via FilterNodes. A compute node
+at the end of the main <SolutionName /> submit XML API flow checks these variables and sets a 500 response
+header with a meaningful JSON response (to match the format of a successful 201 response).
+
+**Local environment variables**
+
+The flows utilize the following variable structure:
+- LocalEnvironment
+  - Variables
+    - <SolutionName />
+      - environment - *name of the target <SolutionName /> environment (e.g. PRODUCTION)*
+      - apikey
+      - orgId
+      - xml - *The XMLNS object of the XML string passed into the flow*
+      - error_message - *message received from an API call*
+      - error_location - *name of the subflow where the error originated from*
+      - error_message_detail - *full context from the API error*
+      - iam_token
+        - access_token
+        - token_type
+        - expires_in
+        - expiration
+        - scope
+      - service_token
+    - message_backup
+
+### 1. Submit XML (subflow)
+
+**Flow highlights:**
+
+1. Call subflow node: Call the <SolutionName />_Authenticate subflow (see below)
+2. Filter node: Check to see if the exchange token process was successful.
+3. HTTP Request node: Submit the XML payload to <SolutionName /> with the API key acquired from the <SolutionName />_Authenticate subflow
+
+### 2. <SolutionName /> authentication (subflow)
+
+**Flow highlights:**
+
+1. Java compute node: Check the local environment variable for an existing token expiration value. If one exists, check it against the current time and if it has expired, obtain a new one; otherwise, skip the flow (too many calls to the obtain IBM Cloud IAM Service will be denied)
+2. Compute node: Back up the existing message since the HTTP Request nodes will overwrite it.
+3. Java compute node: Call the IBM Cloud IAM service, request a token and store the token in LocalEnvironment Variables.
+4. HTTP request node: Call the <SolutionName /> Authentication API and exchange the token for a service token.
+5. Compute node: Store the service token in a local environment variable.
+6. Compute node: Restore the original inbound message into the message body.
+
+
+### 3. <SolutionName /> submit XML API flow
+
+The flow is configured for the HTTP path: `/ift_submit_xml/`
+
+**Flow highlights**
+
+1. Compute node: Read the inbound JSON payload and store the values in local
+environment variables. Note -- the XML payload was stored as a string, so this node
+converts the node into a proper XMLNS format and stores it as a local environment variable.
+2. Call subflow node: Call the Submit_<SolutionName />_XML subflow from the shared
+library (see above for details).
+3. Filter node: Check a local environment variable to see if an error message exists
+and route as needed.
+4. Compute node: Format the error response.
+
+## Try it out!
+
+Once deployed to your IIB integration node, you can send a JSON payload through
+the flow. The flow expects the following format:
+
+**URL format:** `http://<integration node>:<debug port>/ift_submit_xml/`
+
+**Payload format:**
+
+**Note**: If your organization is registered in the <SolutionName /> sandbox
+environment, you can specify `"environment": "SANDBOX",`
+
+```json
+{
+  "environment":  "PRODUCTION",
+  "apikey":  "...",
+  "orgId": "...",
+  "xml" : "<?xml version=\"1.0\" ...."
+}
+```
+
+## Related topics
+
+- [Java sample](/managing-users/java-sample)
+- [TypeScript sample](/managing-users/typescript-sample)
+
+<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>

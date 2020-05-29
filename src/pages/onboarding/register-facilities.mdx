@@ -1,0 +1,222 @@
+---
+title: Register facilities
+description: Register your organization's facilities
+---
+
+<PageDescription>
+
+To trace and share product information with your <SolutionName /> supply chain
+partners, you must first register your organization's facilities (locations). A
+registered facility can be any physical location with a unique ID, including manufacturing plants,
+distribution centers, and warehouses. Sublocations, or zones within a facility, are also supported.
+
+</PageDescription>
+
+## Overview
+
+A facility ID is required to register each
+facility; this ID can be either a [GS-1 GTIN and URN](/reference/gs1-standards) or a
+[custom identifier](/reference/solution-identifiers). <SolutionName /> supports
+multiple [GS-1 facility ID](/reference/gs1-standards) formats, including the
+[GS-1 URN](/reference/gs1-standards) format.
+
+If your facility is not registered with GS-1, you can request a [custom facility
+ID](/reference/solution-identifiers). Once you have your custom facility IDs,
+register each facility using one of the methods described below.
+
+Multiple facilities can be defined at the same physical location and address, as long as each one
+has a unique identifier.
+
+## GDPR notice
+
+**Attention**: To comply with <a href="https://gdpr.eu/" target="_blank">EU General Data
+Protection Regulation (GDPR)</a> data privacy requirements, you must ensure that no personal
+data is uploaded to <SolutionName /> in any free-form text fields or in any comments.
+
+## Registration methods
+
+You can quickly register facilities using the UI <a href={process.env.GATSBY_UI_URL + '/self-guided-onboarding/manage-data/facilities'}
+target="_blank">Onboarding module</a>. **Note**: The identical facility registration functionality
+is also available in the UI <a href={process.env.GATSBY_UI_URL + '/manage-data/facilities'} target="_blank">Data module</a>.
+
+As an alternative to the UI, your data integration experts may choose to use
+the <a href={process.env.GATSBY_UI_URL + '/manage-data/bulk-upload'} target="_blank">Spreadsheets</a> method or
+the **Connector API** method to register large numbers of facilities.
+
+### Using the UI
+
+Use the <a href={process.env.GATSBY_UI_URL + '/self-guided-onboarding/manage-data/facilities'} target="_blank">Onboarding module</a> or
+the <a href={process.env.GATSBY_UI_URL + '/manage-data/facilities'} target="_blank">Data module</a> to quickly register your facilities.
+
+### Using spreadsheets
+
+Use the UI <a href={process.env.GATSBY_UI_URL + '/self-guided-onboarding/manage-data/bulk-upload'} target="_blank">Spreadsheet
+templates</a> page to register your facilities using Microsoft&reg; Excel&trade; files. After
+downloading and completing your spreadsheets, you will upload them to <SolutionName /> using the UI.
+
+Refer to the [Using spreadsheets](/onboarding/use-spreadsheets) documentation for complete usage details.
+
+### Using the Connector API
+
+To register facilities using the <a href={process.env.GATSBY_UI_URL + '/ift/api/connector/swagger-ui.html'} target="_blank">
+Connector API</a>, you will use the XML [Master Item Data](/reference/data-types#master-data) type.
+The Master Item Data message type is derived from the GS1 Item Data Notification XML message type,
+and is used for registering locations (facilities) on <SolutionName />.
+
+Master item data is class-level master data corresponding to a GLN (Global Location Number)
+or custom facility ID, is typically uploaded by the creator of the facility
+in <SolutionName />, and consists of the following data points:
+
+* Text description
+* GLN or [<SolutionName /> facility ID](/reference/solution-identifiers)
+
+The following XML shows the specific mandatory and optional fields in the
+[annotated facility master data file](/files/xml-annotated-samples/xml-MasterData-Facility-Annotated):
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<basic_party_registration:basicPartyRegistrationMessage
+    xmlns:basic_party_registration="urn:gs1:gdsn:basic_party_registration:xsd:3"
+    xmlns:sh="http://www.unece.org/cefact/namespaces/StandardBusinessDocumentHeader"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:gs1:gdsn:basic_party_registration:xsd:3 ../Schemas/gs1/gdsn/BasicPartyRegistration.xsd">
+    <sh:StandardBusinessDocumentHeader>
+        <sh:HeaderVersion>1.0</sh:HeaderVersion>
+        <sh:Sender>
+            <sh:Identifier Authority="GS1">8712345678913</sh:Identifier>
+        </sh:Sender>
+        <sh:Receiver>
+            <sh:Identifier Authority="GS1">9712345678912</sh:Identifier>
+            <!--Mandatory, but can be left empty.-->
+        </sh:Receiver>
+        <sh:DocumentIdentification>
+            <sh:Standard>GS1</sh:Standard>
+            <sh:TypeVersion>3.1</sh:TypeVersion>
+            <sh:InstanceIdentifier>20051101</sh:InstanceIdentifier>
+            <sh:Type>basicPartyRegistration</sh:Type>
+            <sh:CreationDateAndTime>2011-04-11T14:58:56.591Z</sh:CreationDateAndTime>
+        </sh:DocumentIdentification>
+    </sh:StandardBusinessDocumentHeader>
+    <!--Party here refers to a Facility, as well.-->
+    <party>
+        <isPartyActive>true</isPartyActive>
+        <!--MANDATORY: isPartyActive will be set to False, if a facility is closed etc.-->
+        <registeringParty>0032334500017</registeringParty>
+        <!--MANDATORY: Organization's corporate identity GLN-->
+        <gln>0032334500352</gln>
+        <!--MANDATORY: GLN or IBM Blockchain Transparent Supply™ facility ID of the party (location) being registered-->
+        <!--IBM Blockchain Transparent Supply™ Facility ID format: urn:ibm:ift:location:loc:<Company Prefix>.<Location Reference>-->
+        <partyAddress>
+            <!--MANDATORY: This section is Mandatory; However, some of the fields below are optional.-->
+            <city>Atlanta</city>
+            <!--MANDATORY-->
+            <countryCode>840</countryCode>
+            <!--MANDATORY: ISO 3166-1 numeric-3 code https://en.wikipedia.org/wiki/ISO_3166-1_numeric.-->
+            <!--Numeric-3 country codes offer script-independence, and are consistent with GDSN 3.1.-->
+            <!--"840"=USA.-->
+            <name>Mondial Distribution</name>
+            <!--MANDATORY: Name of the facility-->
+            <postalCode>07654</postalCode>
+            <!--MANDATORY-->
+            <!--OPTIONAL (BEGIN): THE FIELDS BELOW ARE OPTIONAL.-->
+            <languageOfThePartyCode>en</languageOfThePartyCode>
+            <!--ISO 639-1 alpha-2 code https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes.-->
+            <state>Georgia</state>
+            <!--Use complete state name, if applicable.-->
+            <cityCode>string</cityCode>
+            <countyCode>string</countyCode>
+            <crossStreet>string</crossStreet>
+            <pOBoxNumber>string</pOBoxNumber>
+            <provinceCode>string</provinceCode>
+            <streetAddressOne>1 Peachtree Avenue</streetAddressOne>
+            <streetAddressTwo>Suite 911</streetAddressTwo>
+            <geographicalCoordinates>
+                <latitude>33.24</latitude>
+                <longitude>-83.44</longitude>
+            </geographicalCoordinates>
+            <!--OPTIONAL (END): THE FIELDS ABOVE ARE OPTIONAL.-->
+        </partyAddress>
+        <partyRole>
+            <!--MANDATORY: The section below describes the role that this location/facility is playing.-->
+            <!--For example, whether this is a DC or a store or corporate-identity, etc.-->
+            <partyName>SuperStore</partyName>
+            <!--MANDATORY: Name of the owning entity.-->
+            <partyRoleCode>DISTRIBUTOR</partyRoleCode>
+            <!--MANDATORY: Role of this facility.-->
+            <!--Value from standard GS1 code-list: http://apps.gs1.org/GDD/Pages/clDetails.aspx?semanticURN=urn:gs1:gdd:cl:PartyRoleCode&release=3 -->
+            <!--Use partyRoleCode=CORPORATE_IDENTITY for organization's identity/headquarters.-->
+            <!--A value from the IBM Blockchain Transparent Supply™ custom partyRole code-list can also be used:-->
+            <!--https://github.com/IBM/IFT-Developer-Zone/wiki/doc-IFT-Message-Codes -->
+            <!--Note: The IBM Blockchain Transparent Supply™ custom code-list includes the standard GS1 code-list as a subset.-->
+        </partyRole>
+    </party>
+</basic_party_registration:basicPartyRegistrationMessage>
+```
+
+Once you have created your XML, use the <a href={process.env.GATSBY_UI_URL + '/ift/api/connector/swagger-ui.html'} target="_blank">
+Connector API</a> to register your products with <SolutionName />. You must authenticate first to
+use the Connector API via Swagger. Without this step, all attempts will result in a 401 Not Authorized
+error. After authenticating successfully, Swagger will redirect you to an authenticated session; Swagger only
+notifies users in the case of authentication failures.
+
+**When calling the Connector API outside of Swagger, (e.g. via curl, postman or programmatically), you must
+include your access token in the Authorization header of the request.** For example, for access token **xyz**,
+specify `Bearer xyz` in the Authorization header.
+
+For compliance with data privacy laws, including GDPR, do not submit any data that personally identifies an
+individual to <SolutionName />.
+
+**Attention**: Clicking the Swagger **Try it out** button submits your API call to the <SolutionName /> network
+and permanently writes your data to the blockchain ledger. This is not a test.
+
+#### Implementation notes
+
+- An <SolutionName /> asset is data that has been uploaded, by an authorized user, as one of the supported
+document types. Call the **Asset** endpoint to create an asset for the following data types: Purchase Order,
+Despatch Advice, Receive Advice, EPCIS Events, Master Data Item, or Master Data Facility.
+- Refer to the supported schema and example XML [data types](/reference/data-types) as needed. <SolutionName />
+verifies the submitted XML with the corresponding schema. The response will describe any errors.
+- Review your data entitlement and access protocols for details on sharing data with your <SolutionName />
+supply chain partners.
+- Review [Cryptographic signatures](/automation/cryptographic-signatures) for details on signing XML
+documents for authenticity and chain of custody.
+- Response Class (Status 201) Asset Creation Submitted - A successful response will return an array of URNs.
+A URN will be in the format `urn:ibm:provenance:asset:layer:label:org:channel:namespace:instance`. **Please
+ensure these URNs are retained.**
+
+#### Connector API - upload XML
+
+Use the following procedure to upload XMl through the Connector API:
+
+1. Log in to the <a href={process.env.GATSBY_UI_URL + '/ift/api/connector/swagger-ui.html'} target="_blank">Connector API</a>.
+1. Select Authenticate here first to log in to the environment with your IBMid.
+1. Select your **organization** and authenticate with your IBMid. Then select *"Expand Operations"* from the bottom right.
+1. Click **Expand operations** for the **Assets** endpoint.
+1. Edit the mandatory fields, and any optional fields, in your XML file.
+1. Paste your XML into the **Asset** field, under **Parameters**.
+1. Optionally, set the data entitlement mode, which dictates which of your supply chain
+partners can view the uploaded data. On Swagger the default value is **None**, which means data sharing defaults to
+your organization's data access control policy.
+1. Click the **Try it Out** button. If successful, the data will upload to <SolutionName /> with a response code of "201". A response of
+201 is returned for a successful data upload; anything other than 201 indicates the described error.
+
+#### Error 400
+
+If the **body** content is malformed or missing any required fields, a 400: Bad Request
+response error will be returned with JSON describing the error.
+
+Example:
+```json
+{
+  "message": "XML document structures must start and end within the same entity."
+}
+```
+
+## Related topics
+
+- <a href={process.env.GATSBY_UI_URL + '/self-guided-onboarding'} target="_blank">Onboarding module</a>
+- [Using spreadsheets](/onboarding/use-spreadsheets)
+- <a href={process.env.GATSBY_UI_URL + '/ift/api/connector/swagger-ui.html'} target="_blank">Connector API</a>
+- [Data entitlement mode](/reference/data-entitlement-mode)
+- [Cryptographic signatures](/automation/cryptographic-signatures)
+
+<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>

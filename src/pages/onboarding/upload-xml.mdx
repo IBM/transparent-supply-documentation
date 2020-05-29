@@ -1,0 +1,185 @@
+---
+title: Upload XML
+description: Uploading data in XML format using the Connector API
+---
+
+<PageDescription>
+
+**<SolutionName />** organizations upload data in XML format using the <a href={process.env.GATSBY_UI_URL + '/ift/api/connector/swagger-ui.html'} target="_blank">
+Connector API</a>. As described below, there are several methods available for creating compliant
+XML messages.
+
+</PageDescription>
+
+## GDPR notice
+
+**Attention**: To comply with <a target="_blank" href="https://gdpr.eu/">EU General
+Data Protection Regulation (GDPR)</a> data privacy requirements, you must ensure
+that no personal data is uploaded to <SolutionName /> in any free-form text fields
+or in any comments.
+
+## Overview
+
+<p>
+
+  <SolutionName /> users will select one of two methods to upload data in XML format:
+    1) upload data manually, using API calls (human users); or 2) upload data automatically,
+    using a defined workflow (system users and applications). In either case, the user
+    (human, system or application) uploading the data must be authenticated and
+    registered with <SolutionName />. The user must include a valid service token with
+    each submitted XML message.
+
+</p>
+
+## Prerequisites
+
+To upload data to <SolutionName /> in XML messages, the user (human, system or application)
+must have a valid <a target="_blank" href="https://www.ibm.com/account/us-en/signup/register.html">IBMid</a>.
+
+Each IBMid must also be registered with <SolutionName />, by an **Account admin**. To **register human users**:
+Register the user's IBMid (email address) with <SolutionName />, at <a href={process.env.GATSBY_UI_URL + '/manageUsers'} target="_blank">Users dashboard</a>.
+To **register system users and applications**: Obtain a service ID for each system user, as described
+in the prerequisites section in [Authenticate system users](/managing-users/authenticate-system-users).
+
+## Manual submission
+
+Use the following steps to manually (using the Swagger API) upload data to <SolutionName />.
+An authenticated and registered user ID (human users only) is required. Each successfully
+submitted XML message creates an asset on the network:
+
+1. Sign in to IBM with your <a target="_blank" href="https://www.ibm.com/account/us-en/signup/register.html>IBMid</a.
+2. Connect to the Swagger <a href={process.env.GATSBY_UI_URL + '/ift/api/connector/swagger-ui.html'} target="_blank"><SolutionName /> Connector API</a>.
+3. Expand the **Assets** **POST /fs/connector/v1/assets** API.
+4. From your local system, copy the XML message file contents (e.g. EPCIS event, Purchase Order, Receive Advice or Despatch Advice); then paste the contents into the **Create Asset** API parameters **asset** field.
+5. At the bottom of the API, upload the XML message (data) by clicking the **Try it out!** button.
+6. If successful, a 201 response message is displayed. If an error occurs, a 40x response message is displayed, with an explanation. If necessary, correct the error and retry the **Create asset** API.
+
+## Automated submission
+
+Only authenticated system users or applications (ServiceId) can automatically upload data
+to <SolutionName />. Before defining an automated workflow to upload data, ensure that the
+ServiceId has a valid token and is registered with <SolutionName />. If necessary, follow
+the process to [obtain a valid token](/managing-users/authenticate-system-users) (example POST request
+using CURL to send EPCIS Observation XML).
+
+Complete the following process to configure a system user or application (authenticated
+ServiceId) to automatically upload data to <SolutionName />:
+
+1. Retrieve a token for the ServiceId from <SolutionName /> authentication.
+1. Start a POST request to: `https://<solution domain name>/ift/api/connector/fs/connector/v1/assets`
+1. Paste the token in the **Authorization Header**, as follows: `Bearer` &lt;token&gt;.
+1. Submit the XML message to <SolutionName />.
+1. Receive a new asset ID from <SolutionName />, which indicates a successful POST and upload of data.
+
+### Curl
+
+The following command line example POST request uses the cURL command to send the XML message
+file **EPCIS_Observation.xml** to the <SolutionName /> service (URL). The user's Bearer (onboarding)
+token is specified:
+
+```bash
+$ curl -X POST --header 'Content-Type: application/xml' --header 'Accept: application/json' --header
+'Authorization: Bearer <ONBOARDING_TOKEN>' -d @EPCIS_Observation.xml
+'https://<solution domain name>/ift/api/connector/fs/connector/v1/assets'
+```
+
+A successful POST returns the following message containing a list of the asset IDs created:
+
+```json
+{
+  "ids": [
+    "urn:ibm:provenance:asset:event:observation:9dd5cfaf-802b-4c70-8ae3-0770232f61a1:default:default:e2952199846fee144b34f06ea5485d2afbb04edc7297c03bf19c03ab8b3060e6"
+  ]
+}
+```
+
+If necessary, review the [API error codes](/apis/api-error-codes).
+
+### Bash
+
+A sample Bash script is provided to configure an automated data submission
+workflow for system users and applications. The code snippet
+is shown below, folled by the sample script; the ServiceId authentication
+&lt;token&gt;, and the XML &lt;file&gt; to upload must be specified:
+
+```
+POST_XML.sh -t <token> -f <file>
+```
+
+#### Sample Bash script
+
+```
+#!/bin/bash
+token=""
+file=""
+
+while getopts ":t:f:" opt; do
+  case $opt in
+    t)
+      token=$OPTARG
+      ;;
+    f)
+     file=$OPTARG
+      ;;
+  esac
+done
+
+RESPONSE=$(curl --silent --write-out "HTTPSTATUS:%{http_code}" -X POST --header 'Content-Type: application/xml' --header 'Accept: application/json' --header "Authorization: Bearer $token" -d @$file '/api/connector/fs/connector/v1/assets')
+BODY=$(echo $RESPONSE | sed -e 's/HTTPSTATUS\:.*//g')
+STATUS=$(echo $RESPONSE | tr -d '\n' | sed -e 's/.*HTTPSTATUS://')
+
+echo "Response body: $BODY"
+echo "Response status: $STATUS"
+
+if [ $STATUS -eq 201  ]; then
+  echo "Asset Created"
+  exit 0
+fi
+
+DETAILS_MESSAGE="Details for this error can be found here."
+
+if [ $STATUS -eq 400  ]; then
+  echo "Bad Request.  $DETAILS_MESSAGE /apis/400-bad-request"
+elif [ $STATUS -eq 401 ]; then
+  echo "Unauthorized.  $DETAILS_MESSAGE /apis/401-unauthorized"
+elif [ $STATUS -eq 403  ]; then
+  echo "Forbidden.  $DETAILS_MESSAGE /apis/403-forbidden"
+elif [ $STATUS -eq 415  ]; then
+  echo "Unsupported Media Type.  $DETAILS_MESSAGE /apis/415-unsupported-media-type"
+elif [ $STATUS -eq 500  ]; then
+  echo "Internal Server Error.  $DETAILS_MESSAGE /apis/500-internal-server-error"
+elif [ $STATUS -eq 503  ]; then
+  echo "Service Unavailable.  $DETAILS_MESSAGE /apis/503-service-unavailable"
+fi
+echo "Retry sending the xml once the error has been corrected"
+```
+
+
+#### Responses
+
+**201 Asset Created.**  This is returned when the submitted XML has been successfully
+processed.  A response body will also be returned containing the asset ids that were
+generated for each asset contained in the xml.
+
+Sample **201 Asset Created** response body with asset IDs:
+
+```json
+{
+  "message": {
+    "ids": [
+      "urn:ibm:provenance:asset:event:transformation:org:default:default:dbdadc0dc3b2d36d4028c1d8f24b090cea63c5017b1d272fd688d9189907e10e",
+      "urn:ibm:provenance:asset:object:lotILMD:org:default:default:95bc06fef9dd2a7081bdb795399b7d1c8f52dfc6630d095d2dda10620b421c4a",
+      "urn:ibm:provenance:asset:object:lotILMD:org:default:default:0d38c56f0886a5cd7ee69fd63030b170bbc0997a926e441ecba7296410db6335"
+    ]
+  }
+}
+```
+
+* Common error responses can be found [here](/apis/connector-api-error-messages).
+
+<p>
+  <SolutionName /> will return a new asset ID for the uploaded data, or
+  an <a href="../apis/api-error-codes">error code</a>.
+</p>
+
+<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>

@@ -1,0 +1,22 @@
+---
+title: Connector API 401 message
+description: XML submission error message 401 Unauthorized response
+---
+
+<PageDescription>
+
+The Connector API rejects the XML submission and returns a 401 Unauthorized response.
+
+</PageDescription>
+
+## Instructions to fix
+
+If using <a href={process.env.GATSBY_UI_URL + '/ift/api/connector/swagger-ui.html'} target="_blank">Swagger</a>, ensure that you
+are logged in by using the link at the top of the page (Authenticate here first).
+
+If programmatically submitting the xml or using a 3rd party REST tool, ensure the
+request header Authorization is set with a value of `Bearer <token>` in the request.
+Before clicking Authenticate here first in Swagger to obtain a token, please ensure
+you are in the correct environment (integration or production).
+
+<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>

@@ -1,0 +1,119 @@
+---
+title: Signature header
+description: Code sample to construct an HTTP **signature header** value.
+---
+
+<PageDescription>
+
+The following code sample constructs an HTTP **signature header** value. The
+code implements the <a href="https://tools.ietf.org/html/draft-cavage-http-signatures-09"
+target="_blank">IETF draft-cavage-http-signatures-09</a> specification, which is
+used to validate the code.
+
+</PageDescription>
+
+## Signature header code example
+
+```typescript
+const crypto = require('crypto');
+
+///// constants taken from IETF draft-cavage-http-signatures-09 /////
+
+const PUBLIC_KEY = `-----BEGIN PUBLIC KEY-----
+<public key value>
+-----END PUBLIC KEY-----`;
+
+const PRIVATE_KEY = -----BEGIN RSA PRIVATE KEY----- <private key value> -----END RSA PRIVATE KEY-----; # pragma: whitelist secret
+
+const ALGORITHM = 'rsa-sha256';
+
+const METHOD = 'POST';
+const PATH = '/foo?param=value&pet=dog';
+const HEADERS = {
+  Host: 'example.com',
+  Date: 'Sun, 05 Jan 2014 21:31:40 GMT',
+  'Content-Type': 'application/json',
+  Digest: '<hash value>',
+  'Content-Length': 18,
+};
+const PAYLOAD = '{"hello": "world"}';
+
+const KEY_ID = 'Test';
+
+const EXPECTED_BASIC_TEST_SIGNATURE       = '<hash value>'
+const EXPECTED_ALL_HEADERS_TEST_SIGNATURE = '<hash value>'
+
+///// signature methods /////
+
+function get_signing_string(method: string, path: string, headers: string[]) {
+  let signing_string = '(request-target): ' + method.toLowerCase() + ' ' + path;
+  for (const key in headers) {
+    const value = headers[key];
+    signing_string += '\n' + key.toLowerCase() + ': ' + String(value);
+  }
+  return signing_string;
+}
+
+function get_signature(signing_string: string, private_key: string) {
+  const signer = crypto.createSign('RSA-SHA256');
+  signer.update(signing_string);
+  return signer.sign(private_key, 'base64');
+}
+
+function get_signature_header_value(key_id: string, algorithm: string, headers: string[], signature: string) {
+  let header_names = '(request-target)';
+  for (const name in headers) {
+    header_names += ' ' + name.toLowerCase();
+  }
+  let header_value = '';
+  header_value += 'keyId="' + key_id + '",';
+  header_value += 'algorithm="' + algorithm + '",';
+  header_value += 'headers="' + header_names + '",';
+  header_value += 'signature="' + signature + '"';
+  return header_value;
+}
+
+///// test methods /////
+
+// uses the (request-target), host, and date headers
+function basic_test() {
+  const headers = {};
+  headers['Host'] = HEADERS['Host'];
+  headers['Date'] = HEADERS['Date'];
+  run_test('BASIC TEST', headers, EXPECTED_BASIC_TEST_SIGNATURE);
+}
+
+// uses all headers
+function all_headers_test() {
+  const headers = HEADERS;
+  run_test('ALL HEADERS TEST', headers, EXPECTED_ALL_HEADERS_TEST_SIGNATURE);
+}
+
+function run_test(name, headers, expected_signature) {
+  const signing_string = get_signing_string(METHOD, PATH, headers);
+  const signature_base64 = get_signature(signing_string, PRIVATE_KEY);
+  const signature_header_value = get_signature_header_value(KEY_ID, ALGORITHM, headers, signature_base64);
+  console.log();
+  console.log('===================================================');
+  console.log(name);
+  console.log();
+  console.log('signing string:\n' + signing_string);
+  console.log();
+  console.log('signature_base64:\n' + signature_base64);
+  console.log();
+  console.log('signature_header_value:\n' + signature_header_value);
+  console.log();
+  if (signature_base64 === expected_signature) {
+    console.log('SUCESS: signature is the same as expected');
+  } else {
+    console.log('ERROR: signature is different than expected');
+  }
+}
+
+///// run tests /////
+
+basic_test();
+all_headers_test();
+```
+
+<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>

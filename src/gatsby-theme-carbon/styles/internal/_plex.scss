@@ -1,0 +1,18 @@
+$font-prefix: '~@ibm/plex';
+
+/*==================================== font-face definitions =====================================*/
+// sans
+@import '~@ibm/plex/scss/sans/light/index';
+@import '~@ibm/plex/scss/sans/regular/index';
+@import '~@ibm/plex/scss/sans/semibold/index';
+
+// sans italic
+@import '~@ibm/plex/scss/sans/light/italic/index';
+@import '~@ibm/plex/scss/sans/italic/index';
+@import '~@ibm/plex/scss/sans/semibold/italic/index';
+
+// mono
+@import '~@ibm/plex/scss/mono/light/index';
+@import '~@ibm/plex/scss/mono/regular/index';
+@import '~@ibm/plex/scss/mono/semibold/index';
+/*================================================================================================*/

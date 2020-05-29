@@ -1,0 +1,70 @@
+---
+title: Assign user roles
+description: How to assign roles to your human users
+---
+
+<PageDescription>
+
+**<SolutionName />** includes defined static roles that grant authorization to
+human users, by registered <a target="_blank" href="https://www.ibm.com/account/us-en/signup/register.html">IBMid</a>,
+to execute certain network tasks on behalf of their **organization**. Assigning
+roles enables an **Account admin** to easily control the level of access provided to
+each user in their organization.
+
+</PageDescription>
+
+
+## Prerequisites
+
+When onboarding new users to <SolutionName />, an **Account admin** must assign
+one or more roles to each user. Before assigning roles, the following prerequisites
+must be met:
+
+* Your **organization** and your **Account admin** **must be onboarded** to <SolutionName />.
+* Each human user being onboarded must have a registered <a target="_blank" href="https://www.ibm.com/account/us-en/signup/register.html">IBMid</a>.
+
+## Roles and authorization
+
+The <SolutionName /> defined roles and authorizations are detailed below (Table 1). Each registered
+human user can be assigned to multiple roles; system users are not assigned to roles. Note that
+ONLY the **Account admin** role inherits authorizations granted by other roles.
+
+Table 1. <SolutionName /> roles and authorization
+
+| User role | Authorization | Module |
+| --------- | ------------- | ------ |
+| **(All registered users)**  | View organization's <SolutionName /> home page           | <a href={process.env.GATSBY_UI_URL + '/home'} target="_blank">Home</a> |
+|                             | Read and download all data uploaded by user's organization | <a href={process.env.GATSBY_UI_URL + '/manage-data/products'} target="_blank">Data</a> |
+|                             | Read all data shared with user's organization          | <a href={process.env.GATSBY_UI_URL + '/trace'} target="_blank">Trace</a> |
+|                             | View organization's <SolutionName /> usage               | <a href={process.env.GATSBY_UI_URL + '/usageDashboard'} target="_blank">Activity</a> |
+|                             | Read documents owned by user's organization            | <a href={process.env.GATSBY_UI_URL + '/documents'} target="_blank">Documents</a> |
+|                             | Read documents shared with user's organization         | <a href={process.env.GATSBY_UI_URL + '/documents'} target="_blank">Documents</a> |
+|                             |                                                        |              |
+| **Onboarding team member**    | Upload data for user's organization                    | <a href={process.env.GATSBY_UI_URL + '/manage-data/products'} target="_blank">Data</a>         |
+|                             | Register products and facilities                       | <a href={process.env.GATSBY_UI_URL + '/self-guided-onboarding'} target="_blank">Onboarding</a>   |
+|                             | Build product scenarios                                | <a href={process.env.GATSBY_UI_URL + '/self-guided-onboarding'} target="_blank">Onboarding</a>   |
+|                             | Upload product scenario data                           | <a href={process.env.GATSBY_UI_URL + '/self-guided-onboarding'} target="_blank">Onboarding</a>   |
+|                             |                                                        |              |
+|  **General User**           | Create and modify documents for user's organization    | <a href={process.env.GATSBY_UI_URL + '/documents'} target="_blank">Documents</a> |
+|                             |                                                        |              |
+|  **Account Admin**           | Create and modify human users and system users         | <a href={process.env.GATSBY_UI_URL + '/manageUsers'} target="_blank">Users</a>        |
+|                             | Assign and modify user roles                           | <a href={process.env.GATSBY_UI_URL + '/manageUsers'} target="_blank">Users</a>         |
+|                             | Purchase and renew subscriptions to <SolutionName /> modules | <a href={process.env.GATSBY_UI_URL + '/account-summary'} target="_blank">Membership</a>    |
+|                             |                                                        |              |
+
+## Add or modify role assignments
+
+An **Account admin** can add or modify user role assignments:
+
+1. Log in to <a href={process.env.GATSBY_UI_URL + '/'} target="_blank"><SolutionName /></a> as an **Account admin**.
+1. Select the <a href={process.env.GATSBY_UI_URL + '/manageUsers'} target="_blank">**Users**</a> module.
+1. Select the **ACCOUNT USERS** tab.
+1. To add roles for a new human user, select the new user icon. Add the user and select the roles to assign.
+1. To modify roles assigned to a human user, select a user and click the edit icon. Select the roles to assign.
+
+## Related topics
+
+- [Log in as new user](/how-to/login-new-user)
+- <a href="https://www.ibm.com/account/us-en/signup/register.html" target="_blank">Get IBMid</a>
+
+<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>

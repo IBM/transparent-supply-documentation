@@ -1,0 +1,52 @@
+---
+title: API error codes
+description: Error codes returned by IBM Blockchain Transparent Supply™ APIs
+---
+
+<PageDescription>
+
+When posting data through an <SolutionName /> API call, you may receive an error
+indicating a supplied ID value does not match the expected <SolutionName /> or
+GS1 identifier pattern.
+
+</PageDescription>
+
+## API codes and patterns
+
+An <SolutionName /> API may return a pattern match error message:
+
+```json
+{
+  "message": "EPCISBody.eventList.aggregationEvents[0].parentID: Type must match one of the following patterns: [EPC_SSCC, EPC_SGTIN, FTLPN, SSCC_LA, SFTPI].  Visit this url to look up the pattern error codes. https://github.com/IBM/IFT-Developer-Zone/wiki/api-Error-Codes"
+}
+```
+
+The following table describes the pattern codes referred to in the message URL. Use
+the table to reference the accepted pattern codes specified in the error:
+
+| Code | Example and syntax |
+| --- | --- |
+| EPC-SSCC | `urn:epc:id:sscc:5012345.0678901234` <br /> `urn:epc:id:sscc:<CompanyPrefix>.<SerialRefAndExtension>`(17 Digits) |
+| EPC-SGTIN | `urn:epc:id:sgtin:0614141.107346.2017` <br /> `urn:epc:id:sgtin:<CompanyPrefix>.<IndicatorDigit><ItemRef>.<SerialNumber>`(13 Digits + Serial Number)|
+| EPC-SGLN |  `urn:epc:id:sgln:0614141.00777.0` <br /> `urn:epc:id:sgln:<CompanyPrefix>.<LocationReference>.<Extension>`(12 Digits + Extension)  |
+| EPC-LGTIN | `urn:epc:class:lgtin:0614141.107346.101` <br /> `urn:epc:class:lgtin:<CompanyPrefix>.<IndicatorDigit><ItemRef>.<Lot>`(13 digits + Lot)|
+| EPC-GTIN |  `urn:epc:idpat:sgtin:0614141.107346.*` <br /> `urn:epc:idpat:sgtin:<CompanyPrefix>.<ItemRefAndIndicator>.*`(13 Digits + '*')|
+| GS1-GTIN | `40987650000223` <br /> `<Indicator><CompanyPrefix><ItemRef><CheckDigit>`(14 Digits) |
+| GS1-SSCC | `204623406700001014` <br /> `<Extension><CompanyPrefix><SerialReference><CheckDigit>`(18 Digits) |
+| GS1-GLN | `6056234000013` <br /> `<CompanyPrefix><LocationReference><CheckDigit>`(13 Digits) |
+| GS1_ENTITY | urn:epcglobal:cbv:bt:1234567890123:T1234 <br /> urn:epcglobal:cbv:bt:`<GS1-GLN>:<Transaction ID>` |
+| GS1_ENTITY_TYPE | urn:epcglobal:cbv:btt:po <br /> urn:epcglobal:cbv:btt:`<Business Transaction Type>` <br /> Valid Business Transaction Types = bol, desadv, inv, pedigree, po, poc, prodorder, recadv, rma |
+| GS1_BIZSTEP |urn:epcglobal:cbv:bizstep:receiving <br /> urn:epcglobal:cbv:bizstep:`<bizStep>` <br /> Valid bizSteps = accepting, arriving, assembling, collecting, commissioning, consiging, creating_class_instance, cycle_counting, decommissioning, departing, destroying, disassembling, dispensing, encoding, entering_exiting, holding, inspecting, installing, killing, loading, other, packing, picking, receiving, removing, repackaging, repairing, replacing, reserving, retail_selling, shipping, staging_outbound, stock_taking, stocking, storing, transforming, transporting, unloading, unpacking, void_shipping |
+| GS1_DISPOSITION | urn:epcglobal:cbv:disp:destroyed <br /> urn:epcglobal:cbv:disp:`<Disposition>` <br /> Valid Dispositions = active, container_closed, damaged, destroyed, dispensed, disposed, encoded, expired, in_progress, in_transit, inactive, no_pedigree_match, non_sellable_other, partially_dispensed, recalled, reserved, retail_sold, returned, sellable_accessible, sellable_not_accessible, stolen, unknown |
+| GS1_SOURCE_DEST_TYPE |urn:epcglobal:cbv:sdt:possessing_party <br /> urn:epcglobal:cbv:sdt:`<Source Destination Type>` <br /> Valid Source Destination Types = owning_party, possessing_party, location |
+| FTPI |urn:ibm:ift:product:class:1234567890123.product-123 <br /> urn:ibm:ift:product:class:`<Company Prefix>.<Item Reference>` |
+| LFTPI | urn:ibm:ift:product:lot:class:1234567890123.product-123.lot4 <br /> urn:ibm:ift:product:lot:class:`<Company Prefix>.<Item Reference>.<Lot Number>` |
+| SFTPI | urn:ibm:ift:product:serial:obj:1234567890123.product-123.serial-number-4567 <br /> urn:ibm:ift:product:serial:obj:`<Company Prefix>.<Item Reference>.<Serial Number>` |
+| FTLI | urn:ibm:ift:location:loc:1234567890123.store-123 <br /> urn:ibm:ift:location:loc:`<Company Prefix>.<Location Reference>` |
+| SFTLI | urn:ibm:ift:location:extension:loc:1234567890123.store-123.toy-department <br /> urn:ibm:ift:location:extension:loc:`<Company Prefix>.<Location Reference>.<Extension>` |
+| FTLPN | urn:ibm:ift:lpn:obj:1234567890123.pallet-12345678 <br /> urn:ibm:ift:lpn:obj:`<Company Prefix>.<Serial Reference>` |
+| SSCC_LA | urn:ibm:provenance:ids:supplychain:aggregation:lpn:5012345.xyz123 <br /> urn:ibm:provenance:ids:supplychain:`<Document Type>`:lpn:`<Company Prefix>`.* |
+| IFT_ENTITY | urn:ibm:ift:bt:1234567890123.store-123.1234 <br /> urn:ibm:ift:bt:`<Company Prefix>.<Location Reference>.<Transaction Id>` |
+| IFT_DISPOSITION | urn:ibm:ift:bv:disp:destroyed <br /> urn:ibm:ift:bv:disp:`<Disposition>` <br /> Valid Dispositions = active, container_closed, damaged, destroyed, dispensed, disposed, encoded, expired, in_progress, in_transit, inactive, no_pedigree_match, non_sellable_other, partially_dispensed, recalled, reserved, retail_sold, returned, sellable_accessible, sellable_not_accessible, stolen, unknown |
+
+<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>

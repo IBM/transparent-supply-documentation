@@ -1,0 +1,47 @@
+---
+title: Cryptographic signatures
+description: Signing XML upload documents
+---
+
+<PageDescription>
+
+To verify document authenticity and chain of custody, **<SolutionName />**
+supports cryptographic signatures for all submitted XML. Signing of all XML documents
+should be done using a supported algorithm (rsa-sha256 or ecdsa-sha256).
+
+</PageDescription>
+
+## Cryptographic signatures
+
+For verification of signed data, the submitter must register public keys by submitting
+a key registration document to <SolutionName />. The key registration document should
+itself be signed using the corresponding private key.
+
+Remove contact information fields from XML documents before cryptographic signing,
+because subsequent modification of data by <SolutionName /> would invalidate the
+signature provided by the submitter.
+
+## Sample public signing key XML
+
+Refer to the following sample public signing key XML:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<ift:publicSigningKey xmlns:ift="urn:ibm:ift:xsd:1">
+  <!-- XML message to communicate encoded public signing keys to IBM Blockchain Transparent Supply™.-->
+  <!-- NOTE : Comments for a field appear BELOW the field. -->
+  <keyID>12345</keyID>
+  <!--Mandatory: Identifier for this public signing key. Should be unique (within your organization).-->
+  <algorithm>rsa-sha256</algorithm>
+  <!--Mandatory: Digital signing algorithm that this key should be used with.-->
+  <!--Should be either rsa-sha256 or ecdsa-sha256.-->
+  <encodedPublicKey>c7be1dd4d4899 ...</encodedPublicKey>
+  <!--Mandatory: Encoded public signing key, represented as a base-64 encoded string.-->
+</ift:publicSigningKey>
+```
+
+## Related topics
+
+- [Signature header](/automation/signature-header) code sample
+
+<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>

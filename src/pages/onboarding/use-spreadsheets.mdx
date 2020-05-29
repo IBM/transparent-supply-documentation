@@ -1,0 +1,143 @@
+---
+title: Use spreadsheets
+description: How to complete Microsoft&reg; Excel&trade; spreadsheets for data upload
+---
+
+<PageDescription>
+
+**<SolutionName />** provides the following Microsoft&reg; Excel&trade; spreadsheet
+templates to facilitate uploading data in XML format.
+
+</PageDescription>
+
+## Usage notes
+
+As one option for onboarding data, Microsoft&reg; Excel&trade; spreadsheet templates
+are provided. Each spreadsheet template is unique to the data type, so you must use
+the template (direct links provided below) specific to each data type:
+
+* Products
+* Facilities
+* Purchase Orders
+* Despatch Advice
+* Receive Advice
+* Events (Commission, Decommission, Observation, Transformation, Aggregation, Disaggregation)
+
+**Note**: Each row in a spreadsheet file denotes a new asset.
+
+Use the following procedure to upload data in a spreadsheet template:
+
+1. Save the correct template file for your data type from the [convert
+spreadsheets](convert-spreadsheets) page.
+2. Open the template file in Microsoft&reg; Excel&trade; and save it as an Excel Workbook:
+  (File -> Save As -> File Format: Excel Workbook (.xslx). An Excel&trade; Workbook
+  is a collection of one or more worksheets (spreadsheets).
+3. To populate data across worksheets, fill them out in the order prescribed by the
+worksheet titles. For Purchase Orders, for example, enter the data in "Step 1 - Products"
+first, followed by "Step 2 - Facilities" and "Step 3 - Purchase Orders". Note that some
+templates only consist of one worksheet.
+
+### Products
+
+| **Products sheet** Header | Description | Format |
+| --- | --- | --- |
+| Item Name | The name or description of the product; this value is used in subsequent worksheets | |
+| Company Prefix&ast; | Company Prefix used to convert from GS1 to EPC formatting | 4-13+ digits |
+| GTIN or <SolutionName /> product ID | Item GTIN or <SolutionName /> product identifier | GTIN: 1234567891011 <br /> IFTPI: 0032334.ftpi123 |
+
+&ast; This field can be omitted from any workbook that does not have an Events worksheet.
+
+### Facilities
+
+| **Facilities sheet** Header | Description | Format
+| --- | --- | --- |
+| Organization | Owning organization Name | |
+| Facility Name | Name of facility; this value is available in subsequent worksheets |
+| Role | Facility role | |
+| City | City that the facility is based in | |
+| State | State that the facility is based in | |
+| Company Prefix&ast; | Company prefix used to convert from GS1 to EPC formatting | 4-13+ digits |
+| GLN or <SolutionName /> location ID | Facility GLN or <SolutionName /> location identifier | GLN: 1234567891011 <br /> IFTLI: 0032334.ftpi123 |
+
+&ast; This field can be omitted from any workbook that does not have an Events worksheet.
+
+### Purchase Orders
+
+| **Purchase Orders** Header | Description | Format
+| --- | --- | --- |
+| Reference | A reference identifier for this Order; leave this field blank to continue the previous reference. | |
+| Buyer location | The facility of the buyer; this value is populated from the Facilities worksheet. | |
+| Seller location | The facility of the seller; this value is populated from the Facilities worksheet. | |
+| Purchase date and time | The date and time of the purchase. | yyyy-mm-ddThh:mm:ss.mmmZ |
+| Requested delivery date | The requested delivery date (and time). | yyyy-mm-ddThh:mm:ss.mmmZ |
+| Line item number&ast; | Auto-generated line number for an item; this value should not be changed. | |
+| Products | The product for this line number; each value is populated from the Products worksheet. | |
+| Quantity | The quantity purchased of each product. | |
+| UoM | Unit of measurement used for the Quantity. | |
+
+&ast; The line number increments for each line of a Reference; entering a new Reference resets the line number to 1.
+
+### Despatch Advice
+
+| **Despatch Advice** Header | Description | Format |
+| --- | --- | --- |
+| Reference | A Reference identifier for this Despatch Advice; leave this field blank to continue the previous Reference | |
+| Despatch Date and Time | The Date and Time of the Despatch | yyyy-mm-ddThh:mm:ss.mmmZ |
+| Ship From (Single Only) | The Facility the item is shipping from; this value is populated from the Facilities worksheet. | |
+| Ship To (Single Only) | The Facility the item is shipping to; this value is populated from the Facilities worksheet.  | |
+| Line Item Number&ast; | Auto-Generated line number for an item; this value should not be changed. | |
+| Purchase order Reference (Scenario Only) | Populated with all Reference identifiers entered in the Purchase Orders worksheet. | |
+| Purchase order Line Number (Scenario Only) | Populated with line numbers for the selected Reference identifiers entered in the Purchase Orders worksheet. | |
+| Despatched Item (Scenario) | Auto-Generated Product name from the selected Reference identifier and Line number | |
+| Despatched Item (Single) | Product despatched in this advice | |
+| Despatched Quantity | Quantity despatched for this Item and line number | |
+| Despatch UoM | Unit of Measurement for this Quantity | |
+| Shipper Company Prefix | Company Prefix of the Shipper | 4-13+ digits |
+| Shipper Identifier | SSCC&ast;&ast; of the shipper | `<Company Prefix>.<Serial Reference>` i.e. 5012345.0678901234 |
+
+&ast; The line number increments for each line of a Reference; entering a new Reference resets the line number to 1.
+&ast;&ast; Serial Shipping Container Code
+
+### Receiving Advice
+
+| **Receiving Advice** Header | Description | Format |
+| --- | --- | --- |
+| Reference | A reference identifier for this Receiving Advice; leave this field blank to continue the previous Reference. | |
+| Received date and time | Date and Time Received | yyyy-mm-ddThh:mm:ss.mmmZ |
+| Origin (single only) | Origin of item; this value is populated from the facilities worksheet. | |
+| Received location (single only) | Location item was received; this value is populated from the facilities worksheet.| |
+| Despatch Advice reference (scenario only) | Populated with references from the Despatch Advice worksheet. | |
+| Despatch Advice line number (scenario only) | Populated with line numbers for the selected Reference identifiers entered in the Despatch Advice worksheet. | |
+| Received product (scenario) | Auto-Generated Product name from the selected reference identifier and Line number  | |
+| Received product (single) | Product received in this advice | |
+| Quantity received | Quantity received for this item and line number | |
+| Quantity UoM | Unit of measurement used for the quantity | |
+
+### Events
+
+| **Events** header | Description | Format |
+| --- | --- | --- |
+| Event ID | ID of EPCIS Event. The supported event types are: <ul><li>Commission</li><li>Decommission</li><li>Observation</li><li>Transformation</li><li>Aggregation</li><li>Disaggregation</li></ul> |
+| Read Point | Geographic coordinates of event for products in transit (no fixed location ID) | |
+| Namespace | Adds data to the Namespace defined on upload (UI only) | |
+| Event location | Location of event; values are populated from the facilities worksheet. | |
+| Event date and time | Date and time of event | yyyy-mm-ddThh:mm:ss.mmmZ |
+| Products | Products involved in this event; values are populated from the products worksheet. | |
+| Quantity | Quantity of product | |
+| UoM | Unit of measurement used for the quantity | |
+| Lot | Lot number used for this product | |
+| Output trade item | Product created by a Transformation Event. | |
+| Output quantity | Quantity of transformed product. | |
+| Output UoM | Unit of Measurement used for the output quantity. | |
+| Output Lot | Lot number used for the transformed product | |
+| Purchase order reference (scenario only) | Purchase Order to reference in this event; values are populated from the Purchase Orders worksheet. | |
+| Despatch Advice reference (scenario only) | Despatch Advice to reference in this event; values are populated from the Despatch Advice worksheet. | |
+| Receiving Advice reference (scenario only) | Receiving Advice to reference in this event; values are populated from the Receiving Advice worksheet. | |
+
+
+## Related Topics
+
+- [Convert spreadsheets](/onboarding/convert-spreadsheets)
+- [Upload spreadsheets](/onboarding/upload-spreadsheets)
+
+<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>
