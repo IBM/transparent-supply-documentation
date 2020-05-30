@@ -1,0 +1,96 @@
+---
+title: Master Data Facility XML example
+description: Example of Master Data Facility XML data for upload
+---
+
+<PageDescription>
+
+Master Data Facility data is uploaded in XML format, as shown in the
+example below.
+
+</PageDescription>
+
+## Master Data Facility XML example
+
+The following example shows example Master Data Facility data in XML:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<basic_party_registration:basicPartyRegistrationMessage
+    xmlns:basic_party_registration="urn:gs1:gdsn:basic_party_registration:xsd:3"
+    xmlns:sh="http://www.unece.org/cefact/namespaces/StandardBusinessDocumentHeader"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:gs1:gdsn:basic_party_registration:xsd:3 ../Schemas/gs1/gdsn/BasicPartyRegistration.xsd">
+    <sh:StandardBusinessDocumentHeader>
+        <sh:HeaderVersion>1.0</sh:HeaderVersion>
+        <sh:Sender>
+            <sh:Identifier Authority="GS1">8712345678913</sh:Identifier>
+        </sh:Sender>
+        <sh:Receiver>
+            <sh:Identifier Authority="GS1">9712345678912</sh:Identifier>
+            <!--Mandatory, but can be left empty.-->
+        </sh:Receiver>
+        <sh:DocumentIdentification>
+            <sh:Standard>GS1</sh:Standard>
+            <sh:TypeVersion>3.1</sh:TypeVersion>
+            <sh:InstanceIdentifier>20051101</sh:InstanceIdentifier>
+            <sh:Type>basicPartyRegistration</sh:Type>
+            <sh:CreationDateAndTime>2011-04-11T14:58:56.591Z</sh:CreationDateAndTime>
+        </sh:DocumentIdentification>
+    </sh:StandardBusinessDocumentHeader>
+    <!--Party here refers to a Facility, as well.-->
+    <party>
+        <isPartyActive>true</isPartyActive>
+        <!--MANDATORY: isPartyActive will be set to False, if a facility is closed etc.-->
+        <registeringParty>0032334500017</registeringParty>
+        <!--MANDATORY: Organization's corporate identity GLN-->
+        <gln>0032334500352</gln>
+        <!--MANDATORY: GLN or IBM Blockchain Transparent Supply™ location id of the party (location) being registered-->
+        <!--IBM Blockchain Transparent Supply™ location id format: urn:ibm:ift:location:loc:<Company Prefix>.<Location Reference>-->
+        <partyAddress>
+            <!--MANDATORY: This section is Mandatory; However, some of the fields below are optional.-->
+            <city>Atlanta</city>
+            <!--MANDATORY-->
+            <countryCode>840</countryCode>
+            <!--MANDATORY: ISO 3166-1 numeric-3 code https://en.wikipedia.org/wiki/ISO_3166-1_numeric.-->
+            <!--Numeric-3 country codes offer script-independence, and are consistent with GDSN 3.1.-->
+            <!--"840"=USA.-->
+            <name>Mondial Distribution</name>
+            <!--MANDATORY: Name of the facility-->
+            <postalCode>07654</postalCode>
+           <!--MANDATORY - Null postal code value accepted -->
+            <!--OPTIONAL (BEGIN): THE FIELDS BELOW ARE OPTIONAL.-->
+            <languageOfThePartyCode>en</languageOfThePartyCode>
+            <!--ISO 639-1 alpha-2 code https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes.-->
+            <state>Georgia</state>
+            <!--Use complete state name, if applicable.-->
+            <cityCode>string</cityCode>
+            <countyCode>string</countyCode>
+            <crossStreet>string</crossStreet>
+            <pOBoxNumber>string</pOBoxNumber>
+            <provinceCode>string</provinceCode>
+            <streetAddressOne>1 Peachtree Avenue</streetAddressOne>
+            <streetAddressTwo>Suite 911</streetAddressTwo>
+            <geographicalCoordinates>
+                <latitude>33.24</latitude>
+                <longitude>-83.44</longitude>
+            </geographicalCoordinates>
+            <!--OPTIONAL (END): THE FIELDS ABOVE ARE OPTIONAL.-->
+        </partyAddress>
+        <partyRole>
+            <!--MANDATORY: The section below describes the role that this location/facility is playing.-->
+            <!--For example, whether this is a DC or a store or corporate-identity, etc.-->
+            <partyName>SuperStore</partyName>
+            <!--MANDATORY: Name of the owning entity.-->
+            <partyRoleCode>DISTRIBUTOR</partyRoleCode>
+            <!--MANDATORY: Role of this facility.-->
+            <!--Value from standard GS1 code-list: http://apps.gs1.org/GDD/Pages/clDetails.aspx?semanticURN=urn:gs1:gdd:cl:PartyRoleCode&release=3 -->
+            <!--Use partyRoleCode=CORPORATE_IDENTITY for organization's identity/headquarters.-->
+            <!--A value from the IBM Blockchain Transparent Supply™ custom partyRole code-list can also be used:-->
+            <!--https://github.com/IBM/IFT-Developer-Zone/wiki/doc-IFT-Message-Codes -->
+            <!--Note: The IBM Blockchain Transparent Supply™ custom code-list includes the standard GS1 code-list as a subset.-->
+        </partyRole>
+    </party>
+</basic_party_registration:basicPartyRegistrationMessage>
+```
+
+<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>

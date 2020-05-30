@@ -1,0 +1,222 @@
+---
+title: Upload spreadsheets
+description: How to upload data using Microsoft&reg; Excel&trade; spreadsheets
+---
+
+<PageDescription>
+
+**<SolutionName />** spreadsheet templates, and completed examples, are provided for download,
+editing, and conversion to XML. You will complete a spreadsheet for each event type, data type, and
+transaction document type that you want to upload. You can download templates and upload your
+completed files using the <SolutionName /> UI <a href={process.env.GATSBY_UI_URL + '/self-guided-onboarding/manage-data/bulk-upload'}
+target="_blank">Onboarding module</a>.
+
+**Note**: As an alternative to uploading spreadsheets via the UI, your Data
+integration experts can use the <a href={process.env.GATSBY_UI_URL + '/ift/api/converter/swagger-ui.html'}
+target="_blank">Converter API</a> to transform your spreadsheet files into XML for
+uploading to <SolutionName /> using the <a href={process.env.GATSBY_UI_URL + '/ift/api/connector/swagger-ui.html'}
+target="_blank">Connector API</a>.
+
+</PageDescription>
+
+## GDPR notice
+
+**Attention**: To comply with <a href="https://gdpr.eu/" target="_blank">EU General
+Data Protection Regulation (GDPR)</a> data privacy requirements, you must ensure
+that no personal data is uploaded to <SolutionName /> in any free-form text fields
+or in any comments.
+
+## Spreadsheet bulk upload
+
+Use the following procedure to upload spreadsheets through either the UI Onboarding
+module or the <a href={process.env.GATSBY_UI_URL + '/manage-data/bulk-upload'} target="_blank">Data
+module</a>:
+
+1. Access **Spreadsheet bulk upload** by selecting
+the <a href={process.env.GATSBY_UI_URL + '/manage-data/bulk-upload'} target="_blank">Data module</a>.
+1. Select **Spreadsheet bulk upload** from the left menu.
+1. Download the spreadsheet templates that you want to use, for products (Master data),
+facilities (Master data), Purchase Orders, Receive Advice, Despatch Advice, Aggregation
+Events, Disaggregation Events, Commission Events, Decommission Events, Observation Events,
+and Payloads.
+
+## Spreadsheet fields
+
+The **Microsoft&reg; Excel&trade; spreadsheet files** (.xlsx workbook files) provided below
+include field-by-field details for each spreadsheet. They include detailed field descriptions,
+required formats, examples, and requirements.
+
+**Attention**: Many of the worksheets contain a **Level** column, which represents groupings.
+Level 1 represents a new event or transaction. Anything above Level 1 represents an array.
+For example, the Aggregation description workbook contains both Level 1 and Level 2 groupings.
+To populate an Aggregation template workbook with one aggregation event, and three trade items,
+for example:
+
+1. First populate all required Level 1 cells in the first workbook row. The first trade item
+description, quantity, and quantity UoM cells (all Level 2) will be populated in the first workbook row.
+1. To populate the second trade item, create a new row, do NOT populate the Level 1 cells,
+and populate the Level 2 trade item description, quantity, and quantity UoM (unit of measure) cells.
+1. Then create another row and populate the Level 2 cells for the third trade item.
+Adding a new row and populating the required Level 1 cells creates a new aggregation event.
+
+Click any link below to view or save the sample spreadsheet file. Each sample explains the
+requirements referenced on the <a href={process.env.GATSBY_UI_URL + '/self-guided-onboarding/manage-data/bulk-upload'} target="_blank">Spreadsheet
+templates page</a>. Note that you should complete the products and facilities spreadsheets first,
+because that data is referenced by other data types.
+
+### Products spreadsheet fields
+
+The **Products** spreadsheet consists of two worksheets&mdash;Entitlement mode and Products:
+
+1. Choose the Entitlement mode: None, Linked, Restricted, Private
+2. Next fill out the product detail information (use the Excel&trade; workbook links above for reference on the fields)
+    - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_items.xlsx'}>Master product</a>
+    - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_entitlement_mode.xlsx'}>Entitlement mode</a>
+
+### Facilities spreadsheet fields
+
+The **Facilities** spreadsheet consists of two worksheets&mdash;Entitlement mode and Facilities:
+
+1. Choose the entitlement mode: None, Linked, Restricted, or Private
+2. Next fill out the facility detail information (use the spreadsheet workbook links above for reference on the fields)
+    - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_facilities.xlsx'}>Master Facility specific fields</a>
+    - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_entitlement_mode.xlsx'}>Entitlement Modes</a>
+
+### Aggregation Events spreadsheet fields
+
+The **Aggregation Events** spreadsheet consists of four worksheets&mdash;Entitlement mode, Products, Facilities, and Aggregation Events:
+
+- <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_entitlement_mode.xlsx'}>Entitlement mode</a>
+- <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_item_related_fields.xlsx'}>Product related fields</a>
+- <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_facility_related_fields.xlsx'}>Facility related fields</a>
+- <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_aggregation.xlsx'}>Aggregation specific fields</a>
+
+### Commission Events spreadsheet fields
+
+The **Commission Events** spreadsheet consists of five worksheets&mdash;Entitlement mode, Products, Facilities, Commission Events, and ILMDs:
+
+- <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_entitlement_mode.xlsx'}>Entitlement mode</a>
+- <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_item_related_fields.xlsx'}>Product related fields</a>
+- <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_facility_related_fields.xlsx'}>Facility related fields</a>
+- <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_commission.xlsx'}>Commission specific fields</a>
+- <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_ilmd.xlsx'}>ILMD</a>
+
+### Decommission Events spreadsheet fields
+
+The **Decommission Events** spreadsheet consists of four worksheets&mdash;Entitlement mode, Products, Facilities and Decommissions. The first sheet is Entitlement mode. This is indicated by the drop-down box.
+
+- <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_entitlement_mode.xlsx'}>Entitlement mode</a>
+- <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_item_related_fields.xlsx'}>Product related fields</a>
+- <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_facility_related_fields.xlsx'}>Facility related fields</a>
+- <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_decommission.xlsx'}>Decommission specific fields</a>
+
+### Disaggregation Events spreadsheet fields
+
+The **Disaggregation Events** spreadsheet consists of four worksheets&mdash;Entitlement mode, Products, Facilities, and Disaggregation Events:
+
+1. <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_entitlement_mode.xlsx'}>Entitlement mode</a>
+2. <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_item_related_fields.xlsx'}>Product related fields</a>
+3. <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_facility_related_fields.xlsx'}>Facility related fields</a>
+4. <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_disaggregation.xlsx'}>Disaggregation specific fields</a>
+
+### Observation Event spreadsheet fields
+
+The **Observation Event** Spreadsheet consists of four worksheets&mdash;Entitlement mode, Products, Facilities, and Observations:
+
+1. <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_entitlement_mode.xlsx'}>Entitlement mode</a>
+2. <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_item_related_fields.xlsx'}>Product related fields</a>
+3. <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_facility_related_fields.xlsx'}>Facility related fields</a>
+4. <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_observation.xlsx'}>Observation specific fields</a>
+
+### Transformation Events spreadsheet fields
+
+The **Transformation Event** spreadsheet consists of five worksheets&mdash;Entitlement mode, Products, Facilities, Transformation Events, and ILMDs:
+
+1. <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_entitlement_mode.xlsx'}>Entitlement mode</a>
+2. <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_item_related_fields.xlsx'}>Product related fields</a>
+3. <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_facility_related_fields.xlsx'}>Facility related fields</a>
+4. <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_transformation.xlsx'}>Transformation specific fields</a>
+5. <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_ilmd.xlsx'}>ILMD</a>
+
+### Payloads Spreadsheet Fields
+
+The **Payloads Spreadsheet** consists of three worksheets&mdash;Entitlement Mode, Products, and Payloads:
+
+1. <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_entitlement_mode.xlsx'}>Entitlement mode</a>
+2. <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_item_related_fields.xlsx'}>Product related fields</a>
+3. <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_payload.xlsx'}>Payload specific fields</a>
+
+### Purchase Orders spreadsheet fields
+
+The **Purchase Orders** spreadsheet consists of four worksheets&mdash;Entitlement mode, Products, Facilities, and Purchase Orders:
+
+1. <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_entitlement_mode.xlsx'}>Entitlement mode</a>
+2. <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_item_related_fields.xlsx'}>Product related fields</a>
+3. <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_facility_related_fields.xlsx'}>Facility related fields</a>
+4. <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_purchase_order.xlsx'}>Purchase Order specific fields</a>
+
+### Despatch Advice spreadsheet fields
+
+The **Despatch Advice** spreadsheet consists of four worksheets&mdash;Entitlement mode, Products, Facilities, and Despatch Advice:
+
+1. <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_entitlement_mode.xlsx'}>Entitlement mode</a>
+2. <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_item_related_fields.xlsx'}>Product related fields</a>
+3. <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_facility_related_fields.xlsx'}>Facility related fields</a>
+4. <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_despatch_advice.xlsx'}>Despatch Advice specific fields</a>
+
+### Receive Advice spreadsheet fields
+
+The **Receive Advice** spreadsheet consists of four worksheets&mdash;Entitlement mode, Products, Facilities, and Receiving Advice:
+
+1. <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_entitlement_mode.xlsx'}>Entitlement mode</a>
+2. <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_item_related_fields.xlsx'}>Product related fields</a>
+3. <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_facility_related_fields.xlsx'}>Facility related fields</a>
+4. <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_receiving_advice.xlsx'}>Receive Advice specific fields</a>
+
+### Entitlement mode worksheets
+
+All spreadsheets include an **Entitlement mode** worksheet to specify which of your supply
+chain partners can view the data. To change the entitlement mode, select a new value from
+the drop-down list. The entitlement mode applies to all data in the XML file that is generated
+from the spreadsheet, and supersedes the data access control policy. An Entitlement Mode of
+**none** indicates that the default entitlement mode for your organization is applied, as
+specified by your organization's data access control policy.
+
+See [Data entitlement mode](/reference/data-entitlement-mode) to learn about data entitlement
+and default access control for each <SolutionName /> message type. **Attention** The documentation
+describes setting the entitlement mode via the `IFT-Entitlement-Mode` header when submitting the
+XML to the <SolutionName /> API; usage of this header supersedes the entitlement mode specified
+in the spreadsheet.
+
+## Usage
+
+Modify your downloaded sample files, or create them programmatically, and submit them to the
+spreadsheet <a href={process.env.GATSBY_UI_URL + '/ift/api/converter/swagger-ui.html'}
+target="_blank">Converter API</a> for conversion to XML. If you have multiple single
+events to convert to XML, enter the additional events on their corresponding worksheets
+and submit them to the API.
+
+## Sample spreadsheets
+
+Click any link to view or save the sample Microsoft&reg; Excel&trade; spreadsheet (workbook file):
+
+* <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/samples/Aggregation.xlsx'}>Aggregation</a>
+* <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/samples/Commission.xlsx'}>Commission</a>
+* <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/samples/Decommission.xlsx'}>Decommission</a>
+* <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/samples/DespatchAdvice.xlsx'}>Despatch Advice</a>
+* <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/samples/Disaggregation.xlsx'}>Disaggregation</a>
+* <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/samples/Facility.xlsx'}>Master Facility</a>
+* <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/samples/Product.xlsx'}>Master product</a>
+* <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/samples/Observation.xlsx'}>Observation</a>
+* <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/samples/Payloads.xlsx'}>Payloads</a>
+* <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/samples/Product.xlsx'}>Product</a>
+* <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/samples/PurchaseOrder.xlsx'}>Purchase Order</a>
+* <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/samples/ReceiveAdvice.xlsx'}>Receive Advice</a>
+* <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/samples/Transformation.xlsx'}>Transformation</a>
+
+## Related topics
+
+- [Convert spreadsheets](/onboarding/convert-spreadsheets)
+- [Use spreadsheets](/onboarding/use-spreadsheets)
+
+<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>

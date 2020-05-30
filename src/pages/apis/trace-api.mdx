@@ -1,0 +1,876 @@
+---
+title: Trace API
+description: How to use the IBM Blockchain Transparent Supply™ Trace API
+---
+
+<PageDescription>
+
+The **<SolutionName />** <a href={process.env.GATSBY_UI_URL + '/ift/api/outbound/api-docs/'}
+target="_blank">**Trace API**</a> allows authorized users to retrieve trace information
+for your organization's supply chain events, transactions, products and facilities.
+
+</PageDescription>
+
+## Prerequisites
+
+To use the <SolutionName /> **Trace API**, you must meet the following prerequisites:
+
+1. Your organization has subscribed to the [**Trace module**](/modules/trace).
+
+2. Your data integration experts are familiar with using **REST APIs** to send
+data programmatically. Automation of data upload is an ultimate goal to facilitate
+data sharing.
+
+3. For <SolutionName /> organizations to share and trace supply chain data, each
+organization must have defined the appropriate data sharing authorization. For
+details on restricting and sharing your data, see [Data entitlement
+mode](/reference/data-entitlement-mode).
+
+## Getting started
+
+Take the following steps to get started with the <SolutionName /> **Trace API**:
+
+1. Obtain an **authentication token**, as described in [Authenticate human
+users](/managing-users/authenticate-human-users) and [Authenticate system
+users](/managing-users/authenticate-system-users).
+
+2. Submit a Trace API request with the authentication token in the Authorization
+header, as shown in the [example request](#example-query). For manual uploads,
+human users can use [Swagger](#swagger) to run the APIs directly.
+
+3. For help understanding the API [response model](#response-model), refer to the
+documentation below.
+
+## Swagger
+
+To use the Trace API manually, use the Swagger interface:
+
+- <a href={process.env.GATSBY_UI_URL + '/ift/api/outbound/api-docs'} target="_blank">Trace API</a>
+
+You must first provide a valid <SolutionName /> authorization token (human user token) on
+Swagger, using the **Authorize** button on the top right of the page.
+
+## Traces endpoint
+
+The **/traces** endpoint retrieves trace information based on the specified product
+identifier (product ID): **/ift/api/outbound/v2/traces**
+
+### Parameters
+
+The product ID (query string) identifies the specific product instance to trace.
+The supported formats are shown in Table 1:
+
+**Table 1. Supported product ID formats**
+
+| Type | Example and syntax |
+| --- | --- |
+| EPC LGTIN | urn:epc:class:lgtin:0614141.107346.101 <br /> urn:epc:class:lgtin:`<CompanyPrefix>.<ItemRefAndIndicator>.<Lot>` (13 digits + Lot #)|
+| EPC SGTIN | urn:epc:id:sgtin:0614141.107346.2017 <br /> urn:epc:id:sgtin:`<CompanyPrefix>.<ItemRefAndIndicator>.<SerialNumber>` (13 Digits + Serial Number)|
+| <SolutionName /> product ID with Lot # | urn:ibm:ift:product:lot:class:1234567890123.product-123.lot4 <br /> urn:ibm:ift:product:lot:class:`<Company Prefix>.<Item Reference>.<Lot Number>` |
+| <SolutionName /> product ID with Serial # | urn:ibm:ift:product:serial:obj:1234567890123.product-123.serial-number-4567 <br /> urn:ibm:ift:product:serial:obj:`<Company Prefix>.<Item Reference>.<Serial Number>` |
+
+### Example query
+
+Request:
+```
+curl -X GET "https://<solution domain name>/ift/api/outbound/v2/traces?productId=urn:ibm:ift:product:lot:class:999999999999.sliced-mango.lot-1" -H "accept: application/json" -H "Authorization: Bearer '<VALID_IFT_AUTHORIZATION_TOKEN>'"
+
+```
+
+Response:
+```
+{
+  "urn:ibm:ift:product:lot:class:999999999999.sliced-mango.lot-1": {
+    "events": {
+      "urn:uuid:c50240fc-4df3-4d34-bd16-36031bf8b2a5": {
+        "data": {
+          "time": "2018-10-28T00:00:00.000Z",
+          "type": "commission",
+          "step": "urn:epcglobal:cbv:bizstep:commissioning",
+          "facility": {
+            "id": "urn:ibm:ift:location:loc:999999999999.farm-1"
+          },
+          "productInstances": {
+            "instances": [
+              {
+                "id": "urn:ibm:ift:product:lot:class:999999999999.mango.lot-1",
+                "quantity": 500,
+                "unit": "CS"
+              }
+            ]
+          }
+        },
+        "payloadIds": []
+      },
+      "urn:uuid:b3b8ee28-58cb-4f26-9ad5-f27b27cb89d6": {
+        "data": {
+          "time": "2018-10-29T02:00:00.000Z",
+          "type": "commission",
+          "step": "urn:epcglobal:cbv:bizstep:commissioning",
+          "facility": {
+            "id": "urn:ibm:ift:location:loc:999999999999.farm-2"
+          },
+          "productInstances": {
+            "instances": [
+              {
+                "id": "urn:ibm:ift:product:lot:class:999999999999.mango.lot-2",
+                "quantity": 650,
+                "unit": "CS"
+              }
+            ]
+          }
+        },
+        "payloadIds": []
+      },
+      "urn:uuid:7d87bbfd-e9b0-49ee-9c04-d2938f6138f8": {
+        "data": {
+          "time": "2018-11-02T00:00:01.000Z",
+          "type": "transformation",
+          "step": "urn:epcglobal:cbv:bizstep:transforming",
+          "facility": {
+            "id": "urn:ibm:ift:location:loc:999999999999.factory-1"
+          },
+          "productInstances": {
+            "inputs": [
+              {
+                "id": "urn:ibm:ift:product:lot:class:999999999999.mango.lot-1",
+                "quantity": 500,
+                "unit": "CS"
+              },
+               {
+                "id": "urn:ibm:ift:product:lot:class:999999999999.mango.lot-2",
+                "quantity": 650,
+                "unit": "CS"
+              }
+            ],
+            "outputs": [
+              {
+                "id": "urn:ibm:ift:product:lot:class:999999999999.sliced-mango.lot-2",
+                "quantity": 4800,
+                "unit": "KGM"
+              }
+            ]
+          }
+        },
+        "payloadIds": []
+      },
+      "urn:uuid:e207acb5-139b-4813-98bf-b275775e499f": {
+        "data": {
+          "time": "2018-11-12T00:00:01.000Z",
+          "type": "observation",
+          "step": "urn:epcglobal:cbv:bizstep:stocking",
+          "facility": {
+            "id": "urn:ibm:ift:location:loc:5555555555555.store-1",
+            "sources": [
+              {
+                "id": "urn:ibm:ift:location:loc:999999999999.factory-1"
+              }
+            ],
+            "destinations": [
+              {
+                "id": "urn:ibm:ift:location:loc:5555555555555.store-1"
+              }
+            ]
+          },
+          "productInstances": {
+            "instances": [
+              {
+                "id": "urn:ibm:ift:product:lot:class:999999999999.sliced-mango.lot-2",
+                "quantity": 1,
+                "unit": "EA"
+              }
+            ]
+          }
+        },
+        "payloadIds": []
+      }
+    },
+    "facilities": {
+      "urn:ibm:ift:location:loc:999999999999.farm-1": {
+        "data": {
+          "name": "Name",
+          "type": "FARM",
+          "address": {
+            "city": "Miami",
+            "postalCode": "72814"
+          }
+        }
+      },
+      "urn:ibm:ift:location:loc:999999999999.farm-2": {
+        "data": {
+          "name": "Name",
+          "type": "FARM",
+          "address": {
+            "city": "West Palm Beach",
+            "postalCode": "33401"
+          }
+        }
+      },
+      "urn:ibm:ift:location:loc:999999999999.factory-1": {
+        "data": {
+          "name": "Name",
+          "type": "PROCESSING_FACILITY",
+          "address": {
+            "city": "Florence",
+            "postalCode": "29501"
+          }
+        },
+        "payloadIds": []
+      },
+      "urn:ibm:ift:location:loc:5555555555555.store-1": {
+        "data": {
+          "name": "Name",
+          "type": "STORE",
+          "address": {
+            "street": "1 Main St",
+            "city": "Durham",
+            "state": "NC",
+            "postalCode": "27713",
+            "country": "US"
+          }
+        },
+        "payloadIds": []
+      }
+    },
+    "payloads": {
+      "urn:uuid:eed87696-40cc-4839-a609-24d8f0429d08": {
+        "data": {
+          "time": "2018-11-02T00:00:00.000Z",
+          "content": "[]",
+          "contentType": "application/json",
+          "typeUri": "typeUriString"
+        }
+      }
+    },
+    "productInstances": {
+      "urn:ibm:ift:product:lot:class:999999999999.mango.lot-1": {
+        "data": {
+          "name": "Mango",
+          "productId": "urn:ibm:ift:product:class:999999999999.mango"
+        },
+        "payloadIds": []
+      },
+       "urn:ibm:ift:product:lot:class:999999999999.mango.lot-2": {
+        "data": {
+          "name": "Mango",
+          "productId": "urn:ibm:ift:product:class:999999999999.mango"
+        },
+        "payloadIds": []
+      },
+      "urn:ibm:ift:product:lot:class:999999999999.sliced-mango.lot-2": {
+        "data": {
+          "name": "Sliced Mango",
+          "productId": "urn:ibm:ift:product:class:999999999999.sliced-mango",
+          "sellByDate": "2018-11-17"
+        },
+        "payloadIds": [
+          "urn:uuid:eed87696-40cc-4839-a609-24d8f0429d08"
+        ]
+      }
+    },
+    "products": {
+      "urn:ibm:ift:product:class:999999999999.mango": {
+        "data": {
+          "name": "Mango"
+        },
+        "payloadIds": []
+      },
+      "urn:ibm:ift:product:class:999999999999.sliced-mango": {
+        "data": {
+          "name": "Sliced Mango",
+          "sku": "12345678"
+        },
+        "payloadIds": []
+      }
+    },
+    "sequences": {
+      "events": [
+        {
+          "source": "urn:uuid:c50240fc-4df3-4d34-bd16-36031bf8b2a5",
+          "target": "urn:uuid:7d87bbfd-e9b0-49ee-9c04-d2938f6138f8"
+        },
+        {
+          "source": "urn:uuid:b3b8ee28-58cb-4f26-9ad5-f27b27cb89d6",
+          "target": "urn:uuid:7d87bbfd-e9b0-49ee-9c04-d2938f6138f8"
+        },
+        {
+          "source": "urn:uuid:7d87bbfd-e9b0-49ee-9c04-d2938f6138f8",
+          "target": "urn:uuid:e207acb5-139b-4813-98bf-b275775e499f"
+        }
+      ],
+      "facilities": [
+        {
+          "source": "urn:ibm:ift:location:loc:999999999999.farm-1",
+          "target": "urn:ibm:ift:location:loc:999999999999.factory-1"
+        },
+        {
+          "source": "urn:ibm:ift:location:loc:999999999999.farm-2",
+          "target": "urn:ibm:ift:location:loc:999999999999.factory-1"
+        },
+        {
+          "source": "urn:ibm:ift:location:loc:999999999999.factory-1",
+          "target": "urn:ibm:ift:location:loc:5555555555555.store-1"
+        }
+      ],
+      "productInstances": [
+        {
+          "source": "urn:ibm:ift:product:lot:class:999999999999.mango.lot-1",
+          "target": "urn:ibm:ift:product:lot:class:999999999999.sliced-mango.lot-2"
+        },
+        {
+          "source": "urn:ibm:ift:product:lot:class:999999999999.mango.lot-2",
+          "target": "urn:ibm:ift:product:lot:class:999999999999.sliced-mango.lot-2"
+        }
+      ]
+    }
+  },
+  "x-version": "1.0.0"
+}
+```
+
+### Response Model
+The **Trace API** returns data pertaining to events, locations, data payloads, products, and the corresponding sequencing of these items, in the following JSON format:
+
+```
+{
+  "<TRACE_PRODUCT_ID>": {
+    "events": {
+      <EVENT_OBJECTS>
+    },
+    "facilities": {
+      <FACILITY_OBJECTS>
+    },
+    "payloads": {
+      <PAYLOAD_OBJECTS>
+    },
+    "product_instances": {
+      <PRODUCT_INSTANCE_OBJECTS>
+    },
+    "products: {
+      <PRODUCT_OBJECTS>
+    }
+    "sequences": {
+      <SEQUENCE_OBJECTS>
+    }
+  },
+  "x-version": "<VERSION>"
+}
+```
+
+For each JSON object, the data model and example JSON are provided below:
+
+### Events
+
+Event information related to the product identifier are returned in the events block of the JSON response. By default, only the following event types are returned:
+
+- Lot creation - Events information collected during the lot creation for products.
+  - Lot creation events must meet the following criteria:
+    - Event type: Commission
+- Transformation - Events information collected when input products are transformed into new products.
+  - Transformation events must meet the following criteria:
+    - Event type: Transformation
+- Store scan - Events information collected when the product is scanned at a store.
+  - Store scan events must meet the following criteria:
+    - Event type: Observation
+    - Biz step: Stocking
+
+Model:
+```
+"events": {
+  // Unique ID of the event
+  "<EVENT_ID>": {
+    "data": {
+      // Date and time of the event in the format: "yyyy-mm-ddThh:mm:ss.mmmZ"
+      "time": "<EVENT_TIME>",
+      // Type of business transaction (commission, transformation, observation)
+      "type": "<EVENT_TYPE>",
+      // Business step that the event was a part of in the format: "urn:epcglobal:cbv:bizstep:Step"
+      "step": "<EVENT_STEP>",
+      "facility": {
+        // Unique ID of the facility
+        "id": "<FACILITY_ID>",
+        "sources": [
+          {
+            // Unique ID of the source facility
+            "id": "<SOURCE_ID>"
+          }
+        ],
+        "destinations": [
+          {
+            // Unique ID of the destination facility
+            "id": "<DESTINATION_ID>"
+          }
+        ]
+      },
+      "productInstances": {
+        "instances": [
+          {
+            // Unique ID of the instance
+            "id": "<INSTANCE_ID>",
+            // Item quantity must be a number
+            "quantity": <INSTANCE_QUANTITY>,
+            // Unit of measure is a two or three character code from UN/CEFACT
+            "unit": "<INSTANCE_UNIT_OF_MEASURE>"
+          }
+        ],
+        "inputs": [
+          {
+            // Unique ID of the input
+            "id": "<INPUT_ID>",
+            // Input quantity must be a number
+            "quantity": <INPUT_QUANTITY>,
+            // Unit of measure is a two or three character code from UN/CEFACT
+            "unit": "<INPUT_UNIT_OF_MEASURE>"
+          }
+        ],
+        "outputs": [
+          {
+            // Unique ID of the output
+            "id": "<OUTPUT_ID>",
+            "quantity": <OUTPUT_QUANTITY>,
+            // Unit of measure is a two or three character code from UN/CEFACT
+            "unit": "<OUTPUT_UNIT_OF_MEASURE"
+          }
+        ]
+      }
+    },
+    // List of associated Payload IDs
+    "payloadIds": [
+      <PAYLOAD_IDS>
+    ]
+  },
+```
+
+Example:
+```
+"events": {
+  "urn:uuid:c50240fc-4df3-4d34-bd16-36031bf8b2a5": {
+    "data": {
+      "time": "2018-10-28T00:00:00.000Z",
+      "type": "commission",
+      "step": "urn:epcglobal:cbv:bizstep:commissioning",
+      "facility": {
+        "id": "urn:ibm:ift:location:loc:999999999999.farm-1"
+      },
+      "productInstances": {
+        "instances": [
+          {
+            "id": "urn:ibm:ift:product:lot:class:999999999999.mango.lot-1",
+            "quantity": 500,
+            "unit": "CS"
+          }
+        ]
+      }
+    },
+    "payloadIds": []
+  },
+  "urn:uuid:b3b8ee28-58cb-4f26-9ad5-f27b27cb89d6": {
+    "data": {
+      "time": "2018-10-29T02:00:00.000Z",
+      "type": "commission",
+      "step": "urn:epcglobal:cbv:bizstep:commissioning",
+      "facility": {
+        "id": "urn:ibm:ift:location:loc:999999999999.farm-2"
+      },
+      "productInstances": {
+        "instances": [
+          {
+            "id": "urn:ibm:ift:product:lot:class:999999999999.mango.lot-2",
+            "quantity": 650,
+            "unit": "CS"
+          }
+        ]
+      }
+    },
+    "payloadIds": []
+  },
+  "urn:uuid:7d87bbfd-e9b0-49ee-9c04-d2938f6138f8": {
+    "data": {
+      "time": "2018-11-02T00:00:01.000Z",
+      "type": "transformation",
+      "step": "urn:epcglobal:cbv:bizstep:transforming",
+      "facility": {
+        "id": "urn:ibm:ift:location:loc:999999999999.factory-1"
+      },
+      "productInstances": {
+        "inputs": [
+          {
+            "id": "urn:ibm:ift:product:lot:class:999999999999.mango.lot-1",
+            "quantity": 500,
+            "unit": "CS"
+          },
+            {
+            "id": "urn:ibm:ift:product:lot:class:999999999999.mango.lot-2",
+            "quantity": 650,
+            "unit": "CS"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "urn:ibm:ift:product:lot:class:999999999999.sliced-mango.lot-2",
+            "quantity": 4800,
+            "unit": "KGM"
+          }
+        ]
+      }
+    },
+    "payloadIds": []
+  },
+  "urn:uuid:e207acb5-139b-4813-98bf-b275775e499f": {
+    "data": {
+      "time": "2018-11-12T00:00:01.000Z",
+      "type": "observation",
+      "step": "urn:epcglobal:cbv:bizstep:stocking",
+      "facility": {
+        "id": "urn:ibm:ift:location:loc:5555555555555.store-1",
+        "sources": [
+          {
+            "id": "urn:ibm:ift:location:loc:999999999999.factory-1"
+          }
+        ],
+        "destinations": [
+          {
+            "id": "urn:ibm:ift:location:loc:5555555555555.store-1"
+          }
+        ]
+      },
+      "productInstances": {
+        "instances": [
+          {
+            "id": "urn:ibm:ift:product:lot:class:999999999999.sliced-mango.lot-2",
+            "quantity": 1,
+            "unit": "EA"
+          }
+        ]
+      }
+    },
+    "payloadIds": []
+  }
+}
+```
+
+### Facilities
+
+Facility information related to a product trace is returned in the **facilities** block. The model is shown below:
+
+Model:
+```
+"facilities": {
+  // Unique ID for the facility
+  "<FACILITY_ID>": {
+    "data": {
+      "name": "<FACILITY_NAME>",
+      // Type of facility (STORE, FARM, SUPPLIER, etc)
+      "type": "STORE",
+      "address": {
+        "street": "<FACILITY_STREET_ADDRESS>",
+        "city": "<FACILITY_CITY>",
+        "state": "<FACILITY_STATE>",
+        "postalCode": "<FACILITY_POSTAL_CODE>",
+        "country": "<FACILTIY_COUNTRY>"
+      }
+    },
+    // List of associated Payload IDs
+    "payloadIds": [
+      <PAYLOAD_IDS>
+    ]
+  }
+}
+```
+
+Example:
+```
+"facilities": {
+  "urn:ibm:ift:location:loc:999999999999.farm-1": {
+    "data": {
+      "name": "Tropical Farms",
+      "type": "FARM",
+      "address": {
+        "city": "Miami",
+        "postalCode": "72814"
+      }
+    }
+  },
+  "urn:ibm:ift:location:loc:999999999999.farm-2": {
+    "data": {
+      "name": "name",
+      "type": "FARM",
+      "address": {
+        "city": "West Palm Beach",
+        "postalCode": "33401"
+      }
+    }
+  },
+  "urn:ibm:ift:location:loc:999999999999.factory-1": {
+    "data": {
+      "name": "name",
+      "type": "PROCESSING_FACILITY",
+      "address": {
+        "city": "Florence",
+        "postalCode": "29501"
+      }
+    },
+    "payloadIds": []
+  },
+  "urn:ibm:ift:location:loc:5555555555555.store-1": {
+    "data": {
+      "name": "name",
+      "type": "STORE",
+      "address": {
+        "street": "1 Main St",
+        "city": "Durham",
+        "state": "NC",
+        "postalCode": "27713",
+        "country": "US"
+      }
+    },
+    "payloadIds": []
+  }
+}
+```
+
+### Payloads
+
+Payload information related to a product trace is returned in the **payloads**
+block. One or more trace events, facilities, products, or product instances can
+reference a payload ID. The model is shown below:
+
+Model:
+```
+"payloads": {
+  // Unique ID of the payload
+  "<PAYLOAD_ID>": {
+    "data": {
+      // Date and time of the payload in the format: "yyyy-mm-ddThh:mm:ss.mmmZ"
+      "time": "<PAYLOAD_TIME>",
+      // Customized content in a String format
+      "content": "<PAYLOAD_CONTENT>",
+      // HTTP content type of the payload (application/json, application/xml, etc)
+      "contentType": "<PAYLOAD_CONTENT_TYPE>",
+      // URI for the payload type
+      "typeUri": "<PAYLOAD_TYPE_URI>"
+    }
+  }
+}
+```
+
+Example:
+```
+"payloads": {
+  "urn:uuid:eed87696-40cc-4839-a609-24d8f0429d08": {
+    "data": {
+      "time": "2018-11-02T00:00:00.000Z",
+      "content": "customized data",
+      "contentType": "application/json",
+      "typeUri": "typeUriString"
+    }
+  }
+}
+```
+
+### Product Instances
+
+Product instance (such as lot-level) information related to a product trace is contained in the **productInstances** block. A **productInstance** is a specific instance or lot of a **product**. The model is shown below:
+
+Model:
+```
+"productInstances": {
+  // Unique ID of the product instance
+  "<PRODUCT_INSTANCE_ID>: {
+    "data": {
+      "name": "<PRODUCT_NAME>",
+      "productId": "<PRODUCT_ID>",
+      // Date of freeze in YYYY-MM-DD format
+      "firstFreezeDate": "<DATE>",
+      // Date of the start of harvest in YYYY-MM-DD format
+      "harvestStartDate": "<DATE>",
+      // Date of the end of harvest in YYYY-MM-DD format
+      "harvestEndDate": "<DATE>",
+      // Expiration date in YYYY-MM-DD format
+      "expirationDate": "<DATE>",
+      // Sell-by date in YYYY-MM-DD format
+      "sellByDate": "<DATE>"
+    },
+    // List of associated Payload IDs
+    "payloadIds": [
+      <PAYLOAD_IDS>
+    ]
+  },
+}
+```
+
+Example:
+```
+"productInstances": {
+  "urn:ibm:ift:product:lot:class:999999999999.mango.lot-1": {
+    "data": {
+      "name": "Mango",
+      "productId": "urn:ibm:ift:product:class:999999999999.mango"
+    },
+    "payloadIds": []
+  },
+    "urn:ibm:ift:product:lot:class:999999999999.mango.lot-2": {
+    "data": {
+      "name": "Mango",
+      "productId": "urn:ibm:ift:product:class:999999999999.mango"
+    },
+    "payloadIds": []
+  },
+  "urn:ibm:ift:product:lot:class:999999999999.sliced-mango.lot-2": {
+    "data": {
+      "name": "Sliced Mango",
+      "productId": "urn:ibm:ift:product:class:999999999999.sliced-mango",
+      "sellByDate": "2018-11-17"
+    },
+    "payloadIds": [
+      "urn:uuid:eed87696-40cc-4839-a609-24d8f0429d08"
+    ]
+  }
+}
+```
+
+### Products
+
+General product information related to a trace is returned in the **products** block. The model is shown below:
+
+Model:
+```
+"products": {
+  // Unique ID of the product
+  "<PRODUCT_ID>": {
+    "data": {
+      "name": "<PRODUCT_NAME>",
+      "sku": "<PRODUCT_SKU>"
+    },
+    // List of associated Payload IDs
+    "payloadIds": [
+      <PAYLOAD_IDS>
+    ]
+  }
+}
+```
+
+Example:
+```
+"products": {
+  "urn:ibm:ift:product:class:999999999999.mango": {
+    "data": {
+      "name": "Mango"
+    },
+    "payloadIds": []
+  },
+  "urn:ibm:ift:product:class:999999999999.sliced-mango": {
+    "data": {
+      "name": "Sliced Mango",
+      "sku": "12345678"
+    },
+    "payloadIds": []
+  }
+}
+```
+
+### Sequences
+
+ Sequences describes the corresponding sequencing of events, facilities, and products. Each array outlines an ordered list that shows matching source and targets. This information can be used to create a linear timeline or a tree structure, depending on the returned data.
+
+Model:
+```
+"sequences": {
+  "events": [
+    {
+      "source": "<EVENT_SOURCE_ID>",
+      "target": "<EVENT_TARGET_ID>"
+    },
+  ],
+  "facilities": [
+    {
+      "source": "<FACILITY_SOURCE_ID>",
+      "target": "<FACILITY_TARGET_ID>"
+    },
+  ],
+  "productInstances": [
+    {
+      "source": "<PRODUCT_INSTANCE_SOURCE_ID>",
+      "target": "<PRODUCT_INSTANCE_TARGET_ID>"
+    },
+  ]
+}
+},
+```
+
+Example:
+```
+"sequences": {
+  "events": [
+    {
+      "source": "urn:uuid:c50240fc-4df3-4d34-bd16-36031bf8b2a5",
+      "target": "urn:uuid:7d87bbfd-e9b0-49ee-9c04-d2938f6138f8"
+    },
+    {
+      "source": "urn:uuid:b3b8ee28-58cb-4f26-9ad5-f27b27cb89d6",
+      "target": "urn:uuid:7d87bbfd-e9b0-49ee-9c04-d2938f6138f8"
+    },
+    {
+      "source": "urn:uuid:7d87bbfd-e9b0-49ee-9c04-d2938f6138f8",
+      "target": "urn:uuid:e207acb5-139b-4813-98bf-b275775e499f"
+    }
+  ],
+  "facilities": [
+    {
+      "source": "urn:ibm:ift:location:loc:999999999999.farm-1",
+      "target": "urn:ibm:ift:location:loc:999999999999.factory-1"
+    },
+    {
+      "source": "urn:ibm:ift:location:loc:999999999999.farm-2",
+      "target": "urn:ibm:ift:location:loc:999999999999.factory-1"
+    },
+    {
+      "source": "urn:ibm:ift:location:loc:999999999999.factory-1",
+      "target": "urn:ibm:ift:location:loc:5555555555555.store-1"
+    }
+  ],
+  "productInstances": [
+    {
+      "source": "urn:ibm:ift:product:lot:class:999999999999.mango.lot-1",
+      "target": "urn:ibm:ift:product:lot:class:999999999999.sliced-mango.lot-2"
+    },
+    {
+      "source": "urn:ibm:ift:product:lot:class:999999999999.mango.lot-2",
+      "target": "urn:ibm:ift:product:lot:class:999999999999.sliced-mango.lot-2"
+    }
+  ]
+}
+```
+
+### API response caching
+
+By default, API responses are cached for 24 hours. The first query will have a
+longer response time, but subsequent queries with the same parameters should have
+faster response times. A separate entry is cached for each unique tuple based on
+the following information:
+
+- organization identifier from the request token
+- **productId** input query parameter
+
+#### Bypassing or updating the cached response
+
+If you have updated trace data within the previous 24 hours, you may want to retrieve
+the latest trace information. To bypass the cache, provide an HTTP header named
+**X-ApiCache-Bypass** with a value of **true**. This will bypass the API cache and
+return the latest available trace information.
+
+Be aware that bypassing the cache will result in much longer response times, so
+only provide the **X-ApiCache-Bypass** header when there has been updated trace
+information. When the cache is bypassed, the latest response information will be
+added to the current API cache. Therefore, subsequent requests with the same parameters
+will return the updated trace information.
+
+## Related topics
+
+- <a href={process.env.GATSBY_UI_URL + '/ift/api/outbound/api-docs'} target="_blank">Trace API</a>
+- [View Trace API usage](/how-to/view-trace-usage)
+- [Data entitlement mode](/reference/data-entitlement-mode)
+- [Authenticate human users](/managing-users/authenticate-human-users)
+- [Authenticate system users](/managing-users/authenticate-system-users)
+
+<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>

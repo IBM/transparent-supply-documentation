@@ -1,0 +1,156 @@
+---
+title: EPCIS Disaggregation Event XML example
+description: Example of EPCIS Disaggregation Event XML data for upload
+---
+
+<PageDescription>
+
+EPCIS Disaggregation Event data is uploaded in XML format, as shown in the
+example below.
+
+</PageDescription>
+
+## EPCIS Disaggregation Event XML example
+
+The following example shows example EPCIS Disaggregation Event data in XML:
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<epcis:EPCISDocument
+  xmlns:epcis="urn:epcglobal:epcis:xsd:1"
+  xmlns:example="http://ns.example.com/epcis"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" creationDate="2005-07-11T11:30:47.0Z" schemaVersion="1.2">
+  <EPCISBody>
+    <EventList>
+      <AggregationEvent>
+        <eventTime>2013-06-08T14:58:56.591Z</eventTime>
+        <!--WHEN-->
+        <!--MANDATORY. UTC time (ISO 8601) when event occurred.-->
+        <eventTimeZoneOffset>+02:00</eventTimeZoneOffset>
+        <!--MANDATORY. Time-zone of location, as an offset from UTC.-->
+        <baseExtension>
+          <eventID>urn:uuid:6926712e-599f-4c4e-b6e9-8dd888c906bd</eventID>
+          <!--OPTIONAL. A unique ID (UUID) for the event. If not specified, the system generates an event ID.-->
+          <!--RECOMMENDED. Supply a unique eventID (UUID) for disambiguation.-->
+        </baseExtension>
+        <parentID>urn:epc:id:sscc:5012345.0678901234</parentID>
+        <!--WHAT-->
+        <!--MANDATORY: single parent object from which child objects are being disaggregated (may be SSCC or internal license plate numbers)-->
+        <!--Guidance for clients-->
+        <!--1. Do not reuse pallet ids (internal or SSCC) at least over periods of months. GS1 guideline: SSCC not reused for at least 1 year.-->
+        <!--2. Pallets moving across company boundaries should have SSCCs. E.g. pallets shipped from supplier to retailer should have SSCC.-->
+        <!--3. Internally assigned pallet ids should be reported with a company prefix, for disambiguation. So, CompanyPrefix.InternalID.-->
+        <!--General EPC SSCC syntax: urn:epc:id:sscc:CompanyPrefix.SerialRefAndExtension-->
+        <!--EPC SSCC is 17 digits-->
+        <!--CompanyPrefix is equal to the CompanyPrefix in GS1 SSCC-->
+        <!--SerialReferenceAndExtension is formed by concatenating the first digit (Extension) from GS1 SSCC with SerialRef digits from GS1 SSCC.-->
+        <!--GS1 SSCC check digit is dropped.-->
+        <!--General syntax for IBM Blockchain Transparent Supply™ logistic unit: -->
+        <!--urn:ibm:ift:lpn:obj:<Company Prefix>.<Serial Reference>-->
+        <childEPCs>
+          <epc>urn:epc:id:sgtin:0614141.107346.2017</epc>
+          <epc>urn:epc:id:sgtin:0614141.107346.2018</epc>
+          <!--Additional entries go here-->
+        </childEPCs>
+        <!--WHAT-->
+        <!--MANDATORY, but can be empty, if childQuantityList (see below) is present-->
+        <!--List of child instance-level objects (SSCC, SGTIN) that are being disaggregated from parent object.-->
+        <!--LGTINs and other class-level objects go in childQuantityList (see below)-->
+        <!--General SGTIN syntax: urn:epc:id:sgtin:CompanyPrefix.IndicatorDigitAndItemRef.SerialNumber-->
+        <!--CompanyPrefix.ItemRefAndIndicator should have 13 digits (without counting dots).-->
+        <!--CompanyPrefix is equal to the CompanyPrefix derived from GTIN-14.-->
+        <!--ItemRefAndIndicator is formed by concatenating the first digit (Indicator) from GTIN-14 with ItemRef digits from GTIN-14.-->
+        <!--GTIN-14 check digit is dropped.-->
+        <!--GTIN-12 or GTIN-13 should first be converted to GTIN-14 by adding leading 0s before above conversion.-->
+        <!--IBM Blockchain Transparent Supply™ IDs-->
+        <!--IBM Blockchain Transparent Supply™ Product with Serial #: urn:ibm:ift:product:serial:obj:<Company Prefix>.<Item Reference>.<Serial Number>-->
+        <!--IBM Blockchain Transparent Supply™ Logistic Unit: urn:ibm:ift:lpn:obj:<Company Prefix>.<Serial Reference>-->
+        <action>DELETE</action>
+        <!--MANDATORY. EPCIS action. Don't change-->
+        <bizStep>urn:epcglobal:cbv:bizstep:unpacking</bizStep>
+        <!--OPTIONAL. From Section 7.1.3 of https://www.gs1.org/sites/default/files/docs/epc/CBV-Standard-1-2-r-2016-09-29.pdf-->
+        <!--The business step that this event was a part of.-->
+        <disposition>urn:epcglobal:cbv:disp:in_progress</disposition>
+        <!--OPTIONAL. From Section 7.2.3 of https://www.gs1.org/sites/default/files/docs/epc/CBV-Standard-1-2-r-2016-09-29.pdf-->
+        <!--The condition of the objects after this event.-->
+        <readPoint><id>urn:epc:id:sgln:0614141.00777.0</id></readPoint>
+        <!--OPTIONAL: SGLN FTLI, or SFTLI for point at which aggregation occurred. Used if multiple facilities GLNs (look below for the Mandatory GLN).-->
+        <!--General syntax of SGLN: urn:epc:id:sgln:CompanyPrefix.LocationReference.Extension-->
+        <!--CompanyPrefix.LocationReference are the first 12 digits of GLN (13th check digit is not included).-->
+        <!--Extension can be a single 0 digit (denoting no extension), or can be any number of digits without leading zeros-->
+        <!--IBM Blockchain Transparent Supply™ Location with Extension ID: urn:ibm:ift:location:extension:loc:<Company Prefix>.<Location Reference>.<Extension>-->
+        <bizLocation><id>urn:epc:id:sgln:0614141.00888.0</id></bizLocation>
+        <!--WHERE-->
+        <!--MANDATORY: SGLN (extensible global location number) FTLI, or SFTLI for the business location where the event occurred.-->
+        <!--See above for SGLN and IBM Blockchain Transparent Supply™ location formats-->
+        <bizTransactionList>
+          <bizTransaction type="urn:epcglobal:cbv:btt:po">urn:epcglobal:cbv:bt:5412345000037:PO3352</bizTransaction>
+          <bizTransaction type="urn:epcglobal:cbv:btt:desadv">urn:epcglobal:cbv:bt:5412345000037:PO3352-DA349875</bizTransaction>
+          <bizTransaction type="urn:epcglobal:cbv:btt:prodorder">urn:epcglobal:cbv:bt:0614141000005:Order123</bizTransaction>
+          <!-- Three types of Business Txn document examples: -->
+          <!--  1. Use "urn:epcglobal:cbv:btt:po" above to indicate the identifier for a PURCHASE ORDER (send from retailer to supplier) -->
+          <!--  2. Use "urn:epcglobal:cbv:btt:desadv" above to indicate the identifier for a DESPATCH ADVICE (send from supplier to retailer) -->
+          <!--  3. Use "urn:epcglobal:cbv:btt:prodorder" above to indicate the identifier for a PRODUCTION ORDER (internal to a supplier) -->
+        </bizTransactionList>
+        <!--WHY-->
+        <!--List of business transactions associated with this event.-->
+        <!--The example above shows a purchase order (PO), a despatch advice (ASN), and a production order-->
+        <!--OPTIONAL, in general. From Page 28 of https://www.gs1.org/sites/default/files/docs/epc/CBV-Standard-1-2-1-r-2017-05-05.pdf-->
+        <!--MANDATORY: When this event is used to represent receiving a shipment from supplier to retailer,-->
+        <!--the bizTransactionList should include a PO. It should also include a DA (ASN) when one is available.-->
+        <!--General syntax: urn:epcglobal:cbv:bt:GLN:TransactionID-->
+        <!--See transaction XMLs for TransactionID format.-->
+        <!--IBM Blockchain Transparent Supply™ transaction id format: urn:ibm:ift:bt:<Company Prefix>.<Location Reference>.<Transaction Id>-->
+        <extension>
+          <childQuantityList>
+            <quantityElement>
+              <epcClass>urn:epc:class:lgtin:0614141.107346.101</epcClass>
+              <!--MANDATORY for quantityElement. Class-level EPCs like LGTINs. See note below for description.-->
+              <quantity>10</quantity>
+              <!--MANDATORY for quantityElement.-->
+              <!--Meaning: 10 cases of LGTIN '0614141.107346' belonging to lot '101'-->
+              <uom>CS</uom>
+              <!--MANDATORY for quantityElement. Item quantity unit of measurement. "CS" = Case.-->
+              <!--Two or three-charater codes from UN/CEFACT Recommendation 20.-->
+              <!--Other examples: EA (each), LBR (pound), KGM (kilogram).-->
+              <!--See https://www.unece.org/fileadmin/DAM/cefact/recommendations/rec20/rec20_rev3_Annex2e.pdf and-->
+              <!--https://www.unece.org/fileadmin/DAM/cefact/recommendations/rec20/rec20_rev3_Annex3e.pdf.-->
+            </quantityElement>
+	          <!--Additional quantityElement entries go here.-->
+          </childQuantityList>
+          <!--WHAT-->
+          <!--MANDATORY that childQuantityList be present if childEPCs is empty.-->
+          <!--List of child class-level objects like LGTINS (GTIN+lot) along with their quantity and unit of measure.-->
+          <!--LGTINs should be constructed to be as unique as possible; by concatenating time/date of creation with object id, e.g.-->
+          <!--General LGTIN syntax: urn:epc:class:lgtin:CompanyPrefix.IndicatorDigitAndItemRef.Lot-->
+          <!--CompanyPrefix.ItemRefAndIndicator should have 13 digits (without counting dots).-->
+          <!--CompanyPrefix is equal to the CompanyPrefix derived from GTIN.-->
+          <!--ItemRefAndIndicator is formed by concatenating the first digit (Indicator) from GTIN with ItemRef digits from GTIN.-->
+          <!--GTIN check digit is dropped.-->
+          <!--If a GTIN (without lot) is to be represented, the following syntax is used:-->
+          <!--From Page 35 of https://www.gs1.org/sites/default/files/docs/epc/CBV-Standard-1-2-1-r-2017-05-05.pdf -->
+          <!--urn:epc:idpat:sgtin:CompanyPrefix.ItemRefAndIndicator.* where -->
+          <!--CompanyPrefix.ItemRefAndIndicator is 13 digits as above.-->
+          <!--IBM Blockchain Transparent Supply™ IDs-->
+          <!--IBM Blockchain Transparent Supply™ Product with Lot #: urn:ibm:ift:product:lot:class:<Company Prefix>.<Item Reference>.<Lot Number>-->
+          <!--IBM Blockchain Transparent Supply™ Product without Lot/Serial: urn:ibm:ift:product:class:<Company Prefix>.<Item Reference>-->
+	        <sourceList>
+	          <source type="urn:epcglobal:cbv:sdt:owning_party">urn:epc:id:sgln:0614141.00001.0</source>
+            <!--Additional source entries go here.-->
+	          <!--OPTIONAL: SGLN of the facility or facilities that goods are being sent from.-->
+            <!--MANDATORY if this event involves a transfer of goods, such as a shipment from supplier to retailer.-->
+	        </sourceList>
+	        <destinationList>
+	          <destination type="urn:epcglobal:cbv:sdt:owning_party">urn:epc:id:sgln:5012345.00001.0</destination>
+            <!--Additional destination entries go here.-->
+	          <!--OPTIONAL: SGLN of the receiving facility or facilities.-->
+            <!--MANDATORY if this event involves a transfer of goods, such as a shipment from suppler to retailer. -->
+          </destinationList>
+        </extension>
+      </AggregationEvent>
+    </EventList>
+  </EPCISBody>
+</epcis:EPCISDocument>
+```
+
+<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>

@@ -1,0 +1,41 @@
+---
+title: Supplier data
+description: Data requirements for supply chain suppliers
+---
+
+<PageDescription>
+
+To onboard and use **<SolutionName />**, product **suppliers** register,
+upload, and share the **data types** described below.
+
+</PageDescription>
+
+## Supplier data
+
+The following data types must be uploaded by product suppliers (organizations):
+
+1. [**Unique product identifiers**](/reference/data-types#master-data) - Can include GS-1 GTINs
+or <SolutionName /> product identifiers, mapping from **GTINs** to **SKUs** and **UPCs**,
+and product descriptions. If you do not have a GS-1 identifier for a product, you can
+choose to register for an <SolutionName /> product identifier in the **Onboarding** module.
+2. [**Unique location identifiers**](/reference/data-types#master-data) - Can include **GS-1
+GLNs**, **<SolutionName /> facility identifiers**, and **location descriptions**, such
+as facility type, number, address, and contact information. If you do not have a GS-1
+identifier for a facility, you can choose to register for an **<SolutionName /> facility
+identifier** in the **Onboarding** module.
+3. [**Lot or batch identifier**](/reference/data-types#instancelot-master-data-(ilmd)) - The lot or
+batch number that uniquely identifies the shipment for the product instance.
+4. [**Events**](/reference/data-types#epcis-events) - Must include a time and date stamp and
+references to any **Purchase Orders**, **Despatch Advice (DA)**, **EPCIS Events** (with
+lot number), receiver **Disaggregation** and **Observation** events, processor **Disaggregation**,
+**Aggregation**, **Observation** and **Transformation** events, and shipper **Aggregation**
+and **Observation** events.
+
+Note: Additional [data types](/reference/data-types) are supported but not required.
+
+## Related topics
+
+- [Test data](/onboarding/test-data)
+- [Data types](/reference/data-types)
+
+<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>

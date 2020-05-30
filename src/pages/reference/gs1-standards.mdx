@@ -1,0 +1,73 @@
+---
+title: GS1 standards
+description: IBM Blockchain Transparent Supply™ supports GS1 standards
+---
+
+<PageDescription>
+
+To facilitate data integration between **<SolutionName />** and the local
+systems of member organizations, compliant data is based on <a href="https://www.gs1.org"
+target="_blank">GS1 standards</a>. Global Standards One (GS1) is a not-for-profit
+global business organization that develops and maintains standards and services for
+supply chain participants. GS1 standards enable businesses that use divergent processes
+and procedures to interact and transact with clarity and efficiency.
+
+</PageDescription>
+
+
+## GS1 standards
+
+GS1 provides a method for registering identifiers for company prefixes, locations,
+and products. Each registered identifier is a unique ID (UUID) that can be used on
+any supply chain, worldwide. The following [GS1 Identifier Types](#gs1-identifier-types)
+are commonly used in <SolutionName />. A complete list of <a href="https://www.gs1.org"
+target="_blank">GS1 ID types</a> is available on the GS1 site. <a
+href="http://apps.gs1.org/GDD/_layouts/help.aspx?Lcid=1033&Key=WSSEndUser&ShowNav=true"
+target="_blank">Understanding the GS1 Business Data Model</a> can also facilitate the
+data upload process.
+
+| Identifier | Description | Examples |
+| --- | --- | --- |
+| GTIN | Global Trade Item Number (products and services) | Milk, mangoes, tomatoes |
+| GLN | Global Location Number (parties and locations) | Businesses, warehouses, retail stores |
+| SSCC | Serial Shipping Container Code or Logistics units | Pallets, containers |
+
+## GS1 URNs
+
+As shown in Table 1 below, <SolutionName /> uses GS1 URNs, which follow the <a
+href="https://www.gs1.org/sites/default/files/docs/epc/TDS_1_9_Standard.pdf"
+target="_blank">GS1 Tag Data Standard</a>.
+
+Table 1. GS1 URNs
+
+| Element | Example and syntax |
+| --- | --- |
+| EPC-SSCC | `urn:epc:id:sscc:5012345.0678901234` <br /> `urn:epc:id:sscc:<CompanyPrefix>.<SerialRefAndExtension>`(17 Digits) |
+| EPC-SGTIN | `urn:epc:id:sgtin:0614141.107346.2017` <br /> `urn:epc:id:sgtin:<CompanyPrefix>.<IndicatorDigit><ItemRef>.<SerialNumber>`(13 Digits + Serial Number)|
+| EPC-SGLN |  `urn:epc:id:sgln:0614141.00777.0` <br /> `urn:epc:id:sgln:<CompanyPrefix>.<LocationReference>.<Extension>`(12 Digits + Extension)  |
+| EPC-LGTIN | `urn:epc:class:lgtin:0614141.107346.101` <br /> `urn:epc:class:lgtin:<CompanyPrefix>.<IndicatorDigit><ItemRef>.<Lot>`(13 digits + Lot)|
+| EPC-GTIN |  `urn:epc:idpat:sgtin:0614141.107346.*` <br /> `urn:epc:idpat:sgtin:<CompanyPrefix>.<IndicatorDigit><ItemRef>.*`(13 Digits + '*')|
+| GS1-GTIN | `40987650000223` <br /> `<Indicator><CompanyPrefix><ItemRef><CheckDigit>`(14 Digits) |
+| GS1-SSCC | `409876506700001010` <br /> `<Extension><CompanyPrefix><SerialReference><CheckDigit>`(18 Digits) |
+| GS1-GLN | `4098765000010` <br /> `<CompanyPrefix><LocationReference><CheckDigit>`(13 Digits) |
+| GS1_ENTITY | urn:epcglobal:cbv:bt:1234567890123:T1234 <br /> urn:epcglobal:cbv:bt:`<GS1-GLN>:<Transaction ID>` |
+| GS1_ENTITY_TYPE | urn:epcglobal:cbv:btt:po <br /> urn:epcglobal:cbv:btt:`<Business Transaction Type>` <br /> Valid Business Transaction Types = bol, desadv, inv, pedigree, po, poc, prodorder, recadv, rma |
+| GS1_BIZSTEP |urn:epcglobal:cbv:bizstep:receiving <br /> urn:epcglobal:cbv:bizstep:`<bizStep>` <br /> Valid bizSteps = accepting, arriving, assembling, collecting, commissioning, consiging, creating_class_instance, cycle_counting, decommissioning, departing, destroying, disassembling, dispensing, encoding, entering_exiting, holding, inspecting, installing, killing, loading, other, packing, picking, receiving, removing, repackaging, repairing, replacing, reserving, retail_selling, shipping, staging_outbound, stock_taking, stocking, storing, transforming, transporting, unloading, unpacking, void_shipping |
+| GS1_DISPOSITION | urn:epcglobal:cbv:disp:destroyed <br /> urn:epcglobal:cbv:disp:`<Disposition>` <br /> Valid Dispositions = active, container_closed, damaged, destroyed, dispensed, disposed, encoded, expired, in_progress, in_transit, inactive, no_pedigree_match, non_sellable_other, partially_dispensed, recalled, reserved, retail_sold, returned, sellable_accessible, sellable_not_accessible, stolen, unknown |
+| GS1_SOURCE_DEST_TYPE |urn:epcglobal:cbv:sdt:possessing_party <br /> urn:epcglobal:cbv:sdt:`<Source Destination Type>` <br /> Valid Source Destination Types = owning_party, possessing_party, location |
+
+## Read Points
+
+For EPCIS Events on a vehicle or ship in transit, GS1 **read point geo-coordinates** are supported
+using RFC5870 compliant URNs. Valid geographic coordinates for &lt;readPoint&gt;&lt;geo&gt; XML are
+comma-separated `latitude,longitude` coordinates or comma-separated `latitude,longitude,altitude`
+coordinates, as shown in the following examples:
+
+`<readPoint><geo>geo:13.4125,-103.8667</geo></readPoint>`
+`<readPoint><geo>geo:13.4125,103.8667,9.098</geo></readPoint>`
+
+<p>
+  <SolutionName /> surfaces read point data through the Trace API only, it is not available through the UI. For an example of <SolutionName /> read point upload syntax, see the annotated <a href="../files/xml-annotated-samples/xml-EPCIS-Commission">Commission Event XML</a>. For GS1 read point details, refer to section 7.3.4 of the <a href="https://www.gs1.org/sites/default/files/docs/epc/EPCIS-Standard-1.2-r-2016-09-29.pdf" target="_blank">GS1 EPCIS Standard</a>.
+</p>
+
+<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>

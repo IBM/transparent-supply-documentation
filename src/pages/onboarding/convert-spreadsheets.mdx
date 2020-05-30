@@ -1,0 +1,172 @@
+---
+title: Convert spreadsheets
+description: How to convert Microsoft&reg; Excel&trade; spreadsheets to XML data
+---
+
+<PageDescription>
+
+The **<SolutionName />** spreadsheet <a href={process.env.GATSBY_UI_URL + '/ift/api/converter/swagger-ui.html'} target="_blank">Converter API</a> converts Microsoft&reg; Excel&trade; files
+into XML format for upload via the <a href={process.env.GATSBY_UI_URL + '/ift/api/connector/swagger-ui.html'} target="_blank">Connector API</a>. This tool enables
+you to easily generate valid <SolutionName /> messages from Excel&trade; files. This
+service converts content directly from a spreadsheet file to an <SolutionName /> message
+type in XML format. The template files also contain each XML field that is available
+in the message type.
+
+</PageDescription>
+
+## Overview
+
+Download a sample Excel&trade; spreadsheet (or a blank template) below, and review
+the worksheets and the required formats. Your input file to the Converter API may
+contain multiple worksheets&mdash;including one for facilities (locations) and one
+for products. The products and facilities worksheets describe your **Master data**,
+and provide a single source of attributes and values for reuse. The worksheets contain
+drop-down lists to select values that
+the <a href={process.env.GATSBY_UI_URL + '/ift/api/converter/swagger-ui.html'} target="_blank">Converter
+API</a> requires.
+
+## Sample spreadsheets
+
+Click any link to view or save the sample spreadsheet (.xlsx) file:
+
+* <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/samples/Aggregation.xlsx'}>Aggregation</a>
+* <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/samples/Commission.xlsx'}>Commission</a>
+* <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/samples/Decommission.xlsx'}>Decommission</a>
+* <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/samples/DespatchAdvice.xlsx'}>Despatch Advice</a>
+* <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/samples/Disaggregation.xlsx'}>Disaggregation</a>
+* <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/samples/Facility.xlsx'}>Master Facility</a>
+* <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/samples/Product.xlsx'}>Master Product</a>
+* <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/samples/Observation.xlsx'}>Observation</a>
+* <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/samples/Payloads.xlsx'}>Payloads</a>
+* <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/samples/PurchaseOrder.xlsx'}>Purchase Order</a>
+* <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/samples/ReceiveAdvice.xlsx'}>Receive Advice</a>
+* <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/samples/Transformation.xlsx'}>Transformation</a>
+
+
+## Blank spreadsheet templates
+
+Click any link to save the blank spreadsheet template file; select **Excel Workbook (.xslx)** as the extension:
+
+* <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/templates/Aggregation.xltx'}>Aggregation</a>
+* <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/templates/Commission.xltx'}>Commission</a>
+* <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/templates/Decommission.xltx'}>Decommission</a>
+* <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/templates/DespatchAdvice.xltx'}>Despatch Advice</a>
+* <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/templates/Disaggregation.xltx'}>Disaggregation</a>
+* <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/templates/Facility.xltx'}>Master Facility</a>
+* <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/templates/Product.xltx'}>Master Product</a>
+* <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/templates/Observation.xltx'}>Observation</a>
+* <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/templates/Payloads.xltx'}>Payloads</a>
+* <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/templates/PurchaseOrder.xltx'}>Purchase Order</a>
+* <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/templates/ReceiveAdvice.xltx'}>Receive Advice</a>
+* <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/templates/Transformation.xltx'}>Transformation</a>
+
+## Spreadsheet documentation
+
+The Excel&trade; spreadsheets below (.xlsx files) provide field-by-field details for each spreadsheet,
+including detailed field descriptions, required formats, examples, and requirements. Each table entry
+contains the collection of documentation files for each <SolutionName /> message type.
+
+**Note:** Many of the spreadsheets contain a **Level** column, which represents groupings. Level 1
+represents a new event or transaction. Anything above Level 1 represents an array. For example, the
+Aggregation description workbook contains both Level 1 and Level 2 groupings. To populate an Aggregation
+template workbook with one aggregation event, and three trade items, for example:
+
+1. First populate all required Level 1 cells in the first row. The first trade item description, quantity,
+and quantity UoM (unit of measure) cells (all Level 2) will be populated in the first row.
+2. To populate the second trade item, create a new row, do NOT populate the Level 1 cells, and populate
+the Level 2 trade item description, quantity, and quantity UoM cells.
+3. Create another row and populate the Level 2 cells for the third trade item.
+4. Adding a new row and populating the required Level 1 cells creates a new aggregation event.
+
+You can view this **Level** usage in the sample spreadsheets above.
+
+### Excel&trade; spreadsheet fields
+
+Click any link below to view or save the Excel&trade; spreadsheet field-level help file:
+
+| Message| Data field descriptions |
+| --- | ---|
+| Aggregation | - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_aggregation.xlsx'}>Aggregation specific fields</a> <br /> - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_entitlement_mode.xlsx'}>Entitlement Modes</a> <br /> - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_item_related_fields.xlsx'}>Product related fields</a> <br /> - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_facility_related_fields.xlsx'}>Facility related fields</a> |
+| Commission | - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_commission.xlsx'}>Commission specific fields</a> <br /> - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_entitlement_mode.xlsx'}>Entitlement Modes</a> <br /> - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_item_related_fields.xlsx'}>Product related fields</a> <br /> - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_facility_related_fields.xlsx'}>Facility related fields</a> <br /> - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_ilmd.xlsx'}>ILMD</a> |
+| Decommission | - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_decommission.xlsx'}>Decommission specific fields</a> <br /> - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_entitlement_mode.xlsx'}>Entitlement Modes</a> <br /> - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_item_related_fields.xlsx'}>Product related fields</a> <br /> - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_facility_related_fields.xlsx'}>Facility related fields</a> |
+| Despatch Advice | - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_despatch_advice.xlsx'}>Despatch Advice specific fields</a> <br /> - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_entitlement_mode.xlsx'}>Entitlement Modes</a> <br /> - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_item_related_fields.xlsx'}>Product related fields</a> <br /> - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_facility_related_fields.xlsx'}>Facility related fields</a> |
+| Disaggregation | - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_disaggregation.xlsx'}>Disaggregation specific fields</a> <br /> - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_entitlement_mode.xlsx'}>Entitlement Modes</a> <br /> - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_item_related_fields.xlsx'}>Product related fields</a> <br /> - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_facility_related_fields.xlsx'}>Facility related fields</a> |
+| Master Facility | - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_facilities.xlsx'}>Master Facility specific fields</a> <br /> - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_entitlement_mode.xlsx'}>Entitlement Modes</a> |
+| Master Product | - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_items.xlsx'}>Master Product </a> <br /> - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_entitlement_mode.xlsx'}>Entitlement Modes</a> |
+| Observation | - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_observation.xlsx'}>Observation specific fields</a> <br /> - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_entitlement_mode.xlsx'}>Entitlement Modes</a> <br /> - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_item_related_fields.xlsx'}>Product related fields</a> <br /> - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_facility_related_fields.xlsx'}>Facility related fields</a> |
+| Payloads | - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_payload.xlsx'}>Payload specific fields</a> <br /> - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_entitlement_mode.xlsx'}>Entitlement Modes</a> <br /> - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_item_related_fields.xlsx'}>Product related fields</a> |
+| Purchase Order | - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_purchase_order.xlsx'}>Purchase Order specific fields</a> <br /> - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_entitlement_mode.xlsx'}>Entitlement Modes</a> <br /> - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_item_related_fields.xlsx'}>Product related fields</a> <br /> - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_facility_related_fields.xlsx'}>Facility related fields</a> |
+| Receive Advice | - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_receiving_advice.xlsx'}>Receive Advice specific fields</a> <br /> - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_entitlement_mode.xlsx'}>Entitlement Modes</a> <br /> - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_item_related_fields.xlsx'}>Product related fields</a> <br /> - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_facility_related_fields.xlsx'}>Facility related fields</a> |
+| Transformation | - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_transformation.xlsx'}>Transformation specific fields</a> <br /> - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_entitlement_mode.xlsx'}>Entitlement Modes</a> <br /> - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_item_related_fields.xlsx'}>Product related fields</a> <br /> - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_facility_related_fields.xlsx'}>Facility related fields</a> <br /> - <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/spreadsheet_converter/documentation/spreadsheet_help_ilmd.xlsx'}>ILMD</a> |
+
+## Entitlement mode
+
+All spreadsheets have an **Entitlement mode** worksheet, which lets you specify which of your supply
+chain partners can view the data. To change the entitlement mode, select a new value from the drop-down list.
+The entitlement mode applies to the entire XML file that is generated from a spreadsheet. A mode of **none**
+indicates that no data entitlement will be specified for the generated XML. When the XML is submitted to
+the <SolutionName /> API without an entitlement mode, the default data access control for the user's organization
+is applied. Refer to [Data entitlement mode](/reference/data-entitlement-mode).
+
+## Usage
+
+Modify your downloaded sample (or create it programmatically) and submit it to the
+spreadsheet <a href={process.env.GATSBY_UI_URL + '/ift/api/converter/swagger-ui.html'} target="_blank">Converter
+API</a>. If you have multiple events to convert to XML, enter the additional events in their
+corresponding worksheets and submit them to the API.
+
+## Swagger
+The <a href={process.env.GATSBY_UI_URL + '/ift/api/converter/swagger-ui.html'}>Spreadsheet Converter API</a> is available on Swagger.
+
+### Endpoint prerequisite
+To submit data, you must include the following Authorization header:
+
+| Header | Value |
+| --- | --- |
+| Authorization | Bearer &lt;token&gt; |
+
+**Note**: If necessary, refer to the [authenticate system users](/managing-users/authenticate-system-users) documentation.
+
+## API responses
+
+One of three responses is typically returned by calling a **Converter API** endpoint:
+
+| Response | Meaning |
+| --- | ---|
+| 200 | Success|
+| 400 | Error in Spreadsheet File |
+| 401 | User Unauthorized |
+
+### Error messages
+**401: User Unauthorized** - Indicates a problem with the caller's authorization token, such
+as a missing Authorization Header, or an expired token (valid for three hours after assignment).
+This message can also result from specifying a token for the incorrect zone (integration or production).
+
+**400: Bad Data** - Indicates a problem with the submitted data, with a detailed description.
+
+All errors are returned in the response body separated by a new line. Here is an example with multiple errors:
+```
+<BadRequestResponse>
+  <message>
+    [Aggregations][2, 9]: BizTransaction may not be null when associated BizTransaction Type is populated.
+    [Aggregations][2, 11]: Trade Item Description may not be null when associated fields are populated.
+  Aggregation starting with Event ID urn:uuid:6926712e-599f-4c4e-b6e9-8dd888c906bd must have a Trade Item Description populated with Lot and/or Serial populated.</message>
+</BadRequestResponse>
+```
+
+| Errors (fatal) | Description | Message format |
+| --- | --- | --- |
+| Unrecognized Workbook | <SolutionName /> Converter is unable to recognize the workbook format. You will receive this error if you attempt to submit a spreadsheet from the deprecated <SolutionName /> Basic Converter. | `Uploaded File Error: Could not recognize Spread Sheet Format.` |
+| Missing Sheets | The workbook is missing a required worksheet | `The following required sheets are missing. [sheet_names]` |
+| Unrecognized Sheets | The workbook is missing a required worksheet | `The following sheets are not recognized. [sheet_names]` |
+| Missing Header | A worksheet is missing a header entry (column) | `<sheet_name> sheet has missing headers [header_names]` |
+| Missing Field | The sheet specified is missing a value | `[sheet_name][row, column]: <column_name> may not be null.` |
+| Two Missing Fields | The sheet specified requires that at least one of two values must be populated | `[sheet_name][row, column]: <column_name_1> and <column_name_2> may not both be null.` |
+| Multiple Missing Fields | The sheet specified requires multiple associated values must be populated | `<sheet_name> starting with <primary_key_column> <primary_key_column> must have a <column_name_1> populated with <column_name_2> and/or <column_name_3>.` |
+
+## Related topics
+
+- [Use spreadsheets](/onboarding/use-spreadsheets)
+- [Upload spreadsheets](/onboarding/upload-spreadsheets)
+
+<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>

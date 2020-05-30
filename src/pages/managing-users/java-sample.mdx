@@ -1,0 +1,90 @@
+---
+title: Java sample
+description: Using Java to programmatically exchange system user tokens
+---
+
+<PageDescription>
+
+The <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/as-is-code-samples/IBMFoodTrust-java-springboot-sample.tgz'}>Java sample</a>
+(tar file) leverages the <a href="https://spring.io/projects/spring-boot" target="_blank">Spring Boot</a>
+framework to programmatically manage the system user authentication process of obtaining an
+IBM Cloud IAM token and exchanging it for a service ID token. You can use this code to start
+automating your data uploads to **<SolutionName />**.
+
+</PageDescription>
+
+## Usage
+
+With a nominal configuration change, the code (web service) can be deployed and run
+in your environment. When the service starts, the API key stored in the configuration
+file is read and the token exchange is executed. When the API is called, the expiration
+time on the token is checked and automatically renewed if it is expired. The inbound
+payload is then transmitted to <SolutionName /> and the result is returned.
+
+The service utilizes Spring Boot and <a href="https://gradle.org" target="_blank">Gradle</a>
+and was built for the following versions:
+
+- Java 8
+- Gradle 4.2.1
+- Spring Boot 1.5.13.&lt;release&gt;
+
+## Disclaimer
+
+This code is provided to help you get up and running quickly with authentication and data
+submission to <SolutionName />. This code will be maintained for any future authentication
+changes, but it is **not recommended that this code be used "as-is"**. In an enterprise
+environment, additional requirements may be dictated by your organization, such as logging,
+unit tests, health endpoints, statistics and endpoints.
+
+## Configuration
+
+You must configure the service prior to running it, using a **config.properties** file similar
+to the sample shown below. The service analyzes the value of the **iftEnvironment** variable;
+if the value is **SANDBOX**, the sandbox environment properties are used. In all other cases,
+the **PRODUCTION** environment is assumed.
+
+Specifically, you must configure the following variables:
+
+- The API key and organization ID that were used in the [initial token setup steps](/managing-users/authenticate-system-users).
+- The <SolutionName /> environment ("SANDBOX" or "PRODUCTION")
+
+Sample **config.properties** file:
+
+```
+  iftApiKey=8r...sv
+  iftEnvironment=SANDBOX
+  iftCloudIAMURL=https://iam.ng.bluemix.net/oidc/token
+  iftIntegrationOrgId=9dd5c...a1
+  iftIntegrationAuthURL=https://<solution domain name>/ift/api/identity-proxy/exchange_token/v1/organization/
+  iftProductionOrgId=2af3b...d3
+  iftProductionAuthURL=https://<solution domain name>/ift/api/identity-proxy/exchange_token/v1/organization/
+  iftIntegrationURL=https://<solution domain name>/ift/api/connector/v1/assets
+  iftProductionURL=https://<solution domain name>/ift/api/connector/v1/assets
+
+```
+
+## Usage
+
+Complete the following steps to configure your system users to automatically obtain and renew authentication tokens:
+
+  1. <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/as-is-code-samples/IBMFoodTrust-java-springboot-sample.tgz'}>Download
+  the tar file</a> and extract the contents to a working directory.
+  2. cd into the directory
+  3. Modify `src/main/resource/config.properties` (per the instructions above)
+  3. Execute `gradle wrapper` to build the project
+  4. Run the jar: `java -jar build/libs/IFT_authentication_sample-*.jar`
+  5. Post an XML payload to `localhost:8080` e.g.:
+     ```bash
+     curl -X POST \
+     http://localhost:8080 \
+     -H 'Accept: application/json' \
+     -H 'Content-Type: application/xml' \
+     -d '<insert XML text here>'
+     ```
+
+## Related topics
+
+- [TypeScript sample](/managing-users/typescript-sample)
+- [IIB sample](/managing-users/iib-sample)
+
+<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>

@@ -1,0 +1,116 @@
+---
+title: Configure applications
+description: Process for registering an application as a system user
+---
+
+<PageDescription>
+
+To facilitate **<SolutionName />** data uploads, you can register an **application**
+as an <SolutionName /> **system user** and configure the application to submit
+credentials and upload XML data (products, facilities, events, and transactions).
+
+</PageDescription>
+
+## GDPR notice
+
+**Attention**: To comply with <a href="https://gdpr.eu/" target="_blank">EU General
+Data Protection Regulation (GDPR)</a> data privacy requirements, you must ensure that no
+personal data is uploaded to <SolutionName /> in any free-form text fields or in any comments.
+
+## Summary
+
+<p>
+  <SolutionName /> APIs enable authenticated, authorized users, including human users, system users, and applications,
+  to upload data to the network. To successfully upload asset XML, authenticated users must submit their credentials with each
+  API call. Once the data is validated and accepted by <SolutionName />, the assets are available for sharing with your selected <SolutionName /> business partners.
+</p>
+
+The steps that follow illustrate the flow of creating an <SolutionName /> system ID
+for an application and submitting data to <SolutionName /> through API calls:
+
+1. To call an <SolutionName /> API, the application (system user) must have a registered
+system ID. An organization administrator must create the system ID using the <a href={process.env.GATSBY_UI_URL + '/manageUsers'} target="_blank">
+Users module</a> and manually record the generated system ID, client ID, and secret (password) for
+the application. These credentials must then be stored in a form that is consumable by the
+application&mdash;as a configuration file or environment variables, for example.
+2. The application submits its system ID, client ID and secret in a call to the
+authorization API access token endpoint. If successful, the API returns an access
+token (JSON web token/JWT) to the application.
+3. The application submits its received access token (JWT) in a POST call to the <SolutionName />
+API Asset endpoint, to upload assets to <SolutionName />. Information
+about the created asset is returned to the application.
+
+## Authentication
+
+<p>
+  <SolutionName /> allows only authenticated users to upload data. To authenticate applications, refer to
+  the <a href="../managing-users/authenticate-system-users">authenticate system users</a> documentation.
+</p>
+
+## Connector API
+
+The <SolutionName /> <a href={process.env.GATSBY_UI_URL + '/ift/api/connector/swagger-ui.html'} target="_blank">Connector API</a>
+enables authenticated users to upload data to <SolutionName />.
+
+### User-Agent request header
+
+When submitting requests programmatically to <SolutionName /> APIs, set the **User-Agent**
+request header to a string with your organization name. Optionally, the program
+name and version can be added to the string.
+
+Example using organization name:
+```
+User-Agent: organizationName
+```
+
+Example using organization name, program name, and program version:
+```
+User-Agent: organizationName-ProgramName/1.0
+```
+
+### Post Asset XML
+
+Call the **Assets** endpoint to submit an XML message to <SolutionName /> in the
+[required format](/reference/data-types). For help generating XML messages in
+the correct format, a [spreadsheet converter](/onboarding/convert-spreadsheets)
+is available.
+
+#### Swagger
+
+The <a href={process.env.GATSBY_UI_URL + '/ift/api/connector/swagger-ui.html'} target="_blank">Connector API</a> endpoints are
+provided in Swagger:
+
+| HTTP Method| Endpoint | Purpose |
+| --- | --- | --- |
+| POST | `/fs/connector/v1/assets` | Submits XML to <SolutionName /> |
+
+For authentication, the registered user's access token [JWT](#authentication) must
+be submitted in the `Authorization` header of the POST request:
+
+| Header Parameter | Value |
+| --- | --- |
+| Authorization | `Bearer` + `' '` (a space character) +  [Access Token (JWT)](#authentication) |
+
+#### Responses
+
+One of three responses is typically returned by this endpoint:
+
+| Response | Meaning |
+| --- | ---|
+| 201 | Asset Created|
+| 400 | Error in XML|
+| 401 | User Unauthorized |
+
+#### Error responses
+
+401: User Unauthorized.  A 401 response indicates a problem with the credentials
+(username/password/client_id) submitted to the endpoint. Ensure that the correct
+credentials for a system ID created using the <a href={process.env.GATSBY_UI_URL + '/manageUsers'} target="_blank">Users
+module</a> are submitted.
+
+400: Bad Data.  A 400 response indicates a problem with the uploaded data. The
+response includes a detailed description of the problem.
+
+For additional information, refer to [API error messages](/reference/api-error-messages).
+
+<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>

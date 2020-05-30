@@ -1,0 +1,105 @@
+---
+title: Solution identifiers
+description: Solution-specific product and facility identifiers
+---
+
+<PageDescription>
+
+For transactions and events data submitted to <SolutionName />, <SolutionName /> identifiers
+can be used in place of their GS1/EPC counterparts to identify products, locations and logistic
+units. All <SolutionName /> identifiers are fully-qualified URNs that follow <a href="https://www.ietf.org/rfc/rfc2141.txt" target="_blank">
+RFC 2141</a> (similar to GS1 URNs).
+
+</PageDescription>
+
+## <SolutionName /> identifiers
+
+If you have a GS1 registered Company Prefix, use it as your <SolutionName /> organization
+prefix. Otherwise, a new <SolutionName /> organization prefix can be provided for you.
+
+In some instances, you may need to use identifiers that are not registered with GS1.
+For these cases, **<SolutionName />** provides the following identifiers:
+
+- **<SolutionName /> organization prefixes**
+- **<SolutionName /> product identifiers** (supports a lot or serial number)
+- **<SolutionName /> location (facility) identifiers** (supports a sub-location extension)
+- **<SolutionName /> logistic unit identifiers**
+
+For each instance of an <SolutionName /> identifier in your submitted data, the fully-qualified
+URN must be specified.
+
+## <SolutionName /> organization prefixes
+
+<p>
+  <SolutionName /> organization prefixes are 13 or more numeric digits. Each prefix is a unique identifier (UUID) and assigned to a single organization.
+</p>
+
+Example of an <SolutionName /> organization prefix: `1234567890123`
+
+## Format for <SolutionName /> identifier fields
+
+With the exception of <SolutionName /> organization Prefixes, the <SolutionName /> identifier
+fields referenced in this document are strings that follow the <a href="https://www.ietf.org/rfc/rfc2141.txt" target="_blank">
+RFC 2141</a> URN syntax specification (similar to GS1 URNs), with one restriction. <SolutionName />
+identifier fields cannot contain a colon character `:` or a period character `.`, which are reserved
+for use as delimiters in <SolutionName /> URNs.
+
+The following <SolutionName /> identifier fields must conform to the <SolutionName /> identifier field format:
+
+- `<Item Reference>`
+- `<Lot Number>`
+- `<Serial Number>`
+- `<Location Reference>`
+- `<Extension>`
+- `<Serial Reference>`
+
+## <SolutionName /> identifiers - types and formats
+
+Table 1 displays the <SolutionName /> identifier types and URN formats:
+
+**Table 1. <SolutionName /> identifiers**
+
+|  Element  | Syntax and example |
+| --- | --- |
+| Product | urn:ibm:ift:product:class:`<Company Prefix>.<Item Reference>` <br /> urn:ibm:ift:product:class:1234567890123.product_123 |
+| Product with Lot # | urn:ibm:ift:product:lot:class:`<Company Prefix>.<Item Reference>.<Lot Number>` <br /> urn:ibm:ift:product:lot:class:1234567890123.product_123.lot4 |
+| Product with Serial # | urn:ibm:ift:product:serial:obj:`<Company Prefix>.<Item Reference>.<Serial Number>` <br /> urn:ibm:ift:product:serial:obj:1234567890123.product_123.serialnumber_4567 |
+| Location | urn:ibm:ift:location:loc:`<Company Prefix>.<Location Reference>` <br /> urn:ibm:ift:location:loc:1234567890123.store_123 |
+| Location with Extension | urn:ibm:ift:location:extension:loc:`<Company Prefix>.<Location Reference>.<Extension>` <br /> urn:ibm:ift:location:extension:loc:1234567890123.store_123.producedepartment  |
+| Public location type* | urn:ibm:ift:location:`<TYPE>`:loc:`<ID>` <br /> urn:ibm:ift:location:unlocode:loc:usnyc |
+| Public location type with Extension* | urn:ibm:ift:location:`<TYPE>`:ext:loc:`<ID>`.`<EXT>` <br /> urn:ibm:ift:location:unlocode:ext:loc:usnyc.import |
+| Logistic Unit | urn:ibm:ift:lpn:obj:`<Company Prefix>.<Serial Reference>` <br /> urn:ibm:ift:lpn:obj:1234567890123.pallet_12345678 |
+| Business Transaction identifier | urn:ibm:ift:bt:`<Company Prefix>.<Location Reference>.<Transaction Id>` <br />  urn:ibm:ift:bt:1234567890123.store_123.1234 |
+| FTPI |urn:ibm:ift:product:class:1234567890123.product-123 <br /> urn:ibm:ift:product:class:`<Company Prefix>.<Item Reference>` |
+| LFTPI | urn:ibm:ift:product:lot:class:1234567890123.product-123.lot4 <br /> urn:ibm:ift:product:lot:class:`<Company Prefix>.<Item Reference>.<Lot Number>` |
+| SFTPI | urn:ibm:ift:product:serial:obj:1234567890123.product-123.serial-number-4567 <br /> urn:ibm:ift:product:serial:obj:`<Company Prefix>.<Item Reference>.<Serial Number>` |
+| FTLI | urn:ibm:ift:location:loc:1234567890123.store-123 <br /> urn:ibm:ift:location:loc:`<Company Prefix>.<Location Reference>` |
+| SFTLI | urn:ibm:ift:location:extension:loc:1234567890123.store-123.toy-department <br /> urn:ibm:ift:location:extension:loc:`<Company Prefix>.<Location Reference>.<Extension>` |
+| FTLPN | urn:ibm:ift:lpn:obj:1234567890123.pallet-12345678 <br /> urn:ibm:ift:lpn:obj:`<Company Prefix>.<Serial Reference>` |
+| SSCC_LA | urn:ibm:provenance:ids:supplychain:aggregation:lpn:5012345.xyz123 <br /> urn:ibm:provenance:ids:supplychain:`<Document Type>`:lpn:`<Company Prefix>`.* |
+| IFT_ENTITY | urn:ibm:ift:bt:1234567890123.store-123.1234 <br /> urn:ibm:ift:bt:`<Company Prefix>.<Location Reference>.<Transaction Id>` |
+| IFT_DISPOSITION | urn:ibm:ift:bv:disp:destroyed <br /> urn:ibm:ift:bv:disp:`<Disposition>` <br /> Valid Dispositions = active, container_closed, damaged, destroyed, dispensed, disposed, encoded, expired, in_progress,
+in_transit, inactive, no_pedigree_match, non_sellable_other, partially_dispensed, recalled, reserved, retail_sold, returned, sellable_accessible, sellable_not_accessible, stolen, unknown |
+
+Table 2 describes the **Public location type** identifier formats for publicly-owned ports, farms, and growing regions:
+
+&#42;**Table 2. <SolutionName /> Public location type identifiers**
+
+|  Element  | Syntax and example |
+| --- | --- |
+| Public location type* | urn:ibm:ift:location:`<TYPE>`:loc:`<ID>` <br /> urn:ibm:ift:location:unlocode:loc:usnyc |
+| Public location type with extension* | urn:ibm:ift:location:`<TYPE>`:ext:loc:`<ID>`.`<EXT>` <br /> urn:ibm:ift:location:unlocode:ext:loc:usnyc.import |
+
+&#42;Table 3 describes the **Public location type** variables and supported values:
+
+**Table 3. Public location type variables and values**
+
+|  Variable | Value |
+| --- | --- |
+| `<TYPE>` | For ports - **unlocode** |
+| `<TYPE>` | For growing regions and farms - **pma**. |
+| `<ID>` | For **unlocode** - Any **lowercase five-character (country + location)** <a href="https://www.unece.org/cefact/locode/service/location.html" target="_blank">UNECE identifier</a>  |
+| `<ID>` | For **pma** - Any **lowercase two-character U.S. state abbreviation EXCEPT for ca and az** &#124; **yuma &#124; phoenix &#124; south_az &#124; north_ca &#124; salinas &#124; santa_maria &#124; south_ca &#124; imperial_vly &#124; coachella &#124; central_vly &#124; north_mx &#124; central_mx &#124; south_mx**  |
+| `<EXT>` | For **unlocode** only - **import** &#124; **export** |
+
+<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>

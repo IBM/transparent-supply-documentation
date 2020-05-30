@@ -1,0 +1,35 @@
+---
+title: Public Signing Key XML example
+description: Example of XML Public Signing Key data for upload
+---
+
+<PageDescription>
+
+Public Signing Key data is uploaded in XML format, as shown in the
+example below.
+
+</PageDescription>
+
+## Public Signing Key XML example
+
+The following example shows example Public Signing Key data in XML:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<ift:publicSigningKey xmlns:ift="urn:ibm:ift:xsd:1">
+  <!-- XML message to communicate encoded public signing keys to IBM Blockchain Transparent Supply™.-->
+  <!-- NOTE : Comments for a field appear BELOW the field. -->
+  <keyMessage>
+    <keyID>string</keyID>
+    <!--Mandatory: Identifier for this public signing key. Should be unique (within your organization).-->
+    <algorithm>rsa-sha256</algorithm>
+    <!--Mandatory: Digital signing algorithm that this key should be used with.-->
+    <!--Should be either rsa-sha256 or ecdsa-sha256.-->
+    <encodedPublicKey>base64Binary encoded string</encodedPublicKey>
+    <!--Mandatory: Encoded public signing key, represented as a base-64 encoded string.-->
+  </keyMessage>
+  <!--Optional: Additional keyMessage(s) can be added.-->
+</ift:publicSigningKey>
+```
+
+<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>

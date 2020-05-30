@@ -1,0 +1,35 @@
+---
+title: Authentication
+description: How to authenticate system users for automation
+---
+
+<PageDescription>
+
+**<SolutionName />** manages the issuance and maintenance of **access tokens**, also
+known as authentication tokens, service tokens, or JSON web tokens (JWT). Each
+registered user (human, system, or application) must obtain an access token in
+order to use <SolutionName />.
+
+</PageDescription>
+
+## User types
+
+<p>
+  <SolutionName /> classifies users into two types:
+</p>
+
+1. **Human users** are authenticated via their identity service
+(<a href="https://www.ibm.com/account/us-en/signup/register.html" target="_blank">IBMid</a>)
+username (email address) and password. Authenticated human users can interact
+directly with the <SolutionName /> network.
+
+2. **System users** (systems and applications) are authenticated via system ID,
+client ID and secret (token). A system user ID must also be created for any
+application program that calls <SolutionName /> APIs.
+
+## Related topics
+
+- [Authenticate human users](/managing-users/authenticate-human-users)
+- [Authenticate system users](/managing-users/authenticate-system-users)
+
+<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>

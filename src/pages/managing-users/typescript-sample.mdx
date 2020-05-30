@@ -1,0 +1,103 @@
+---
+title: TypeScript sample
+description: Using TypeScript to programmatically exchange system user tokens
+---
+
+<PageDescription>
+
+The following TypeScript code sample programmatically manages the system user
+authentication process of obtaining an IBM Cloud IAM token and exchanging it for a
+service ID token. You can utilize this code to start automating your data uploads
+to **<SolutionName />**.
+
+</PageDescription>
+
+## TypeScript code
+
+```typescript
+const request = require('request-promise');
+const errors  = require('request-promise/errors');
+
+export async function getToken(mmo_host: string,
+                               mmo_instance_id: string,
+                               mmo_solution_id: string,
+                               mmo_organization_id: string,
+                               apikey: string): Promise<string> {
+  const iamTokenData = await getBluemixIamToken(apikey);
+  return await exchangeToken(mmo_host, mmo_instance_id, mmo_solution_id , mmo_organization_id , iamTokenData);
+}
+
+export function getBluemixIamToken(apikey: string): Promise<BluemixIamToken> {
+  const parameters = {
+    grant_type : 'urn:ibm:params:oauth:grant-type:apikey',
+    apikey     : apikey
+  };
+  const requestOptions = {
+    uri: 'https://iam.ng.bluemix.net/oidc/token',
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json'
+    },
+    form: parameters, // adds header 'Content-Type' = 'application/x-www-form-urlencoded'
+    json: true
+  };
+  return request(requestOptions)
+    .then((resp: BluemixIamToken) => {
+      return resp;
+    })
+    .catch(errors.StatusCodeError, (rpError: any) => {
+      Promise.reject(rpError.message);
+    })
+    .catch(errors.RequestError, (rpError: any) => {
+      Promise.reject(rpError.error);
+    });
+}
+
+export function exchangeToken(mmo_host: string,
+                              mmo_instance_id: string,
+                              mmo_solution_id: string,
+                              mmo_organization_id: string,
+                              iamTokenData: BluemixIamToken): Promise<string> {
+  const mmo_endpoint_url = 'https://' + mmo_host + '/' + mmo_instance_id + '/onboarding' +
+                           '/v1/iam/exchange_token' +
+                           '/solution/' + mmo_solution_id +
+                           '/organization/' + mmo_organization_id;
+  const requestOptions = {
+    uri: mmo_endpoint_url,
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json'
+    },
+    body: iamTokenData,
+    json: true
+  };
+  return request(requestOptions)
+    .then((resp: ExchangeTokenResponse) => {
+      return resp.onboarding_token;
+    })
+    .catch(errors.StatusCodeError, (rpError: any) => {
+      Promise.reject(rpError.message);
+    })
+    .catch(errors.RequestError, (rpError: any) => {
+      Promise.reject(rpError.error);
+    });
+}
+
+export interface BluemixIamToken {
+  access_token : string;
+  token_type   : string;
+  expires_in   : number;
+  expiration   : number;
+}
+
+export interface ExchangeTokenResponse {
+  onboarding_token: string;
+}
+```
+
+## Related topics
+
+- [Java sample](/managing-users/java-sample)
+- [IIB sample](/managing-users/iib-sample)
+
+<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>

@@ -1,0 +1,42 @@
+{
+  "name": "transparent-supply-documentation",
+  "version": "1.0.0",
+  "description": "Documentation for IBM Blockchain Transparent Supply™",
+  "license": "Apache-2.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:IBM/transparent-supply-documentation.git"
+  },
+  "engines": {
+    "node": "10"
+  },
+  "scripts": {
+    "postinstall": "gatsby telemetry --disable",
+    "start": "npm run dev",
+    "clean": "gatsby clean",
+    "dev": "gatsby develop",
+    "predev:clean": "npm run clean",
+    "dev:clean": "npm run dev",
+    "prebuild": "npm run clean",
+    "build": "CI=true DEBUG=gatsby:*,-gatsby:component-shadowing gatsby build --verbose",
+    "prebuild:prod": "npm run clean",
+    "build:prod": "PROD=true CI=true DEBUG=gatsby:*,-gatsby:component-shadowing gatsby build --verbose --prefix-paths",
+    "serve": "gatsby serve",
+    "serve:prod": "gatsby serve --prefix-paths"
+  },
+  "dependencies": {
+    "@ibm/plex": "^4.0.2",
+    "gatsby": "^2.21.36",
+    "gatsby-theme-carbon": "^1.24.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "@carbon/icons": "^10.9.2",
+    "gatsby-plugin-no-sourcemaps": "^2.1.2"
+  },
+  "browserslist": [
+    "defaults"
+  ]
+}

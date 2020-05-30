@@ -1,0 +1,144 @@
+---
+title: Connector API 400 message
+description: XML submission error message 400 Bad Request response
+---
+
+<PageDescription>
+
+The Connector API rejects the XML submission and returns a 400 Bad Request response.
+
+</PageDescription>
+
+## Instructions to fix
+
+This is an indication that something needs to be corrected in the XML. Once corrected, the XML can
+be resubmitted to Connector. The returned error message provides a description about what needs to
+be corrected with the XML.
+
+## Common issues
+
+### Whitespace before opening XML tag
+
+#### API response
+
+```json
+{
+  "message": "The processing instruction target matching \"[xX][mM][lL]\" is not allowed."
+}
+```
+
+#### Resolution
+
+Ensure that there is no whitespace before the `<?xml>` tag.
+
+### Data before opening XML tag
+
+#### API response
+
+```json
+{
+  "message": "Content is not allowed in prolog."
+}
+```
+
+#### Resolution
+
+Ensure that there is no data before the opening `<?xml>` tag.
+
+### Root XML is not supported
+
+#### API response
+
+```json
+{
+  "message": "Root xml is not supported."
+}
+```
+
+#### Resolution
+
+The connector component is hardcoded to look for one of the following root XML tags and namespaces:
+
+* Purchase Order: `order:orderMessage`
+* Despatch Advice: `despatch_advice:despatchAdviceMessage`
+* Receive Advice: `receiving_advice:receivingAdviceMessage`
+* Master Data Item: `item_data_notification:itemDataNotificationMessage`
+* Master Data Facility: `basic_party_registration:basicPartyRegistrationMessage`
+* EPCIS Event: `epcis:EPCISDocument`
+
+### Incorrectly formatted XML comments
+
+#### API response
+
+```json
+{
+  "message": "The string \"--\" is not permitted within comments."
+}
+```
+
+#### Resolution
+
+Ensure that all comments in the XML file are formatted correctly (`<!-- -->`) and do not
+contain two consecutive dash characters (`--`). The following are examples of valid and invalid
+XML comments:
+
+Valid
+* `<!-- Comment -->`
+* `<!-- This is a well-formatted comment -->`
+
+Invalid
+* `<!-- Comment --->`
+* `<!-- -- Comment -->`
+
+### XML data missing `childEPCs`
+
+#### API response
+```json
+{
+  "message": "ERROR: cvc-complex-type.2.4.a: Invalid content was found starting with element 'action'. One of '{childEPCs}' is expected."
+}
+```
+
+#### Resolution
+
+The `<childEPCs>` tag must be present in the XML. It does not need to contain `<epc>`
+elements, but it must be present.
+
+### XML data missing `epcList` or `quantityList`
+
+#### API response
+
+```json
+{
+  "message": ": childEPCs and childQuantityList cannot both be empty."
+}
+```
+
+#### Resolution
+
+Ensure that `epcList` or `quantityList` is present in the XML and is a correctly formed
+urn.
+
+### Invalid date
+
+#### API response
+
+```json
+{
+  "message": "ERROR:cvc-datatype-valid.1.2.1:'2006-01-10T12:00:01.000-05:00' is not a valid value for 'date'."
+}
+```
+
+#### Resolution
+
+Ensure that data in a `<date>` element only contains date information
+and not time information. For example, the `orderLogisticalInformation ->
+orderLogisticalDateInformation -> requestedDeliveryDateTime -> date`
+field in a purchase order must be date only.
+
+### Issue not listed
+
+If none of these responses apply to your situation and you need assistance debugging
+your examples, please contact support.
+
+<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>

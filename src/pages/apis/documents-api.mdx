@@ -1,0 +1,90 @@
+---
+title: Documents API
+description: How to use the IBM Blockchain Transparent Supply™ Documents API
+---
+
+<PageDescription>
+
+The **<SolutionName />** <a href={process.env.GATSBY_UI_URL + '/ift/api/documents/api-docs/'} target="_blank">**Documents API**</a>
+allows authorized users to upload, view and share your organization's supply chain documents, such
+as facility certificates and audit reports.
+
+</PageDescription>
+
+## Prerequisites
+
+To use the <SolutionName /> **Documents API**, you must meet the following prerequisites:
+
+1. Your organization has subscribed to the [**Documents module**](/modules/documents).
+
+2. Your data integration experts are familiar with using **REST APIs** to send data
+programmatically. Automation of data upload is an ultimate goal to facilitate data sharing.
+
+3. For <SolutionName /> organizations to share supply chain data, each organization must
+have defined the appropriate level of data entitlement. For details on restricting
+and sharing your data, see [Data entitlement mode](/reference/data-entitlement-mode).
+
+## Getting started
+
+Take the following steps to get started with the <SolutionName /> **Documents API**:
+
+1. Obtain an **authentication token**, as described in [Authenticate human
+users](/managing-users/authenticate-human-users) and [Authenticate system
+users](/managing-users/authenticate-system-users).
+
+2. Submit a Documents API request by including the authentication token in the
+authorization header, as shown in the [example request](#example-query). For
+manual testing, human users can use [Swagger](#swagger) to call the API endpoints.
+
+3. For help understanding the API response model, refer to the
+documentation below.
+
+## Swagger
+
+To use the Documents API manually, use the Swagger interface:
+
+- <a href={process.env.GATSBY_UI_URL + '/ift/api/documents/api-docs/'} target="_blank">Documents API</a>
+
+You must first provide a valid <SolutionName /> authorization token (human user token)
+on Swagger, using the **Authorize** button on the top right of the page.
+
+## Endpoints
+
+All **Documents** API endpoints are documented in <a href={process.env.GATSBY_UI_URL + '/ift/api/documents/api-docs/'} target="_blank">
+Swagger</a>. With the required authorization, users can create, share, search, download and view
+documents.
+
+For example, to create a new document an authorized user will call the following endpoints:
+
+- **GET /templates/{documentType}** - Retrieves a document type template for rendering and validating a document.
+- **POST /documents** - Creates and uploads a new document, with access permissions.
+
+### Request body
+
+Use the following attributes to create and upload a new document (**POST /documents** endpoint):
+
+- **properties** - Information about the document (uploaded in JSON).
+- **content** - A content file in PDF, PNG, JPEG, or GIF format.
+- **entitlement** - Document access permissions. See [Data entitlement mode](/reference/data-entitlement-mode)
+for details.
+
+### Parameters
+
+The following parameters are used when calling applicable endpoints:
+
+- **id** - The system-generated document ID.
+- **version** - The document version. Versions of the same document will have an equivalent **id**.
+
+
+### Example Query
+
+See <a href={process.env.GATSBY_UI_URL + '/ift/api/documents/api-docs/'} target="_blank">**Swagger**</a> for example requests and responses for each endpoint.
+
+## Related topics
+
+- <a href={process.env.GATSBY_UI_URL + '/ift/api/documents/api-docs/'} target="_blank">Documents API (Swagger)</a>
+- [Data entitlement mode](/reference/data-entitlement-mode)
+- [Authenticate human users](/managing-users/authenticate-human-users)
+- [Authenticate system users](/managing-users/authenticate-system-users)
+
+<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>

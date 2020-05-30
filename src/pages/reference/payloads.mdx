@@ -1,0 +1,192 @@
+---
+title: Payload data
+description: Supported formats for payload data upload
+---
+
+<PageDescription>
+
+**<SolutionName />** provides the **payload** data upload method to extend
+support beyond the standard GS-1 data types. Use a payload to attach user-defined
+data (such as attributes) to events, items (product lots, serial shipping
+containers, pallets) or locations.
+
+</PageDescription>
+
+## Payload types
+
+Payloads must specify the type of contained data, using the `<payloadTypeURI>` tag. <SolutionName />
+defines the following payload types:
+
+- **Key-value pairs**
+- **Sensor data**
+- **Strings**
+
+The [examples below](#submit-payload-data) show the `<payloadTypeURI>` value that
+must be used for each of these payload types.
+
+## Attachment points
+
+A submitted payload should attach to an item (product ID), location (facility ID)
+or event (EPCIS Event ID). Include one of the following data points in your payload:
+
+1. Electronic Product Code (EPC) - Product Item or Lot (product ID) using the
+epcList element in the payload XML.
+2. Global Location Number (GLN) - Supply Chain Location (facility ID) using the
+locationList element in the payload XML.
+3. EPCIS Event ID - For a Commission, Decommission, Aggregation, Disaggregation,
+Transformation or Observation event using the eventIDList element in the payload XML.
+
+Note: The content type [examples below](#submit-payload-data) attach to an EPC:
+`<epc>urn:ibm:ift:product:serial:obj:1234567890123.LiveCow.lc11</epc>`
+
+## Usage notes
+
+Consider the following usage notes when uploading payload data:
+
+1. The only payload data visible in the UI are **key-value pairs that are attached
+to a supported Product ID or Facility ID**&mdash;which are GS1 formats for **SSCC,
+GTIN, SGTIN, LGTIN, GLN, and EPC-SGLN** and their **equivalent custom identifiers** only.
+2. To change the name of the payload in the <SolutionName /> UI, upload a **key-value
+pair with Title as the key and the new name as the value.**
+3. Payload messages **cannot exceed 32 KB**.
+
+## Submit payload data
+
+Submit your payload using the <SolutionName /> <a href={process.env.GATSBY_UI_URL + '/ift/api/connector/swagger-ui.html'}>Connector API</a>
+**assets** endpoint. Simply paste your payload XML into the **asset** Parameter **Value**
+field and click the **Try it out!** button.
+
+The following examples describe the XML for each payload type:
+
+### Key-value pairs
+
+Use the **key-value pair** payload data type to upload any set of variable-value combinations.
+
+Key-value pairs payload data must be specified using the following `<payloadTypeURI>` format:
+
+`<payloadTypeURI>urn:ibm:ift:payload:type:json:triple</payloadTypeURI>`
+
+The following code shows a sample payload specifying key-value pairs payload data:
+
+```xml
+<ift:payload xmlns:ift="urn:ibm:ift:xsd:1">
+  <payloadMessage>
+    <payloadID>41b14d7a-5b04-11e9-bdaa-6c4008984c16</payloadID>
+    <payloadTime>2019-03-01T08:00:00Z</payloadTime>
+    <payloadContentType>application/json</payloadContentType>
+    <payloadTypeURI>urn:ibm:ift:payload:type:json:triple</payloadTypeURI>
+    <epcList>
+      <epc>urn:ibm:ift:product:serial:obj:1234567890123.LiveCow.lc11</epc>
+    </epcList>
+    <payload>[{key":"title", "value":"My test payload","type":"string"}, {"key": "Lot Number", "value": "LiveCow.lc11", "type": "string"}, {"key": "Lairage Intake Date", "value": "2019-03-01 08:00:00", "type": "string"}, {"key": "Herd Number", "value": "Herd-lc11", "type": "string"}, {"key": "Site Code", "value": "Site0001", "type": "string"}, {"key": "Eartag", "value": "Ear-lc11", "type": "string"}]</payload>
+  </payloadMessage>
+</ift:payload>
+```
+
+### Sensor data
+
+Use the **sensor** payload data type to upload temperature data collected by sensor
+devices - either **ambient** (location temperature) or **probe** (product temperature).
+
+The **sensor** payload data type must be specified using the following `<payloadTypeURI>` format:
+
+`<payloadTypeURI>urn:ibm:ift:payload:type:json:sensor:v2</payloadTypeURI>`
+
+The following code shows a sample **ambient temperature** (in Fahrenheit) sensor data
+payload for the specified **location**:
+
+```xml
+<ns0:payload xmlns:ns0="urn:ibm:ift:xsd:1">
+  <payloadMessage>
+    <payloadID>urn:uuid:00000000-0000-0000-0000-00003b9acc47</payloadID>
+    <payloadTime>2020-01-15T00:00:00Z</payloadTime>
+    <payloadContentType>application/json</payloadContentType>
+    <payloadTypeURI>urn:ibm:ift:payload:type:sensor:v2</payloadTypeURI>
+    <locationList>
+      <location>urn:ibm:ift:location:extension:loc:0070217.5043.0</location>
+    </locationList>
+    <payload>
+      {"payload": {"readings": [{"value": 48.97403963890513, "time": "2020-01-14T00:00:00Z"},
+      {"value": 49.38640811696154, "time": "2020-01-14T00:15:00Z"},
+      {"value": 49.482325803716854, "time": "2020-01-14T00:30:00Z"},
+      {"value": 49.7178481505353, "time": "2020-01-14T00:45:00Z"},
+      {"value": 55.114865776213215, "time": "2020-01-14T03:15:00Z"},
+      {"value": 93.69268608689146, "time": "2020-01-14T23:30:00Z"},
+      {"value": 94.4938525640488, "time": "2020-01-14T23:45:00Z"}],
+      "device_id": "S00001", "type": "gs1:Temperature", "uom": "FAH",
+      "reading_type": "urn:ibm:ift:sensor:readingtype:ambient"}}
+    </payload>
+  </payloadMessage>
+</ns0:payload>
+```
+
+The following code shows a sample **probe temperature** (in Fahrenheit) sensor
+data payload for the specified **product** instance (EPC) and **sublocation**:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<ift:payload xmlns:ift="urn:ibm:ift:xsd:1">
+  <payloadMessage>
+    <payloadID>string</payloadID>
+    <payloadTime>2018-09-28T21:49:45Z</payloadTime>
+    <payloadContentType>application/json</payloadContentType>
+    <payloadTypeURI>urn:ibm:ift:payload:type:sensor:v2</payloadTypeURI>
+    <eventIDList/>
+    <epcList>
+      <epc>urn:ibm:ift:product:serial:obj:0614141000000.107346.2016</epc>
+    </epcList>
+    <locationList>
+      <location>urn:ibm:ift:location:extension:loc:1234567890123.store-123.toy-department</location>
+    </locationList>
+    <payload>
+      {
+        "payload": {
+          "reading_type": "urn:ibm:ift:sensor:readingtype:probe",
+          "device_id": "S00001",
+          "uom": "FAH",
+          "type": "gs1:Temperature",
+          "readings": [
+            {
+              "time": "2018-09-12T01:00:00.000Z",
+              "value": 45
+            },
+            {
+              "time": "2018-09-12T01:05:00.000Z",
+              "value": 40
+            }
+          ]
+        }
+      }
+    </payload>
+  </payloadMessage>
+</ift:payload>
+```
+
+### Strings
+
+Use the **string** payload data type to upload any string. The **string** payload data type must be specified using the following `<payloadTypeURI>` format:
+
+`<payloadTypeURI>string</payloadTypeURI>`
+
+```xml
+<ift:payload xmlns:ift="urn:ibm:ift:xsd:1">
+  <payloadMessage>
+    <payloadID>41b14d7a-5b04-11e9-bdaa-6c4008984c16</payloadID>
+    <payloadTime>2019-03-01T08:00:00Z</payloadTime>
+    <payloadContentType>application/json</payloadContentType>
+    <payloadTypeURI>string</payloadTypeURI>
+    <epcList>
+      <epc>urn:ibm:ift:product:serial:obj:1234567890123.LiveCow.lc11</epc>
+    </epcList>
+    <payload>
+      Any customized string up to the 32 KB length limit.
+    </payload>
+  </payloadMessage>
+</ift:payload>
+```
+
+## Related topics
+
+- [Payload XML example](/files/xml-annotated-samples/xml-Payload)
+
+<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>

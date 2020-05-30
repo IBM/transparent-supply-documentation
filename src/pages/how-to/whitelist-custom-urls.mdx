@@ -1,0 +1,31 @@
+---
+title: Whitelist custom URLs
+description: IBM Blockchain Transparent Supply™ whitelist custom URLs
+---
+
+<PageDescription>
+
+Any custom UI that directly connects to <SolutionName /> **AND** uses Blockchain
+Solution Manager to authenticate users must whitelist any `'returnTo'` URL that is
+**NOT** the production domain name or sandbox domain name.
+
+</PageDescription>
+
+## Applicable cases
+
+A custom UI uses Blockchain Solution Manager to authenticate users **ONLY** if it uses
+the path &lt;*<SolutionName /> base url*&gt;/onboarding/v1/logins?returnTo=&lt;*custom UI URL*&gt;.
+In this configuration, if the custom UI URL is not whitelisted, the authenticated token
+will not be delivered and authentication and redirection to the custom UI URL will fail.
+
+## Impacted environments
+
+Both the <SolutionName /> production and sandbox environments are being restricted for improved
+security.
+
+## Required action
+
+Open a support ticket to have your applicable custom UI URLs added to the production and sandbox
+whitelists.
+
+<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>

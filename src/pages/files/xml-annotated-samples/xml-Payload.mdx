@@ -1,0 +1,55 @@
+---
+title: Payload XML example
+description: Example of XML Payload data for upload
+---
+
+<PageDescription>
+
+Payload data is uploaded in XML format, as shown in the
+example below.
+
+</PageDescription>
+
+## Payload XML example
+
+The following example shows example Payload data in XML:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<ift:payload xmlns:ift="urn:ibm:ift:xsd:1">
+  <!-- XML message to communicate generic string-encoded payloads to IBM Blockchain Transparent Supply™.-->
+  <!-- NOTE : Comments for a field appear BELOW the field. -->
+  <payloadMessage>
+    <payloadID>string</payloadID>
+    <!--Mandatory: ID of this payload.-->
+    <payloadTime>2018-09-28T21:49:45Z</payloadTime>
+    <!--Optional: Timestamp for this payload message.-->
+    <payloadContentType>application/json</payloadContentType>
+    <!--Optional: http content type of payload - application/json -->
+    <payloadTypeURI>string</payloadTypeURI>
+    <!--Mandatory: URI for payload type - string or json triple or sensor -->
+    <eventIDList>
+      <eventID>eventID1</eventID>
+      <eventID>eventID2</eventID>
+    </eventIDList>
+    <!--Optional: List of events with which this payload is associated.-->
+    <epcList>
+      <!--Zero or more epc elements of type: GTIN, LGTIN, SGTIN, SSCC -->
+      <epc>urn:epc:id:sscc:0614141.0123456789</epc>
+      <epc>urn:ibm:ift:product:serial:obj:0614141000000.107346.2016</epc>
+    </epcList>
+    <!--Optional: List of epcs with which this payload is associated.-->
+    <locationList>
+      <!--Location elements of type: EPC-SGLN or IBM Blockchain Transparent Supply™ location-with-extension -->
+      <location>urn:epc:id:sgln:0614141.00777.0</location>
+      <location>urn:ibm:ift:location:extension:loc:1234567890123.store-123.toy-department</location>
+    </locationList>
+    <!--Optional: List of locations with which this payload is associated.-->
+    <payload>string</payload>
+    <!--Mandatory: payload - string or json triple or sensor -->
+  </payloadMessage>
+  <!--Optional: Additional payloadMessage(s) can be added.-->
+</ift:payload>
+```
+
+<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>

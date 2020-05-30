@@ -1,0 +1,113 @@
+---
+title: EPCIS events
+description: IBM Blockchain Transparent Supply™ supported EPCIS event types
+---
+
+<PageDescription>
+
+**<SolutionName />** enables your **organization** to trace the physical
+movement and status of products on your supply chain, and to make this data
+available to your selected business partners. To help achieve this goal, <SolutionName />
+implements the <a href="https://www.gs1.org/standards/epcis" target="_blank">GS1
+Electronic Product Code Information Services (EPCIS)</a> standards.
+
+</PageDescription>
+
+## EPCIS and <SolutionName />
+
+Using EPCIS standards, supply chain events that describe products and facilities
+registered with <SolutionName /> can be uploaded to the network. This event data can
+then be traced on <SolutionName /> to show end-to-end supply chain flows for specific
+product instances. The following six EPCIS events are defined in <SolutionName />;
+uploading these event types enables authorized users to trace and view supply chain
+data for the specified products.
+
+### Commission Event
+
+A **Commission Event** describes a new product instance being created, such as when
+harvested lettuce arrives at a processing plant. Commission events can describe
+products that are tracked in lots or batches, or those tracked individually.
+Uploading a commission event to <SolutionName /> creates the product instance on the
+network, and does not necessarily correlate with the time when the actual product
+was harvested or created. For example, if a batch of lettuce is harvested from a
+farm that is not yet defined to <SolutionName />, the batch would not be commissioned
+until it arrives at a processing facility that is registered with <SolutionName />.
+Each instance of an end-to-end supply chain starts with a commission event that
+instantiates, or creates, a new product instance on <SolutionName />.
+
+### Decommission Event
+
+A **Decommission Event** describes a product instance being removed from the supply
+chain. A decommission event is essentially the inverse of a commission event. For
+example, decommission can occur when there is a product loss due to spoilage or
+contamination. Like commission events, decommission events occur on the supply chain
+before they are uploaded to <SolutionName /> and reflected in product traces.
+
+### Aggregation Event
+
+An **Aggregation Event** describes one or more instances of a product or products
+being combined into a larger container (pallet or SSCC) for shipment. Shipment can
+occur between facilities within your organization or to another organization. The
+aggregation event will include details on the shipping of the container (Despatch
+Advice or Advance Shipping Notice) such as source, destination and Purchase Order
+(PO). For example, one lot of lettuce and one lot of broccoli are combined (aggregated)
+onto one pallet for shipping.
+
+### Disaggregation Event
+
+A **Disaggregation Event** describes the separation of items that were combined in
+an aggregation event. A disaggregation event is essentially the inverse of an aggregation
+event. The product instances combined in the aggregation event are separated into
+their original forms. For example, a received pallet is separated (disaggregated)
+into one lot of lettuce and one lot of broccoli.
+
+### Transformation Event
+
+A **Transformation Event** describes the irreversible changing or combining of a
+product or products to create a new product. For example, multiple leafy greens are
+transformed by being pureed into an energy drink.
+
+### Observation Event
+
+An **Observation Event** describes any recording of a product instance on the supply chain that does
+not change the status of the product (or match any of the other six supported events). For example,
+a batch of lettuce is observed during an inspection of the product. If the inspection does not
+create, destroy, transform, pack, or unpack the lettuce, this is an observation event.
+
+## About EPCIS Events
+
+EPCIS events can be described as defining the what, where, when, and why of supply chain events:
+
+**What** - The product lots or batches involved in an event.
+
+**Where** - The facility or location where the event occurred.
+
+**When** - The time and date of the event.
+
+**Why** - Business transaction documents, such as Purchase Orders (POs), Despatch Advice/Advanced Shipping Notices, and Receive Advice.
+
+## Uploading EPCIS Events
+
+<p>
+  <SolutionName /> supports uploading EPCIS events in the GS1 standardized XML format. Annotated EPCIS XML files are provided, which contain all available elements and comments for each event type. You can use these XML files as templates to generate your own EPCIS event files for uploading to <SolutionName />.
+</p>
+
+EPCIS events can be uploaded to <SolutionName /> using either of the following methods:
+
+1. Using XML:
+  a. Build Product Scenarios and save the results as XML templates.
+  b. Replace the template data with your real data, or submit it as test data.
+  c. Upload your XML using the Connector API.
+2. Using spreadsheets:
+  a. Download the applicable EPCIS event spreadsheet template.
+  b. Add the data for the event to the spreadsheet.
+  c. Upload the data using the spreadsheet bulk upload page in the <SolutionName /> UI.
+
+## Related topics
+
+- [Upload XML](/onboarding/upload-xml) (Connector API)
+- [Upload spreadsheets](/onboarding/upload-spreadsheets)
+- <a href={process.env.GATSBY_UI_URL + '/manage-data/bulk-upload'} target="_blank">Spreadsheets UI</a>
+- <a href={process.env.GATSBY_UI_URL + '/ift/api/connector/swagger-ui.html'} target="_blank">Connector API</a>
+
+<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>

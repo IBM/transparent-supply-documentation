@@ -1,0 +1,73 @@
+---
+title: Data entitlement mode
+description: Description of data entitlement mode specifications
+---
+
+<PageDescription>
+
+**<SolutionName />** supports data entitlement (data access) specifications for
+all XML documents uploaded to the network. With the data access control
+policy selected by your organization, specifying an optional entitlement mode
+when uploading XML enables control over sharing data (such as events, transactions and
+documents) with other organizations.
+
+</PageDescription>
+
+
+## Data entitlement specifications
+
+The data uploader can specify a data entitlement mode for each XML document at the
+time of submission, as follows:
+
+**Private**: The data is only visible to the submitting organization, unless it is
+shared via **explicit grants** (e.g. event data pertaining to an organization’s
+internal processes, or location master data for private locations).
+
+**Restricted**: The data is shared only with the organizations that are **explicitly
+referenced** in the XML document. These are typically business transaction partners
+who are identified in Purchase Order, Despatch Advice (ASN) and Receiving Advice documents.
+
+**Linked**: The data is enabled for sharing with all organizations up and down the
+supply chain for a specific trade item (GTIN). These are typically supply chain events,
+which are shared through a process of cross-referencing data such as facility IDs and
+event IDs.
+
+**Default**: Applies the default entitlement mode per type of document, as described in
+**Table 1** below.
+
+**Attention**: Specifying a **Data entitlement mode** on your data upload API calls
+supersedes your organization's data access control policy.
+
+## Assigning entitlement mode on data submission
+
+Entitlement mode is specified using the **IFT-Entitlement-Mode** header in the data
+submission request. **If an entitlement mode is not specified**, the default entitlement
+mode is applied, based on the type of XML document (Table 1):
+
+Table 1. Default entitlement modes
+
+| Default entitlement mode | Document type |
+| ---------------- | ------------- |
+| Restricted        | Purchase Order transactions, Despatch Advice transactions (DA/ASN), Receive Advice transactions      |
+| Linked    | EPCIS Events, Item master data, Location master data, Documents  |
+| Private  | Payload data |
+
+
+### Valid entitlement mode headers on data submission
+
+ - **Restricted:** **IFT-Entitlement-Mode: restricted**
+ - **Linked:** **IFT-Entitlement-Mode: linked**
+ - **Private:** **IFT-Entitlement-Mode: private**
+
+If no **IFT-Entitlement-Mode** header is provided on data submission, the default mode
+will be applied based on the XML document type, as described previously in Table 1.
+
+Specifying an invalid entitlement mode value will return the following error message:
+
+```json
+{
+  "message": "bad_entitlement_mode_value is not a valid IFT-Entitlement-Mode header value!"
+}
+```
+
+<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>
