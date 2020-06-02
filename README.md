@@ -115,3 +115,7 @@ image and adjusting these properties:
   image's opacity accordingly.
 - **Screen size:** Make sure the overall image and its focal point work well at different screen
   sizes. The way it gets cropped/scaled will differ on narrower screens vs. on wider screens.
+
+## Contributing
+
+We are not accepting contributions at this time, but please feel free to open issues!
