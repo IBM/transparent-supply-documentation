@@ -17,8 +17,6 @@ import {
   skipToContent,
 } from 'gatsby-theme-carbon/src/components/Header/Header.module.scss';
 
-import SolutionName from '../../components/SolutionName';
-
 const DocumentationHeader = () => {
   const {
     leftNavIsOpen,
@@ -45,7 +43,7 @@ const DocumentationHeader = () => {
           className={`${headerName} ${ searchIsOpen ? collapsed : null}`}
           to="/"
         >
-          <SolutionName />&nbsp;<span>Docs</span>
+          IBM Blockchain Transparent Supply™&nbsp;<span>Docs</span>
         </Link>
         <HeaderGlobalBar>
           {isSearchEnabled && <GlobalSearch />}

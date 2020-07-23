@@ -5,15 +5,15 @@ description: Error codes returned by IBM Blockchain Transparent Supply™ APIs
 
 <PageDescription>
 
-When posting data through an <SolutionName /> API call, you may receive an error
-indicating a supplied ID value does not match the expected <SolutionName /> or
+When posting data through an IBM Blockchain Transparent Supply™ API call, you may receive an error
+indicating a supplied ID value does not match the expected IBM Blockchain Transparent Supply™ or
 GS1 identifier pattern.
 
 </PageDescription>
 
 ## API codes and patterns
 
-An <SolutionName /> API may return a pattern match error message:
+An IBM Blockchain Transparent Supply™ API may return a pattern match error message:
 
 ```json
 {
@@ -36,7 +36,7 @@ the table to reference the accepted pattern codes specified in the error:
 | GS1-GLN | `6056234000013` <br /> `<CompanyPrefix><LocationReference><CheckDigit>`(13 Digits) |
 | GS1_ENTITY | urn:epcglobal:cbv:bt:1234567890123:T1234 <br /> urn:epcglobal:cbv:bt:`<GS1-GLN>:<Transaction ID>` |
 | GS1_ENTITY_TYPE | urn:epcglobal:cbv:btt:po <br /> urn:epcglobal:cbv:btt:`<Business Transaction Type>` <br /> Valid Business Transaction Types = bol, desadv, inv, pedigree, po, poc, prodorder, recadv, rma |
-| GS1_BIZSTEP |urn:epcglobal:cbv:bizstep:receiving <br /> urn:epcglobal:cbv:bizstep:`<bizStep>` <br /> Valid bizSteps = accepting, arriving, assembling, collecting, commissioning, consiging, creating_class_instance, cycle_counting, decommissioning, departing, destroying, disassembling, dispensing, encoding, entering_exiting, holding, inspecting, installing, killing, loading, other, packing, picking, receiving, removing, repackaging, repairing, replacing, reserving, retail_selling, shipping, staging_outbound, stock_taking, stocking, storing, transforming, transporting, unloading, unpacking, void_shipping |
+| GS1_BIZSTEP |urn:epcglobal:cbv:bizstep:receiving <br /> urn:epcglobal:cbv:bizstep:`<bizStep>` <br /> Valid bizSteps = accepting, arriving, assembling, collecting, commissioning, consiging, creating_class_instance, cycle_counting, decommissioning, departing, destroying, disassembling, dispensing, encoding, entering_exiting, holding, inspecting, installing, killing, loading, other, packing, picking, receiving, removing, repackaging, repairing, replacing, reserving, retail_selling, shipping, staging_outbound, stock_taking, stocking, storing, transforming, transporting, unloading, unpacking, void_shipping <br /> Custom bizSteps are supported, in the format `https://<client-controlled-domain-name/path/biz_step_name>` |
 | GS1_DISPOSITION | urn:epcglobal:cbv:disp:destroyed <br /> urn:epcglobal:cbv:disp:`<Disposition>` <br /> Valid Dispositions = active, container_closed, damaged, destroyed, dispensed, disposed, encoded, expired, in_progress, in_transit, inactive, no_pedigree_match, non_sellable_other, partially_dispensed, recalled, reserved, retail_sold, returned, sellable_accessible, sellable_not_accessible, stolen, unknown |
 | GS1_SOURCE_DEST_TYPE |urn:epcglobal:cbv:sdt:possessing_party <br /> urn:epcglobal:cbv:sdt:`<Source Destination Type>` <br /> Valid Source Destination Types = owning_party, possessing_party, location |
 | FTPI |urn:ibm:ift:product:class:1234567890123.product-123 <br /> urn:ibm:ift:product:class:`<Company Prefix>.<Item Reference>` |

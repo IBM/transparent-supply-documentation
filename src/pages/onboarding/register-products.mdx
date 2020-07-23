@@ -5,31 +5,32 @@ description: Register your organization's products
 
 <PageDescription>
 
-To trace and share product information with your **<SolutionName />** supply chain
+To trace and share product information with your **IBM Blockchain Transparent Supply™** supply chain
 partners, you must first register your organization's products. A registered product
 can be any traceable item, such as an ingredient, raw material, or aggregated
 product. To register each item, a **product ID** is required, which can be either
 a [GS1 identifier](/reference/gs1-standards) or
-an [<SolutionName /> identifier](/reference/solution-identifiers).
+an [IBM Blockchain Transparent Supply™ identifier](/reference/solution-identifiers).
 
 </PageDescription>
 
 ## Overview
 
-<p>
-  <SolutionName /> supports **GS1 product ID** formats, including the [GS1 GTIN and URN](/reference/gs1-standards) formats. If your product is not registered with GS1, you can request a <a href="../reference/solution-identifiers"><SolutionName /> product ID</a>. Once you have your product IDs, register each product using one of the three methods described below (using the UI, spreadsheets, or the <a href={process.env.GATSBY_UI_URL + '/ift/api/connector/swagger-ui.html'} target="_blank">Connector API</a>).
-</p>
+IBM Blockchain Transparent Supply™ supports **GS1 product ID** formats, including the
+[GS1 GTIN and URN](/reference/gs1-standards) formats. If your product is not registered with GS1,
+you can request an [IBM Blockchain Transparent Supply™ product ID](/reference/solution-identifiers).
+Once you have your product IDs, register each product using one of the three methods
+described below (using the UI, spreadsheets, or the <a href={process.env.GATSBY_UI_URL + '/ift/api/connector/swagger-ui.html'} target="_blank">Connector API</a>).
 
 ## GDPR notice
 
 **Attention**: To comply with <a href="https://gdpr.eu/" target="_blank">EU General Data
 Protection Regulation (GDPR)</a> data privacy requirements, you must ensure that no personal
-data is uploaded to <SolutionName /> in any free-form text fields or in any comments.
+data is uploaded to IBM Blockchain Transparent Supply™ in any free-form text fields or in any comments.
 
 ## Registration methods
 
-You can quickly register products using the <a href={process.env.GATSBY_UI_URL + '/self-guided-onboarding'}
-target="_blank">Onboarding module</a>. **Note**: The identical product registration functionality
+You can quickly register products using the <a href={process.env.GATSBY_UI_URL + '/self-guided-onboarding/manage-data/products'} target="_blank">Onboarding module</a>. <strong>Note</strong>: The identical product registration functionality
 is also available in the <a href={process.env.GATSBY_UI_URL + '/manage-data/products'} target="_blank">Data module</a>.
 
 As an alternative to the UI, your **Data integration experts** may choose to
@@ -39,14 +40,15 @@ to register large numbers of products.
 
 ### Using the UI
 
-Use the <a href={process.env.GATSBY_UI_URL + 'self-guided-onboarding/manage-data/products'} target="_blank">Onboarding module</a>
-or the <a href={process.env.GATSBY_UI_URL + '/manage-data/products'} target="_blank">Data module</a> to quickly register products.
+Use the <a href={process.env.GATSBY_UI_URL + '/self-guided-onboarding/manage-data/products'} target="_blank">
+Onboarding module</a> or the <a href={process.env.GATSBY_UI_URL + '/manage-data/products'} target="_blank">
+Data module</a> to quickly register products.
 
 ### Using spreadsheets
 
 Use the UI <a href={process.env.GATSBY_UI_URL + '/self-guided-onboarding/manage-data/bulk-upload'} target="_blank">Onboarding
 Spreadsheet Templates</a> to register your products using Microsoft&reg; Excel&trade; files. After
-downloading and completing your spreadsheets, you will upload them to <SolutionName /> using the UI.
+downloading and completing your spreadsheets, you will upload them to IBM Blockchain Transparent Supply™ using the UI.
 
 Refer to the [Use spreadsheets](/onboarding/use-spreadsheets) documentation for complete usage details.
 
@@ -55,14 +57,14 @@ Refer to the [Use spreadsheets](/onboarding/use-spreadsheets) documentation for 
 To register products using the <a href={process.env.GATSBY_UI_URL + '/ift/api/connector/swagger-ui.html'} target="_blank">
 Connector API</a>, you will use the XML [Master item data](/reference/data-types#master-data)
 type. The Master item data message type is derived from the GS1 Item Data Notification XML message
-type, and is used for registering trade items (products) on <SolutionName />.
+type, and is used for registering trade items (products) on IBM Blockchain Transparent Supply™.
 
 Master item data is class-level master data corresponding to a GTIN (Global Trade Item Number)
-or <SolutionName /> product ID, is typically uploaded by the creator of the product
-in <SolutionName />, and consists of the following data points:
+or IBM Blockchain Transparent Supply™ product ID, is typically uploaded by the creator of the product
+in IBM Blockchain Transparent Supply™, and consists of the following data points:
 
 * Text description
-* GTIN or [<SolutionName /> product ID](/reference/solution-identifiers)
+* GTIN or [IBM Blockchain Transparent Supply™ product ID](/reference/solution-identifiers)
 * SKU (Stock Keeping Unit)
 
 To use the following Master item data example XML, replace the bold items with your information:
@@ -123,7 +125,7 @@ https://github.com/IBM/IFT-Developer-Zone/wiki/xml_MasterData_Item_Annotated
 </item_data_notification:itemDataNotificationMessage>
 ```
 Once you have created your XML, you will use the <a href={process.env.GATSBY_UI_URL + '/ift/api/connector/swagger-ui.html'}
-target="_blank">Connector API</a> to register your products with <SolutionName />. You must authenticate
+target="_blank">Connector API</a> to register your products with IBM Blockchain Transparent Supply™. You must authenticate
 first to use the Connector API via Swagger. Without this step, all attempts will result in a 401 Not
 Authorized error. After authenticating, Swagger will redirect you to an authenticated session; Swagger only
 notifies users in the case of authentication failures.
@@ -133,20 +135,20 @@ include your access token in the authorization header of the request. For exampl
 specify `Bearer xyz` in the authorization header.
 
 **Attention: For compliance with data privacy laws, including GDPR, do not submit any data that personally
-identifies an individual to <SolutionName />.**
+identifies an individual to IBM Blockchain Transparent Supply™.**
 
-**Attention**: Clicking the Swagger **Try it out** button submits your API call to the <SolutionName />
+**Attention**: Clicking the Swagger **Try it out** button submits your API call to the IBM Blockchain Transparent Supply™
 network and permanently writes your data to the blockchain ledger. This is not a test.
 
 #### Implementation notes
 
-- An <SolutionName /> asset is data that has been uploaded, by an authorized user, as one of the supported
+- An IBM Blockchain Transparent Supply™ asset is data that has been uploaded, by an authorized user, as one of the supported
 document types. Call the Connector API **Asset** endpoint to create an asset for the following data
 types: Purchase Order, Despatch Advice, Receive Advice, EPCIS Events, Master Data Item, or Master Data Facility.
 - Refer to the supported schema and example XML [data types](/reference/data-types) as
-needed. <SolutionName /> verifies the submitted XML with the corresponding schema. The response will
+needed. IBM Blockchain Transparent Supply™ verifies the submitted XML with the corresponding schema. The response will
 describe any errors.
-- Review your data access and entitlement policies for sharing data with your <SolutionName /> supply chain partners.
+- Review your data access and entitlement policies for sharing data with your IBM Blockchain Transparent Supply™ supply chain partners.
 - Review [Cryptographic signatures](/automation/cryptographic-signatures) for details on signing XML
 documents for authenticity and chain of custody.
 - Response Class (Status 201) Asset Creation Submitted - A successful response will return an array of
@@ -166,7 +168,7 @@ Use the following procedure to upload XMl through the Connector API:
 1. Optionally, set the data entitlement mode, which dictates which of your supply chain partners can view the
 uploaded data. On Swagger the default value is **None**, which means data sharing defaults to your organization's
 data access control policy.
-1. Click the **Try it Out** button. If successful, the data will upload to <SolutionName /> with a response code of "201".
+1. Click the **Try it Out** button. If successful, the data will upload to IBM Blockchain Transparent Supply™ with a response code of "201".
 A response of 201 is returned for a successful data upload; anything other than 201 indicates the described error.
 
 #### Error 400

@@ -97,9 +97,7 @@ cannot have an accordion within an accordion).**
 
 ### Changing the solution name
 
-The first step to changing the solution name is to change the `solutionName` variable in
-`src/components/SolutionName.js`. This is the quickest step and will change the majority of
-instances. The second step is to find and replace all remaining, applicable instances of
+To change the solution name, simply find and replace all applicable instances of
 `IBM Blockchain Transparent Supply™` with the new solution name.
 
 ### Changing the hero image

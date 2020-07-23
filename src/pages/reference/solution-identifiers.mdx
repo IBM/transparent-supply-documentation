@@ -5,46 +5,45 @@ description: Solution-specific product and facility identifiers
 
 <PageDescription>
 
-For transactions and events data submitted to <SolutionName />, <SolutionName /> identifiers
+For transactions and events data submitted to IBM Blockchain Transparent Supply™, IBM Blockchain Transparent Supply™ identifiers
 can be used in place of their GS1/EPC counterparts to identify products, locations and logistic
-units. All <SolutionName /> identifiers are fully-qualified URNs that follow <a href="https://www.ietf.org/rfc/rfc2141.txt" target="_blank">
+units. All IBM Blockchain Transparent Supply™ identifiers are fully-qualified URNs that follow <a href="https://www.ietf.org/rfc/rfc2141.txt" target="_blank">
 RFC 2141</a> (similar to GS1 URNs).
 
 </PageDescription>
 
-## <SolutionName /> identifiers
+## IBM Blockchain Transparent Supply™ identifiers
 
-If you have a GS1 registered Company Prefix, use it as your <SolutionName /> organization
-prefix. Otherwise, a new <SolutionName /> organization prefix can be provided for you.
+If you have a GS1 registered Company Prefix, use it as your IBM Blockchain Transparent Supply™ organization
+prefix. Otherwise, a new IBM Blockchain Transparent Supply™ organization prefix can be provided for you.
 
 In some instances, you may need to use identifiers that are not registered with GS1.
-For these cases, **<SolutionName />** provides the following identifiers:
+For these cases, **IBM Blockchain Transparent Supply™** provides the following identifiers:
 
-- **<SolutionName /> organization prefixes**
-- **<SolutionName /> product identifiers** (supports a lot or serial number)
-- **<SolutionName /> location (facility) identifiers** (supports a sub-location extension)
-- **<SolutionName /> logistic unit identifiers**
+- **IBM Blockchain Transparent Supply™ organization prefixes**
+- **IBM Blockchain Transparent Supply™ product identifiers** (supports a lot or serial number)
+- **IBM Blockchain Transparent Supply™ location (facility) identifiers** (supports a sub-location extension)
+- **IBM Blockchain Transparent Supply™ logistic unit identifiers**
 
-For each instance of an <SolutionName /> identifier in your submitted data, the fully-qualified
+For each instance of an IBM Blockchain Transparent Supply™ identifier in your submitted data, the fully-qualified
 URN must be specified.
 
-## <SolutionName /> organization prefixes
+## IBM Blockchain Transparent Supply™ organization prefixes
 
-<p>
-  <SolutionName /> organization prefixes are 13 or more numeric digits. Each prefix is a unique identifier (UUID) and assigned to a single organization.
-</p>
+IBM Blockchain Transparent Supply™ organization prefixes are 13 or more numeric digits. Each prefix
+is a unique identifier (UUID) and assigned to a single organization.
 
-Example of an <SolutionName /> organization prefix: `1234567890123`
+Example of an IBM Blockchain Transparent Supply™ organization prefix: `1234567890123`
 
-## Format for <SolutionName /> identifier fields
+## Format for IBM Blockchain Transparent Supply™ identifier fields
 
-With the exception of <SolutionName /> organization Prefixes, the <SolutionName /> identifier
+With the exception of IBM Blockchain Transparent Supply™ organization Prefixes, the IBM Blockchain Transparent Supply™ identifier
 fields referenced in this document are strings that follow the <a href="https://www.ietf.org/rfc/rfc2141.txt" target="_blank">
-RFC 2141</a> URN syntax specification (similar to GS1 URNs), with one restriction. <SolutionName />
+RFC 2141</a> URN syntax specification (similar to GS1 URNs), with one restriction. IBM Blockchain Transparent Supply™
 identifier fields cannot contain a colon character `:` or a period character `.`, which are reserved
-for use as delimiters in <SolutionName /> URNs.
+for use as delimiters in IBM Blockchain Transparent Supply™ URNs.
 
-The following <SolutionName /> identifier fields must conform to the <SolutionName /> identifier field format:
+The following IBM Blockchain Transparent Supply™ identifier fields must conform to the IBM Blockchain Transparent Supply™ identifier field format:
 
 - `<Item Reference>`
 - `<Lot Number>`
@@ -53,11 +52,11 @@ The following <SolutionName /> identifier fields must conform to the <SolutionNa
 - `<Extension>`
 - `<Serial Reference>`
 
-## <SolutionName /> identifiers - types and formats
+## IBM Blockchain Transparent Supply™ identifiers - types and formats
 
-Table 1 displays the <SolutionName /> identifier types and URN formats:
+Table 1 displays the IBM Blockchain Transparent Supply™ identifier types and URN formats:
 
-**Table 1. <SolutionName /> identifiers**
+**Table 1. IBM Blockchain Transparent Supply™ identifiers**
 
 |  Element  | Syntax and example |
 | --- | --- |
@@ -78,12 +77,11 @@ Table 1 displays the <SolutionName /> identifier types and URN formats:
 | FTLPN | urn:ibm:ift:lpn:obj:1234567890123.pallet-12345678 <br /> urn:ibm:ift:lpn:obj:`<Company Prefix>.<Serial Reference>` |
 | SSCC_LA | urn:ibm:provenance:ids:supplychain:aggregation:lpn:5012345.xyz123 <br /> urn:ibm:provenance:ids:supplychain:`<Document Type>`:lpn:`<Company Prefix>`.* |
 | IFT_ENTITY | urn:ibm:ift:bt:1234567890123.store-123.1234 <br /> urn:ibm:ift:bt:`<Company Prefix>.<Location Reference>.<Transaction Id>` |
-| IFT_DISPOSITION | urn:ibm:ift:bv:disp:destroyed <br /> urn:ibm:ift:bv:disp:`<Disposition>` <br /> Valid Dispositions = active, container_closed, damaged, destroyed, dispensed, disposed, encoded, expired, in_progress,
-in_transit, inactive, no_pedigree_match, non_sellable_other, partially_dispensed, recalled, reserved, retail_sold, returned, sellable_accessible, sellable_not_accessible, stolen, unknown |
+| IFT_DISPOSITION | urn:ibm:ift:bv:disp:destroyed <br /> urn:ibm:ift:bv:disp:`<Disposition>` <br /> Valid Dispositions = active, container_closed, damaged, destroyed, dispensed, disposed, encoded, expired, in_progress, in_transit, inactive, no_pedigree_match, non_sellable_other, partially_dispensed, recalled, reserved, retail_sold, returned, sellable_accessible, sellable_not_accessible, stolen, unknown |
 
 Table 2 describes the **Public location type** identifier formats for publicly-owned ports, farms, and growing regions:
 
-&#42;**Table 2. <SolutionName /> Public location type identifiers**
+&#42;**Table 2. IBM Blockchain Transparent Supply™ Public location type identifiers**
 
 |  Element  | Syntax and example |
 | --- | --- |

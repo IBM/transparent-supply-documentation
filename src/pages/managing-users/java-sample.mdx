@@ -9,7 +9,7 @@ The <a href={process.env.GATSBY_UI_URL + '/ift/docs/files/as-is-code-samples/IBM
 (tar file) leverages the <a href="https://spring.io/projects/spring-boot" target="_blank">Spring Boot</a>
 framework to programmatically manage the system user authentication process of obtaining an
 IBM Cloud IAM token and exchanging it for a service ID token. You can use this code to start
-automating your data uploads to **<SolutionName />**.
+automating your data uploads to **IBM Blockchain Transparent Supply™**.
 
 </PageDescription>
 
@@ -19,7 +19,7 @@ With a nominal configuration change, the code (web service) can be deployed and 
 in your environment. When the service starts, the API key stored in the configuration
 file is read and the token exchange is executed. When the API is called, the expiration
 time on the token is checked and automatically renewed if it is expired. The inbound
-payload is then transmitted to <SolutionName /> and the result is returned.
+payload is then transmitted to IBM Blockchain Transparent Supply™ and the result is returned.
 
 The service utilizes Spring Boot and <a href="https://gradle.org" target="_blank">Gradle</a>
 and was built for the following versions:
@@ -31,7 +31,7 @@ and was built for the following versions:
 ## Disclaimer
 
 This code is provided to help you get up and running quickly with authentication and data
-submission to <SolutionName />. This code will be maintained for any future authentication
+submission to IBM Blockchain Transparent Supply™. This code will be maintained for any future authentication
 changes, but it is **not recommended that this code be used "as-is"**. In an enterprise
 environment, additional requirements may be dictated by your organization, such as logging,
 unit tests, health endpoints, statistics and endpoints.
@@ -46,7 +46,7 @@ the **PRODUCTION** environment is assumed.
 Specifically, you must configure the following variables:
 
 - The API key and organization ID that were used in the [initial token setup steps](/managing-users/authenticate-system-users).
-- The <SolutionName /> environment ("SANDBOX" or "PRODUCTION")
+- The IBM Blockchain Transparent Supply™ environment ("SANDBOX" or "PRODUCTION")
 
 Sample **config.properties** file:
 

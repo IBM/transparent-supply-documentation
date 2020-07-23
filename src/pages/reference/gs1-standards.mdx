@@ -5,7 +5,7 @@ description: IBM Blockchain Transparent Supply™ supports GS1 standards
 
 <PageDescription>
 
-To facilitate data integration between **<SolutionName />** and the local
+To facilitate data integration between **IBM Blockchain Transparent Supply™** and the local
 systems of member organizations, compliant data is based on <a href="https://www.gs1.org"
 target="_blank">GS1 standards</a>. Global Standards One (GS1) is a not-for-profit
 global business organization that develops and maintains standards and services for
@@ -20,7 +20,7 @@ and procedures to interact and transact with clarity and efficiency.
 GS1 provides a method for registering identifiers for company prefixes, locations,
 and products. Each registered identifier is a unique ID (UUID) that can be used on
 any supply chain, worldwide. The following [GS1 Identifier Types](#gs1-identifier-types)
-are commonly used in <SolutionName />. A complete list of <a href="https://www.gs1.org"
+are commonly used in IBM Blockchain Transparent Supply™. A complete list of <a href="https://www.gs1.org"
 target="_blank">GS1 ID types</a> is available on the GS1 site. <a
 href="http://apps.gs1.org/GDD/_layouts/help.aspx?Lcid=1033&Key=WSSEndUser&ShowNav=true"
 target="_blank">Understanding the GS1 Business Data Model</a> can also facilitate the
@@ -34,7 +34,7 @@ data upload process.
 
 ## GS1 URNs
 
-As shown in Table 1 below, <SolutionName /> uses GS1 URNs, which follow the <a
+As shown in Table 1 below, IBM Blockchain Transparent Supply™ uses GS1 URNs, which follow the <a
 href="https://www.gs1.org/sites/default/files/docs/epc/TDS_1_9_Standard.pdf"
 target="_blank">GS1 Tag Data Standard</a>.
 
@@ -59,15 +59,17 @@ Table 1. GS1 URNs
 ## Read Points
 
 For EPCIS Events on a vehicle or ship in transit, GS1 **read point geo-coordinates** are supported
-using RFC5870 compliant URNs. Valid geographic coordinates for &lt;readPoint&gt;&lt;geo&gt; XML are
+using RFC5870 compliant URNs. Valid geographic coordinates for `<readPoint><geo>` XML are
 comma-separated `latitude,longitude` coordinates or comma-separated `latitude,longitude,altitude`
 coordinates, as shown in the following examples:
 
 `<readPoint><geo>geo:13.4125,-103.8667</geo></readPoint>`
 `<readPoint><geo>geo:13.4125,103.8667,9.098</geo></readPoint>`
 
-<p>
-  <SolutionName /> surfaces read point data through the Trace API only, it is not available through the UI. For an example of <SolutionName /> read point upload syntax, see the annotated <a href="../files/xml-annotated-samples/xml-EPCIS-Commission">Commission Event XML</a>. For GS1 read point details, refer to section 7.3.4 of the <a href="https://www.gs1.org/sites/default/files/docs/epc/EPCIS-Standard-1.2-r-2016-09-29.pdf" target="_blank">GS1 EPCIS Standard</a>.
-</p>
+IBM Blockchain Transparent Supply™ surfaces read point data through the Trace API only, it is not
+available through the UI. For an example of IBM Blockchain Transparent Supply™ read point upload
+syntax, see the annotated <a href="../files/xml-annotated-samples/xml-EPCIS-Commission">Commission Event XML</a>.
+For GS1 read point details, refer to section 7.3.4 of the <a href="https://www.gs1.org/sites/default/files/docs/epc/EPCIS-Standard-1.2-r-2016-09-29.pdf" target="_blank">
+GS1 EPCIS Standard</a>.
 
 <PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>

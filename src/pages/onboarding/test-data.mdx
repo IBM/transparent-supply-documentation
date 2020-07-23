@@ -5,8 +5,8 @@ description: Uploading and sharing test data
 
 <PageDescription>
 
-**<SolutionName />** allows authorized users to upload test data, which can then be
-deleted by <SolutionName /> support upon request. The XML message test namespace
+**IBM Blockchain Transparent Supply™** allows authorized users to upload test data, which can then be
+deleted by IBM Blockchain Transparent Supply™ support upon request. The XML message test namespace
 header identifies the data as test data.
 
 </PageDescription>
@@ -14,8 +14,8 @@ header identifies the data as test data.
 ## Test namespace
 
 As opposed to **production namespace data**, **test namespace data** is not written
-to the <SolutionName /> blockchain. However, test namespace data is fully available
-to authorized users through all <SolutionName /> UI and API interfaces. Test namespace
+to the IBM Blockchain Transparent Supply™ blockchain. However, test namespace data is fully available
+to authorized users through all IBM Blockchain Transparent Supply™ UI and API interfaces. Test namespace
 data therefore enables complete testing of user scenarios and generates the same
 results and user experience as production namespace data.
 
@@ -26,9 +26,9 @@ must therefore adopt and communicate to users methods for identifying test data 
 differentiating it from production data.**
 
 To use a test namespace, the **IFT-Test-Namespace** header **must be** added to the
-REST API request for any data uploaded to <SolutionName />. The IFT-Test-Namespace header
+REST API request for any data uploaded to IBM Blockchain Transparent Supply™. The IFT-Test-Namespace header
 value will be the name of the specified test namespace. If the namespace value does
-not already exist, <SolutionName /> will create it.
+not already exist, IBM Blockchain Transparent Supply™ will create it.
 
 ## How it works
 
@@ -40,7 +40,7 @@ The following details summarize test namespace usage:
 * Each namespace name must be unique and identify your organization, such as `<solution>.<orgId>.test1`.
 * Multiple test namespaces can be created.
 * Test namespaces are not supported for Fresh Insights data.
-* Test namespaces and test data can be deleted by the <SolutionName /> support team, upon request.
+* Test namespaces and test data can be deleted by the IBM Blockchain Transparent Supply™ support team, upon request.
 * **You must record** and save the names of all test namespaces used in order to reference them in a delete request.
 * Test namespaces can be **defined ONLY through REST API calls**. Identifying test
 namespace data is not supported via UI data entries, spreadsheet uploads, or

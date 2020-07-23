@@ -5,10 +5,10 @@ description: How to convert Microsoft&reg; Excel&trade; spreadsheets to XML data
 
 <PageDescription>
 
-The **<SolutionName />** spreadsheet <a href={process.env.GATSBY_UI_URL + '/ift/api/converter/swagger-ui.html'} target="_blank">Converter API</a> converts Microsoft&reg; Excel&trade; files
+The **IBM Blockchain Transparent Supply™** spreadsheet <a href={process.env.GATSBY_UI_URL + '/ift/api/converter/swagger-ui.html'} target="_blank">Converter API</a> converts Microsoft&reg; Excel&trade; files
 into XML format for upload via the <a href={process.env.GATSBY_UI_URL + '/ift/api/connector/swagger-ui.html'} target="_blank">Connector API</a>. This tool enables
-you to easily generate valid <SolutionName /> messages from Excel&trade; files. This
-service converts content directly from a spreadsheet file to an <SolutionName /> message
+you to easily generate valid IBM Blockchain Transparent Supply™ messages from Excel&trade; files. This
+service converts content directly from a spreadsheet file to an IBM Blockchain Transparent Supply™ message
 type in XML format. The template files also contain each XML field that is available
 in the message type.
 
@@ -64,7 +64,7 @@ Click any link to save the blank spreadsheet template file; select **Excel Workb
 
 The Excel&trade; spreadsheets below (.xlsx files) provide field-by-field details for each spreadsheet,
 including detailed field descriptions, required formats, examples, and requirements. Each table entry
-contains the collection of documentation files for each <SolutionName /> message type.
+contains the collection of documentation files for each IBM Blockchain Transparent Supply™ message type.
 
 **Note:** Many of the spreadsheets contain a **Level** column, which represents groupings. Level 1
 represents a new event or transaction. Anything above Level 1 represents an array. For example, the
@@ -105,7 +105,7 @@ All spreadsheets have an **Entitlement mode** worksheet, which lets you specify 
 chain partners can view the data. To change the entitlement mode, select a new value from the drop-down list.
 The entitlement mode applies to the entire XML file that is generated from a spreadsheet. A mode of **none**
 indicates that no data entitlement will be specified for the generated XML. When the XML is submitted to
-the <SolutionName /> API without an entitlement mode, the default data access control for the user's organization
+the IBM Blockchain Transparent Supply™ API without an entitlement mode, the default data access control for the user's organization
 is applied. Refer to [Data entitlement mode](/reference/data-entitlement-mode).
 
 ## Usage
@@ -156,7 +156,7 @@ All errors are returned in the response body separated by a new line. Here is an
 
 | Errors (fatal) | Description | Message format |
 | --- | --- | --- |
-| Unrecognized Workbook | <SolutionName /> Converter is unable to recognize the workbook format. You will receive this error if you attempt to submit a spreadsheet from the deprecated <SolutionName /> Basic Converter. | `Uploaded File Error: Could not recognize Spread Sheet Format.` |
+| Unrecognized Workbook | IBM Blockchain Transparent Supply™ Converter is unable to recognize the workbook format. You will receive this error if you attempt to submit a spreadsheet from the deprecated IBM Blockchain Transparent Supply™ Basic Converter. | `Uploaded File Error: Could not recognize Spread Sheet Format.` |
 | Missing Sheets | The workbook is missing a required worksheet | `The following required sheets are missing. [sheet_names]` |
 | Unrecognized Sheets | The workbook is missing a required worksheet | `The following sheets are not recognized. [sheet_names]` |
 | Missing Header | A worksheet is missing a header entry (column) | `<sheet_name> sheet has missing headers [header_names]` |
