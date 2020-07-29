@@ -94,6 +94,16 @@
       path: /apis/api-error-codes
     - title: Connector API error messages
       path: /apis/connector-api-error-messages
+- title: Building apps
+  pages:
+    - title: Overview
+      path: /building-apps/app-support-overview
+    - title: APIs
+      path: /building-apps/app-support-apis
+    - title: Data subscription
+      path: /building-apps/app-support-data-subscription
+    - title: Smart contracts
+      path: /building-apps/app-support-smart-contracts
 - title: Reference
   pages:
     - title: GS1 standards
@@ -108,3 +118,7 @@
       path: /reference/payloads
     - title: Message codes
       path: /reference/message-codes
+    - title: Supported languages
+      path: /reference/supported-languages
+    - title: Supported browsers
+      path: /reference/supported-browsers

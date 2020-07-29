@@ -5,9 +5,9 @@ description: Process for automating data upload
 
 <PageDescription>
 
-The **<SolutionName />** APIs are provided for your data integration experts to automate
-data uploads for your organization. <SolutionName /> APIs are simple REST APIs, so the
-automated process is similar to manually uploading data. To automate, a registered <SolutionName />
+The **IBM Blockchain Transparent Supply™** APIs are provided for your data integration experts to automate
+data uploads for your organization. IBM Blockchain Transparent Supply™ APIs are simple REST APIs, so the
+automated process is similar to manually uploading data. To automate, a registered IBM Blockchain Transparent Supply™
 system user for your organization will authenticate and upload conforming XML data.
 
 </PageDescription>
@@ -17,20 +17,24 @@ system user for your organization will authenticate and upload conforming XML da
 
 **Attention**: To comply with <a href="https://gdpr.eu/" target="_blank">EU General
 Data Protection Regulation (GDPR)</a> data privacy requirements, you must ensure that no
-personal data is uploaded to <SolutionName /> in any free-form text fields or in any comments.
+personal data is uploaded to IBM Blockchain Transparent Supply™ in any free-form text fields or in any comments.
 
 ## IDs and tokens
-<p>
-  <SolutionName /> runs on IBM Cloud, so the <strong>service ID</strong> that you create for your <strong>system user</strong> must first be configured for both environments. First, the service ID must authenticate to IBM Cloud using the API key (password) and request a <strong>Cloud IAM token</strong>. Using the Cloud IAM token, the system user must then authenticate the Service ID to <SolutionName /> and request an <strong><SolutionName /> service token</strong>. This service token is then used by the system user to authenticate API calls, until the token expires (after 3 hours).
-</p>
+
+IBM Blockchain Transparent Supply™ runs on IBM Cloud, so the **service ID** that you create for your
+**system user** must first be configured for both environments. First, the service ID must
+authenticate to IBM Cloud using the API key (password) and request a **Cloud IAM token**. Using the
+Cloud IAM token, the system user must then authenticate the Service ID to IBM Blockchain Transparent Supply™
+and request a service token for IBM Blockchain Transparent Supply™. This service token is then used
+by the system user to authenticate API calls, until the token expires (after 3 hours).
 
 ## Preparing for automation
 
-Complete the following steps to prepare for automating your <SolutionName /> data uploads:
+Complete the following steps to prepare for automating your IBM Blockchain Transparent Supply™ data uploads:
 
-1. Obtain the **product and facility identifiers** (GS1 or <SolutionName />) that your supply chain experts
+1. Obtain the **product and facility identifiers** (GS1 or IBM Blockchain Transparent Supply™) that your supply chain experts
 have mapped.
-2. Verify that the product and facility identifiers have been registered with <SolutionName />.
+2. Verify that the product and facility identifiers have been registered with IBM Blockchain Transparent Supply™.
 3. Identify your critical supply chain events and translate them into their corresponding EPCIS events.
 4. Prepare templates for the EPCIS events, in either XML or Spreadsheet format (Microsoft&reg; Excel&trade;).
 To facilitate automated workloads for a variety of environments, process flexibility is provided. For example,
@@ -44,7 +48,7 @@ will need to be generated. For example, EPCIS events require a Universally Uniq
 
 ## Automation methodology
 
-To automate your **EPCIS** event uploads to <SolutionName />, apply the following methodology.
+To automate your **EPCIS** event uploads to IBM Blockchain Transparent Supply™, apply the following methodology.
 **Your automation code must**:
 
 1. Generate or collect the required EPCIS event data.
@@ -54,22 +58,23 @@ To automate your **EPCIS** event uploads to <SolutionName />, apply the followin
 
 To facilitate error handling, **your automation code should also** provide the following functionality:
 
-1. Error check the HTTP request and response. The HTTP request could fail if there are network connection issues
-between the HTTP client and <SolutionName />. The HTTP response from <SolutionName /> could contain an error code if
-there are problems with the request, such as a 401 authorization error or a 400 invalid XML format error. Your
-automation code should include specific error handling, such as printing error messages to application logs and
+1. Error check the HTTP request and response. The HTTP request could fail if there are network
+connection issues between the HTTP client and IBM Blockchain Transparent Supply™. The HTTP response
+from IBM Blockchain Transparent Supply™ could contain an error code if there are problems with the
+request, such as a 401 authorization error or a 400 invalid XML format error. Your automation code
+should include specific error handling, such as printing error messages to application logs and
 retrying the request.
 2. Save: a) the **assetIdUri** from the JSON returned by the Connector API POST request; b) the **UUID** of the
 event loaded; and c) **details of the event** for future reference or debugging.
 
 ## Event data rules
 
-Apply the following rules when automating your **EPCIS event** uploads to <SolutionName />:
+Apply the following rules when automating your **EPCIS event** uploads to IBM Blockchain Transparent Supply™:
 
-- Event IDs must be unique to be viewed in the <SolutionName /> UI, so **using UUIDs is highly recommended**.
+- Event IDs must be unique to be viewed in the IBM Blockchain Transparent Supply™ UI, so **using UUIDs is highly recommended**.
 - Any **duplicate event IDs** are replaced in the UI by the most recent upload, but are not overwritten on
 blockchain.
-- An erroneous event upload cannot be removed from blockchain, but it can be removed from the <SolutionName /> UI by
+- An erroneous event upload cannot be removed from blockchain, but it can be removed from the IBM Blockchain Transparent Supply™ UI by
 uploading a new event with the **identical Event ID.**
 - **Events cannot be combined into a single event**. For example, a commission event is required when a product
 instance is created, and an aggregation event is required when the product is packed and shipped.
@@ -82,22 +87,22 @@ ordering of supply chain events.
 As described in the [Automation procedure](#automation-procedure) below, you will complete the following steps to
 configure a system user for automated data uploads:
 
-1. Configure an <SolutionName /> **system user**.
+1. Configure an IBM Blockchain Transparent Supply™ **system user**.
 2. Create an IBM Cloud **Service ID** and API key (password).
-3. For the IBM Cloud Service ID, create a **system ID** in the <SolutionName /> UI.
+3. For the IBM Cloud Service ID, create a **system ID** in the IBM Blockchain Transparent Supply™ UI.
 4. Use the Service ID API key to generate an IBM Cloud Identity and Access Management
 (Cloud IAM) **service token**.
-5. Use the Cloud IAM token to generate an **<SolutionName /> service token**.
-6. To authorize the client to send XML data to <SolutionName />, specify the <SolutionName />
+5. Use the Cloud IAM token to generate a service token for **IBM Blockchain Transparent Supply™**.
+6. To authorize the client to send XML data to IBM Blockchain Transparent Supply™, specify the IBM Blockchain Transparent Supply™
 service token in the **authorization header** of each API call.
-7. Regenerate <SolutionName /> **service tokens** as needed; they expire every 3 hours.
+7. Regenerate IBM Blockchain Transparent Supply™ **service tokens** as needed; they expire every 3 hours.
 
 ## Automation procedure
 
 Complete each step below to configure your **system users** for automated data
-upload to <SolutionName />:
+upload to IBM Blockchain Transparent Supply™:
 
-### 1. Configure an <SolutionName /> system user
+### 1. Configure an IBM Blockchain Transparent Supply™ system user
 
 a. <a href="https://cloud.ibm.com/registration" target="_blank">Create an IBM Cloud
 account</a> if you do not already have one.
@@ -110,7 +115,7 @@ the **Create** button.
 
 d. **Copy and Save the "ServiceId" value** at the top of the screen (for example,
 **ServiceId-4807b3fb-11d9-4304-b3da-8205a77d6f8a**). This value is required to register
-the Service ID with <SolutionName />.
+the Service ID with IBM Blockchain Transparent Supply™.
 
 e. Click the **API keys** tab and then click the **Create** button.
 
@@ -122,17 +127,17 @@ it cannot be regenerated, which would require creating a new Service ID. Copy a
 save or download the API key. Once the API key is securely saved and readable, close
 the window.
 
-### 2. Define the Service ID as an <SolutionName /> system ID
+### 2. Define the Service ID as an IBM Blockchain Transparent Supply™ system ID
 
-The next step is to define the IBM Cloud Service ID as an <SolutionName /> system ID:
+The next step is to define the IBM Cloud Service ID as an IBM Blockchain Transparent Supply™ system ID:
 
-a. From the <SolutionName /> UI menu, select the **Users** module.
+a. From the IBM Blockchain Transparent Supply™ UI menu, select the **Users** module.
 
 b. Select the **system IDS** tab and click the **Create** button.
 
 c. Record your **Organization ID**, which is required for future token generation steps.
 
-d. Enter the IBM Cloud **Service ID** as the **<SolutionName /> system ID** and click
+d. Enter the IBM Cloud **Service ID** as the **IBM Blockchain Transparent Supply™ system ID** and click
 the **Add system ID** button.
 
 e. Press the **Close** button. The system ID will be created.
@@ -148,18 +153,18 @@ and Access Management (Cloud IAM) token.
 Use the following HTTP request for the IBM Cloud IAM service token format:
 
 ```
-POST https://iam.ng.bluemix.net/oidc/token
+POST https://iam.cloud.ibm.com/identity/token
 Header: Content-Type: application/x-www-form-urlencoded
 Body: grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey=YOUR_API_KEY
 ```
 A successful response is an HTTP 200 message that includes the IBM Cloud IAM service
-token. You will send this token to <SolutionName /> in exchange for an <SolutionName />
-service token.
+token. You will send this token to IBM Blockchain Transparent Supply™ in exchange for a service token
+for IBM Blockchain Transparent Supply™.
 
-### 4. Generate an <SolutionName /> service token
+### 4. Generate a service token for IBM Blockchain Transparent Supply™
 
-Use the Cloud IAM token to generate an <SolutionName /> service token. To request
-an <SolutionName /> service token, use the following HTTP format:
+Use the Cloud IAM token to generate a service token for IBM Blockchain Transparent Supply™, using
+the following HTTP format:
 
 ```
 POST
@@ -167,18 +172,18 @@ https://<solution domain name>/ift/api/identity-proxy/exchange_token/v1/organiza
 Header: Content-Type: application/json
 Body: The entire JSON response from the Cloud IAM token in step 2
 ```
-A successful response is an HTTP 200 message that includes the <SolutionName /> service
+A successful response is an HTTP 200 message that includes the IBM Blockchain Transparent Supply™ service
 token.
 
 **Attention**: Only the **onboarding_token** value is used in subsequent requests,
 not the entire  returned JSON string.
 
-### 5. Specify <SolutionName /> service token
+### 5. Specify IBM Blockchain Transparent Supply™ service token
 
-To authorize the client to upload XML data to <SolutionName />, specify the **<SolutionName />
+To authorize the client to upload XML data to IBM Blockchain Transparent Supply™, specify the **IBM Blockchain Transparent Supply™
 service token** in the **authorization header** of each API call.
 
-From the generated <SolutionName /> service token, specify only the **onboarding_token**
+From the generated IBM Blockchain Transparent Supply™ service token, specify only the **onboarding_token**
 value (no double quotation marks) in the **authorization header**. This **Bearer token**
 authorization requires the authorization header format of 'Bearer onboarding_token_value'.
 
@@ -188,13 +193,13 @@ The following example API call demonstrates the required **authorization header*
 POST https://<solution domain name>/ift/api/connector/fs/connector/v1/assets
 Header: Content-Type: application/json
 Header: Authorization: Bearer ONBOARDING_token_VALUE
-Body: <SolutionName /> conforming XML
+Body: IBM Blockchain Transparent Supply™ conforming XML
 ```
 A successful response is an HTTP 201 message that includes the asset ID.
 
-### 6. Generate new <SolutionName /> service tokens
+### 6. Generate new IBM Blockchain Transparent Supply™ service tokens
 
-Generate new **<SolutionName /> service tokens** as needed; they expire after 3 hours. If an
+Generate new **IBM Blockchain Transparent Supply™ service tokens** as needed; they expire after 3 hours. If an
 expired service token is specified with an API call, an HTTP 401 (Unauthorized) message is
 returned. New tokens can be generated at any time; the system user does not have to wait
 until the current token has expired. To maximize the active duration, the current token

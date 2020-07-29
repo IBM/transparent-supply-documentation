@@ -5,9 +5,8 @@ import MDXProvider from 'gatsby-theme-carbon/src/components/MDXProvider';
 import defaultComponents from 'gatsby-theme-carbon/src/components/MDXProvider/defaultComponents';
 
 import PageCopyright from '../../components/PageCopyright';
-import SolutionName from '../../components/SolutionName';
 
-const components = { ...defaultComponents, PageCopyright, SolutionName };
+const components = { ...defaultComponents, PageCopyright };
 
 const wrapRootElement = ({ element }) => (
   <NavContextProvider>

@@ -5,7 +5,7 @@ description: How to use the IBM Blockchain Transparent Supply™ Trace API
 
 <PageDescription>
 
-The **<SolutionName />** <a href={process.env.GATSBY_UI_URL + '/ift/api/outbound/api-docs/'}
+The **IBM Blockchain Transparent Supply™** <a href={process.env.GATSBY_UI_URL + '/ift/api/outbound/api-docs/'}
 target="_blank">**Trace API**</a> allows authorized users to retrieve trace information
 for your organization's supply chain events, transactions, products and facilities.
 
@@ -13,7 +13,7 @@ for your organization's supply chain events, transactions, products and faciliti
 
 ## Prerequisites
 
-To use the <SolutionName /> **Trace API**, you must meet the following prerequisites:
+To use the IBM Blockchain Transparent Supply™ **Trace API**, you must meet the following prerequisites:
 
 1. Your organization has subscribed to the [**Trace module**](/modules/trace).
 
@@ -21,14 +21,14 @@ To use the <SolutionName /> **Trace API**, you must meet the following prerequis
 data programmatically. Automation of data upload is an ultimate goal to facilitate
 data sharing.
 
-3. For <SolutionName /> organizations to share and trace supply chain data, each
+3. For IBM Blockchain Transparent Supply™ organizations to share and trace supply chain data, each
 organization must have defined the appropriate data sharing authorization. For
 details on restricting and sharing your data, see [Data entitlement
 mode](/reference/data-entitlement-mode).
 
 ## Getting started
 
-Take the following steps to get started with the <SolutionName /> **Trace API**:
+Take the following steps to get started with the IBM Blockchain Transparent Supply™ **Trace API**:
 
 1. Obtain an **authentication token**, as described in [Authenticate human
 users](/managing-users/authenticate-human-users) and [Authenticate system
@@ -47,7 +47,7 @@ To use the Trace API manually, use the Swagger interface:
 
 - <a href={process.env.GATSBY_UI_URL + '/ift/api/outbound/api-docs'} target="_blank">Trace API</a>
 
-You must first provide a valid <SolutionName /> authorization token (human user token) on
+You must first provide a valid IBM Blockchain Transparent Supply™ authorization token (human user token) on
 Swagger, using the **Authorize** button on the top right of the page.
 
 ## Traces endpoint
@@ -66,8 +66,8 @@ The supported formats are shown in Table 1:
 | --- | --- |
 | EPC LGTIN | urn:epc:class:lgtin:0614141.107346.101 <br /> urn:epc:class:lgtin:`<CompanyPrefix>.<ItemRefAndIndicator>.<Lot>` (13 digits + Lot #)|
 | EPC SGTIN | urn:epc:id:sgtin:0614141.107346.2017 <br /> urn:epc:id:sgtin:`<CompanyPrefix>.<ItemRefAndIndicator>.<SerialNumber>` (13 Digits + Serial Number)|
-| <SolutionName /> product ID with Lot # | urn:ibm:ift:product:lot:class:1234567890123.product-123.lot4 <br /> urn:ibm:ift:product:lot:class:`<Company Prefix>.<Item Reference>.<Lot Number>` |
-| <SolutionName /> product ID with Serial # | urn:ibm:ift:product:serial:obj:1234567890123.product-123.serial-number-4567 <br /> urn:ibm:ift:product:serial:obj:`<Company Prefix>.<Item Reference>.<Serial Number>` |
+| IBM Blockchain Transparent Supply™ product ID with Lot # | urn:ibm:ift:product:lot:class:1234567890123.product-123.lot4 <br /> urn:ibm:ift:product:lot:class:`<Company Prefix>.<Item Reference>.<Lot Number>` |
+| IBM Blockchain Transparent Supply™ product ID with Serial # | urn:ibm:ift:product:serial:obj:1234567890123.product-123.serial-number-4567 <br /> urn:ibm:ift:product:serial:obj:`<Company Prefix>.<Item Reference>.<Serial Number>` |
 
 ### Example query
 

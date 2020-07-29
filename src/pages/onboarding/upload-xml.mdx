@@ -5,7 +5,7 @@ description: Uploading data in XML format using the Connector API
 
 <PageDescription>
 
-**<SolutionName />** organizations upload data in XML format using the <a href={process.env.GATSBY_UI_URL + '/ift/api/connector/swagger-ui.html'} target="_blank">
+**IBM Blockchain Transparent Supply™** organizations upload data in XML format using the <a href={process.env.GATSBY_UI_URL + '/ift/api/connector/swagger-ui.html'} target="_blank">
 Connector API</a>. As described below, there are several methods available for creating compliant
 XML messages.
 
@@ -15,40 +15,36 @@ XML messages.
 
 **Attention**: To comply with <a target="_blank" href="https://gdpr.eu/">EU General
 Data Protection Regulation (GDPR)</a> data privacy requirements, you must ensure
-that no personal data is uploaded to <SolutionName /> in any free-form text fields
+that no personal data is uploaded to IBM Blockchain Transparent Supply™ in any free-form text fields
 or in any comments.
 
 ## Overview
 
-<p>
-
-  <SolutionName /> users will select one of two methods to upload data in XML format:
-    1) upload data manually, using API calls (human users); or 2) upload data automatically,
-    using a defined workflow (system users and applications). In either case, the user
-    (human, system or application) uploading the data must be authenticated and
-    registered with <SolutionName />. The user must include a valid service token with
-    each submitted XML message.
-
-</p>
+IBM Blockchain Transparent Supply™ users will select one of two methods to upload data in XML format:
+1) upload data manually, using API calls (human users); or 2) upload data automatically,
+using a defined workflow (system users and applications). In either case, the user
+(human, system or application) uploading the data must be authenticated and
+registered with IBM Blockchain Transparent Supply™. The user must include a valid service token with
+each submitted XML message.
 
 ## Prerequisites
 
-To upload data to <SolutionName /> in XML messages, the user (human, system or application)
+To upload data to IBM Blockchain Transparent Supply™ in XML messages, the user (human, system or application)
 must have a valid <a target="_blank" href="https://www.ibm.com/account/us-en/signup/register.html">IBMid</a>.
 
-Each IBMid must also be registered with <SolutionName />, by an **Account admin**. To **register human users**:
-Register the user's IBMid (email address) with <SolutionName />, at <a href={process.env.GATSBY_UI_URL + '/manageUsers'} target="_blank">Users dashboard</a>.
+Each IBMid must also be registered with IBM Blockchain Transparent Supply™, by an **Account admin**. To **register human users**:
+Register the user's IBMid (email address) with IBM Blockchain Transparent Supply™, at <a href={process.env.GATSBY_UI_URL + '/manageUsers'} target="_blank">Users dashboard</a>.
 To **register system users and applications**: Obtain a service ID for each system user, as described
 in the prerequisites section in [Authenticate system users](/managing-users/authenticate-system-users).
 
 ## Manual submission
 
-Use the following steps to manually (using the Swagger API) upload data to <SolutionName />.
+Use the following steps to manually (using the Swagger API) upload data to IBM Blockchain Transparent Supply™.
 An authenticated and registered user ID (human users only) is required. Each successfully
 submitted XML message creates an asset on the network:
 
-1. Sign in to IBM with your <a target="_blank" href="https://www.ibm.com/account/us-en/signup/register.html>IBMid</a.
-2. Connect to the Swagger <a href={process.env.GATSBY_UI_URL + '/ift/api/connector/swagger-ui.html'} target="_blank"><SolutionName /> Connector API</a>.
+1. Sign in to IBM with your <a target="_blank" href="https://www.ibm.com/account/us-en/signup/register.html">IBMid</a>.
+2. Connect to the Swagger <a href={process.env.GATSBY_UI_URL + '/ift/api/connector/swagger-ui.html'} target="_blank">IBM Blockchain Transparent Supply™ Connector API</a>.
 3. Expand the **Assets** **POST /fs/connector/v1/assets** API.
 4. From your local system, copy the XML message file contents (e.g. EPCIS event, Purchase Order, Receive Advice or Despatch Advice); then paste the contents into the **Create Asset** API parameters **asset** field.
 5. At the bottom of the API, upload the XML message (data) by clicking the **Try it out!** button.
@@ -57,24 +53,24 @@ submitted XML message creates an asset on the network:
 ## Automated submission
 
 Only authenticated system users or applications (ServiceId) can automatically upload data
-to <SolutionName />. Before defining an automated workflow to upload data, ensure that the
-ServiceId has a valid token and is registered with <SolutionName />. If necessary, follow
+to IBM Blockchain Transparent Supply™. Before defining an automated workflow to upload data, ensure that the
+ServiceId has a valid token and is registered with IBM Blockchain Transparent Supply™. If necessary, follow
 the process to [obtain a valid token](/managing-users/authenticate-system-users) (example POST request
 using CURL to send EPCIS Observation XML).
 
 Complete the following process to configure a system user or application (authenticated
-ServiceId) to automatically upload data to <SolutionName />:
+ServiceId) to automatically upload data to IBM Blockchain Transparent Supply™:
 
-1. Retrieve a token for the ServiceId from <SolutionName /> authentication.
+1. Retrieve a token for the ServiceId from IBM Blockchain Transparent Supply™ authentication.
 1. Start a POST request to: `https://<solution domain name>/ift/api/connector/fs/connector/v1/assets`
 1. Paste the token in the **Authorization Header**, as follows: `Bearer` &lt;token&gt;.
-1. Submit the XML message to <SolutionName />.
-1. Receive a new asset ID from <SolutionName />, which indicates a successful POST and upload of data.
+1. Submit the XML message to IBM Blockchain Transparent Supply™.
+1. Receive a new asset ID from IBM Blockchain Transparent Supply™, which indicates a successful POST and upload of data.
 
 ### Curl
 
 The following command line example POST request uses the cURL command to send the XML message
-file **EPCIS_Observation.xml** to the <SolutionName /> service (URL). The user's Bearer (onboarding)
+file **EPCIS_Observation.xml** to the IBM Blockchain Transparent Supply™ service (URL). The user's Bearer (onboarding)
 token is specified:
 
 ```bash
@@ -177,9 +173,7 @@ Sample **201 Asset Created** response body with asset IDs:
 
 * Common error responses can be found [here](/apis/connector-api-error-messages).
 
-<p>
-  <SolutionName /> will return a new asset ID for the uploaded data, or
-  an <a href="../apis/api-error-codes">error code</a>.
-</p>
+IBM Blockchain Transparent Supply™ will return a new asset ID for the uploaded data, or an
+[error code](/apis/api-error-codes).
 
 <PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>

@@ -5,7 +5,7 @@ description: Supported formats for payload data upload
 
 <PageDescription>
 
-**<SolutionName />** provides the **payload** data upload method to extend
+**IBM Blockchain Transparent Supply™** provides the **payload** data upload method to extend
 support beyond the standard GS-1 data types. Use a payload to attach user-defined
 data (such as attributes) to events, items (product lots, serial shipping
 containers, pallets) or locations.
@@ -14,7 +14,7 @@ containers, pallets) or locations.
 
 ## Payload types
 
-Payloads must specify the type of contained data, using the `<payloadTypeURI>` tag. <SolutionName />
+Payloads must specify the type of contained data, using the `<payloadTypeURI>` tag. IBM Blockchain Transparent Supply™
 defines the following payload types:
 
 - **Key-value pairs**
@@ -46,13 +46,13 @@ Consider the following usage notes when uploading payload data:
 1. The only payload data visible in the UI are **key-value pairs that are attached
 to a supported Product ID or Facility ID**&mdash;which are GS1 formats for **SSCC,
 GTIN, SGTIN, LGTIN, GLN, and EPC-SGLN** and their **equivalent custom identifiers** only.
-2. To change the name of the payload in the <SolutionName /> UI, upload a **key-value
+2. To change the name of the payload in the IBM Blockchain Transparent Supply™ UI, upload a **key-value
 pair with Title as the key and the new name as the value.**
 3. Payload messages **cannot exceed 32 KB**.
 
 ## Submit payload data
 
-Submit your payload using the <SolutionName /> <a href={process.env.GATSBY_UI_URL + '/ift/api/connector/swagger-ui.html'}>Connector API</a>
+Submit your payload using the IBM Blockchain Transparent Supply™ <a href={process.env.GATSBY_UI_URL + '/ift/api/connector/swagger-ui.html'}>Connector API</a>
 **assets** endpoint. Simply paste your payload XML into the **asset** Parameter **Value**
 field and click the **Try it out!** button.
 

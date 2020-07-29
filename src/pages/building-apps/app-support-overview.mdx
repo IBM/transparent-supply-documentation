@@ -1,0 +1,66 @@
+---
+title: Building apps overview
+description: Supported methods for building apps
+---
+
+<PageDescription>
+
+**IBM Blockchain Transparent Supply™** member organizations submit supply chain data to the platform and authorize it to be shared with other
+select members. **IBM Blockchain Transparent Supply™** then collects and integrates this data, creating comprehensive, end-to-end supply
+chain views specific to each organization. This data management method enables the development of applications aimed at
+increasing product availability, reducing supply chain inefficiencies and minimizing waste. 
+
+</PageDescription>
+
+## Building apps overview
+
+**IBM Blockchain Transparent Supply™** provides pre-built applications by subscription, including product **Trace**, product **Insights**, member
+**Onboarding** and **Documents** management. To support the development of additional applications, **IBM Blockchain Transparent Supply™** provides
+several methods to choose from: **APIs**, **data subscription** and **smart contracts**. These methods can be used individually,
+or in combination, to extend data to both private client-specific applications and public generally-available applications.
+
+## Choosing a method
+
+**IBM Blockchain Transparent Supply™** shares its application development methods and capabilities with member organizations for building
+applications for private or commercial use. Applications create value by using integrated data from across the **IBM Blockchain Transparent Supply™**
+supply chain, transcending organizational boundaries and providing innovation and insight.
+
+To build applications, use one of the three supported methods individually, or in combination:
+
+1. Use the **APIs** method when your top priority is ease of use and speed of deployment.
+2. Use the **data subscription** method when your top priority is analyzing the value of data at scale.
+3. Use the **smart contracts** method when your top priority is transparency and trust between transacting parties.
+
+### APIs method
+
+The **IBM Blockchain Transparent Supply™** APIs are provided on Swagger for registered and authenticated third-party applications to submit data requests.
+Only the applications that are authorized by each data owner can successfully retrieve that data:
+
+- <a href={process.env.GATSBY_UI_URL + '/ift/api/connector/swagger-ui.html'} target="_blank">Connector API</a> (upload data)
+- <a href={process.env.GATSBY_UI_URL + '/ift/api/converter/swagger-ui.html'} target="_blank">Converter API</a> (convert spreadsheets)
+- <a href={process.env.GATSBY_UI_URL + '/ift/api/outbound/api-docs/'} target="_blank">Trace API</a> (trace products)
+- <a href={process.env.GATSBY_UI_URL + '/ift/api/documents/api-docs/'} target="_blank">Documents API</a> (share documents)
+- <a href={process.env.GATSBY_UI_URL + '/ift/api/visibility/api-docs/'} target="_blank">Insights API</a> (view metrics)
+
+For details, refer to [Building apps from API data](/building-apps/app-support-apis).
+
+### Data subscription method
+
+**Data subscription** enables authorized applications to retrieve formatted **IBM Blockchain Transparent Supply™** data for
+efficient consumption. Subscription data is provided in tabular format, stored off-blockchain in
+IBM Cloud Object Store, and updated and retrieved via automation. For details, refer to [Building apps
+from data subscription](/building-apps/app-support-data-subscription).
+
+### Smart contracts method
+
+**Smart contracts** enables authorized third-parties to retrieve and process unencrypted **IBM Blockchain Transparent Supply™**
+data. To protect sensitive information, private smart contracts run on private network channels. For
+details, refer to [Building apps from smart contracts](/building-apps/app-support-smart-contracts).
+
+### Related topics
+
+- [APIs method](/building-apps/app-support-apis)
+- [Data subscription method](/building-apps/app-support-data-subscription)
+- [Smart contracts method](/building-apps/app-support-smart-contracts)
+
+<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>

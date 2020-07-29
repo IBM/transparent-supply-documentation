@@ -6,8 +6,8 @@ description: How to authenticate system users for automation
 <PageDescription>
 
 Use the following procedures to register and authenticate **system users** to make API
-calls to **<SolutionName />**. This is a key step towards automating your data uploads
-to <SolutionName />.
+calls to **IBM Blockchain Transparent Supply™**. This is a key step towards automating your data uploads
+to IBM Blockchain Transparent Supply™.
 
 </PageDescription>
 
@@ -16,17 +16,17 @@ to <SolutionName />.
 A **system user** is an automated program, or an application, that sends or receives data
 by specifying a **service ID/API key** token combination. A system user can be a combination
 of multiple programs, or applications, in which case they share the same token. Registering
-multiple system users with <SolutionName /> can be useful for managing distinct workloads, such
+multiple system users with IBM Blockchain Transparent Supply™ can be useful for managing distinct workloads, such
 as processing certificates and sending messages, and to separate information types on your local system.
 
 To configure a new system user, you must first create a new **service ID/API key** pair. You will
-then register the system user with <SolutionName /> by defining its service ID and API key in
-the **Users** module. Once registered, the **system user** will generate an <SolutionName />
+then register the system user with IBM Blockchain Transparent Supply™ by defining its service ID and API key in
+the **Users** module. Once registered, the **system user** will generate an IBM Blockchain Transparent Supply™
 **service token**, in order to make authenticated API calls, using the following sequence:
 
 1. Specify the API key to request an IBM Cloud IAM token.
-2. Exchange the IBM Cloud IAM token for an <SolutionName /> service token, which contains the service ID and password.
-3. Specify the service token in the authorization header of API calls to <SolutionName />.
+2. Exchange the IBM Cloud IAM token for an IBM Blockchain Transparent Supply™ service token, which contains the service ID and password.
+3. Specify the service token in the authorization header of API calls to IBM Blockchain Transparent Supply™.
 4. Because service tokens expire three hours after being issued, either renew the token before
 expiration or repeat this process to generate a new service token.
 
@@ -35,11 +35,11 @@ expiration or repeat this process to generate a new service token.
 ## Configure a system user
 
 A one-time initial registration is required to allow a new **system user** to authenticate
-to <SolutionName />. Only an **Account admin** for your **organization** can register system
+to IBM Blockchain Transparent Supply™. Only an **Account admin** for your **organization** can register system
 users. An **Account admin** must first create a unique service ID and API key pair for each system
 user, as follows:
 
-1. **Log in** to <SolutionName /> and select the <a href={process.env.GATSBY_UI_URL + '/manageUsers'} target="_blank">**Users**</a> module.
+1. **Log in** to IBM Blockchain Transparent Supply™ and select the <a href={process.env.GATSBY_UI_URL + '/manageUsers'} target="_blank">**Users**</a> module.
 1. Select **System IDs** and then click **Add System ID**.
 1. Enter a **name** for your new System ID, and then click the text link to **create a new service ID on IBM Cloud**.
 1. Log in to IBM Cloud using your IBMid (email address registered with IBM).
@@ -60,9 +60,9 @@ Your downloaded and saved API key (JSON) should look similar to the following ex
     }
   ```
 1. Close the API key window. From the subsequent **Manage Mysystem ID** window, copy the service ID value **ServiceId-######**.
-1. Return to the <SolutionName /> **Add System ID** dialog. Paste the service ID value copied from the previous step
+1. Return to the IBM Blockchain Transparent Supply™ **Add System ID** dialog. Paste the service ID value copied from the previous step
 into the service ID field, and then click the **Add System ID** button.
-1. The new **System ID** will be displayed in your <SolutionName /> Users panel.
+1. The new **System ID** will be displayed in your IBM Blockchain Transparent Supply™ Users panel.
 
 ## Obtain an IBM Cloud IAM token
 
@@ -84,7 +84,7 @@ the following steps (an automated process):
 
 ## Exchange an IBM Cloud IAM token for a service token
 
-After obtaining an IBM Cloud IAM token, the system user must exchange it for an <SolutionName /> service token:
+After obtaining an IBM Cloud IAM token, the system user must exchange it for an IBM Blockchain Transparent Supply™ service token:
 
 **Windows users:** Use an application such as <a href="https://www.cygwin.com" target="_blank">Cygwin</a> to
 run the following curl commands.
@@ -116,18 +116,18 @@ curl - X POST - H 'Content-Type: application/json' - d '
 
 ## Token expiration
 
-Both the IBM Cloud IAM token and the <SolutionName /> service token are encoded with an expiration time. During
-the token exchange, the expiration time is copied from the IBM Cloud IAM token and applied to the <SolutionName />
+Both the IBM Cloud IAM token and the IBM Blockchain Transparent Supply™ service token are encoded with an expiration time. During
+the token exchange, the expiration time is copied from the IBM Cloud IAM token and applied to the IBM Blockchain Transparent Supply™
 service token, so they will both expire at the same time.
 
 If an expired IBM Cloud IAM token is sent with an exchange token request, it will be rejected. If an
-expired <SolutionName /> service token is submitted with an API call, it will be rejected.
+expired IBM Blockchain Transparent Supply™ service token is submitted with an API call, it will be rejected.
 
 ## Troubleshooting
 
 To resolve issues with system user configuration, use the following steps:
 
-**Issue:** Receiving a 404 response when exchanging an IBM Cloud IAM token for an <SolutionName /> service token:
+**Issue:** Receiving a 404 response when exchanging an IBM Cloud IAM token for an IBM Blockchain Transparent Supply™ service token:
 
 Example response:
 ```json
@@ -140,7 +140,7 @@ Example response:
 
 **Action:**
 
-1. Verify that the service ID is registered as a system user in the <SolutionName /> **Users** module.
+1. Verify that the service ID is registered as a system user in the IBM Blockchain Transparent Supply™ **Users** module.
 
    If the system ID is not registered, follow the instructions to [Register a system user](#register-a-system-user).
 
