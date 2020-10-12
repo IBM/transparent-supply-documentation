@@ -89,10 +89,11 @@ The following example shows example Despatch Advice data in XML:
         <!-- NOTE: <despatchInformation>, </despatchInformation> tags should not be omitted even if no <actualShipDataTime>.-->
         <purchaseOrder>
             <entityIdentification>urn:epcglobal:cbv:bt:5412345000037:3352</entityIdentification>
-           <!--OPTIONAL-->
-           <!--Top-level PO identification. If needed, line-item level POs can override this.-->
-           <!--Either top-level PO or per-line-item level POs should be present-->
+            <!-- MANDATORY: <purchaseOrder> requires an <entityIdentification> -->
         </purchaseOrder>
+        <!-- OPTIONAL -->
+        <!-- Top-level PO identification. Line-item level POs override this. -->
+        <!-- Either top-level PO or per-line-item level POs should be present -->
         <despatchAdviceLogisticUnit>
             <!-- MANDATORY: A DA Logistic Unit is for each pallet. -->
             <packageTypeCode>PE</packageTypeCode>
@@ -129,10 +130,11 @@ The following example shows example Despatch Advice data in XML:
                 </requestedItemIdentification>
                 <purchaseOrder>
                     <entityIdentification>urn:epcglobal:cbv:bt:5412345000037:3352</entityIdentification>
-                    <!--OPTIONAL. Necessary for computing order-reconciliation metrics.-->
+                    <!-- MANDATORY: <purchaseOrder> requires an <entityIdentification> -->
                     <lineItemNumber>5</lineItemNumber>
-                    <!--MANDATORY: This is the line item in the PO, to which this DA line item corresponds to -->
+                    <!--MANDATORY: This is the line item in the PO that this DA line item corresponds to. -->
                 </purchaseOrder>
+                <!--OPTIONAL. Required for computing order reconciliation metrics. -->
             </despatchAdviceLineItem>
         </despatchAdviceLogisticUnit>
     </despatchAdvice>

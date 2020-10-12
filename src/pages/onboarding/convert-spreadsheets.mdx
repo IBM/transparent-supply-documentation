@@ -108,6 +108,26 @@ indicates that no data entitlement will be specified for the generated XML. When
 the IBM Blockchain Transparent Supply™ API without an entitlement mode, the default data access control for the user's organization
 is applied. Refer to [Data entitlement mode](/reference/data-entitlement-mode).
 
+## Explicit Entitled Org Ids
+
+The **Entitlement Mode** worksheet also includes a column named **Explicit Entitled Org Ids**, which lets you
+explicitly specify which organizations are entitled to the mode selected in the **Entitlement Mode** dropdown
+list. Simply place each organization's Org Id on a separate row in the **Explicit Entitled Org Ids** column.
+
+## Custom bizSteps
+
+All event spreadsheets include a hidden tab with selections for the supported bizSteps, such as **packing**
+and **shipping**. Support for custom bizSteps is also provided, in the
+format `https://<client-controlled-domain-name>/<path>/<biz_step_name>`. To enable selection and upload of a
+custom bizStep, it must first be added to the event spreadsheet hidden tab, as follows:
+
+1. Open the applicable event spreadsheet, such as Aggregation.xls.
+2. Right-click on any tab at the bottom of the spreadsheet.
+3. Select **Unhide** and then **bizSteps**.
+4. Add the custom bizStep URL to the bottom (first empty row) of the bizSteps list, in the
+format `https://<client-controlled-domain-name>/<path>/<biz_step_name>`.
+5. Once added and saved, users will be able to select the custom bizStep (URL) in the event spreadsheet.
+
 ## Usage
 
 Modify your downloaded sample (or create it programmatically) and submit it to the
@@ -116,9 +136,11 @@ API</a>. If you have multiple events to convert to XML, enter the additional eve
 corresponding worksheets and submit them to the API.
 
 ## Swagger
+
 The <a href={process.env.GATSBY_UI_URL + '/ift/api/converter/swagger-ui.html'}>Spreadsheet Converter API</a> is available on Swagger.
 
 ### Endpoint prerequisite
+
 To submit data, you must include the following Authorization header:
 
 | Header | Value |
@@ -138,6 +160,7 @@ One of three responses is typically returned by calling a **Converter API** endp
 | 401 | User Unauthorized |
 
 ### Error messages
+
 **401: User Unauthorized** - Indicates a problem with the caller's authorization token, such
 as a missing Authorization Header, or an expired token (valid for three hours after assignment).
 This message can also result from specifying a token for the incorrect zone (integration or production).

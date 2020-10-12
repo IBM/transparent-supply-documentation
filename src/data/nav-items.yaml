@@ -112,6 +112,8 @@
       path: /reference/solution-identifiers
     - title: Data types
       path: /reference/data-types
+    - title: Data access control
+      path: /reference/data-access-control
     - title: Data entitlement mode
       path: /reference/data-entitlement-mode
     - title: Payload data

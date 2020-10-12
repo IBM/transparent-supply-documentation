@@ -83,12 +83,13 @@ The following example shows example Receive Advice data in XML:
         </despatchAdvice>
         <purchaseOrder>
             <entityIdentification>urn:epcglobal:cbv:bt:5412345000037:3352</entityIdentification>
-            <!-- OPTIONAL -->
-            <!-- PO number to be filled in by the retailer -->
-            <!-- Either DA or PO number should be present -->
-            <!-- Recommendation: PO number should be included. DA should be included when available. -->
-            <!-- Top-level PO identifier. Line-item PO, if present, overrides this. -->
+            <!-- MANDATORY: <purchaseOrder> requires an <entityIdentification> -->
         </purchaseOrder>
+        <!-- OPTIONAL -->
+        <!-- PO number to be filled in by the retailer -->
+        <!-- Either DA or PO number should be present -->
+        <!-- Recommendation: PO number should be included. DA should be included when available. -->
+        <!-- Top-level PO identifier. Line-item POs overrides this. -->
         <receivingAdviceLogisticUnit>
             <!-- First pallet, modular that was received -->
             <packageTypeCode>PE</packageTypeCode>
@@ -121,18 +122,19 @@ The following example shows example Receive Advice data in XML:
                     <!-- MANDATORY: Product that was requested -->
                 </requestedItemIdentification>
                 <despatchAdvice>
-                    <!-- OPTIONAL Field : DA at the line item level -->
-                    <-- Necessary for computing order-reconciliation metrics. -->
+                    <!-- OPTIONAL: DA at the line item level -->
+                    <!-- Required for computing order reconciliation metrics. -->
                     <entityIdentification>urn:epcglobal:cbv:bt:5412345000037:3352-349875</entityIdentification>
                     <!-- urn:epcglobal:cbv:bt:ShipToGLN:PONumber-ASNNumber -->
-                    <!-- The retailer should get the above filds from the PO and the ASN that he receives from the supplier -->
+                    <!-- The retailer should get the above fields from the PO and the ASN received from the supplier -->
                     <lineItemNumber>1</lineItemNumber>
                 </despatchAdvice>
                 <purchaseOrder>
-                    <!-- OPTIONAL Field : PO at the line item level -->
                     <entityIdentification>urn:epcglobal:cbv:bt:5412345000037:3352</entityIdentification>
+                    <!-- MANDATORY: <purchaseOrder> requires an <entityIdentification> -->
                     <lineItemNumber>1</lineItemNumber>
                 </purchaseOrder>
+                <!-- OPTIONAL: PO at the line item level -->
                 <receivingConditionInformation>
                     <receivingConditionCode>DAMAGED_PRODUCT_OR_CONTAINER</receivingConditionCode>
                     <!-- MANDATORY in receivingConditionInformation element.-->
