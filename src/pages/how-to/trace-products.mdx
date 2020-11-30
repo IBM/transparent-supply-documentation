@@ -29,6 +29,19 @@ event type, or facility type.
 * Owners of data maintain complete control over which organizations can trace their data - by
 choosing a **Data access policy** and setting ACL permissions (Data entitlement mode) when uploading data.
 
+## Trace results display
+
+Most trace results are displayed in the UI according to the following general rules:
+
+- Trace results are grouped by organization.
+- The shipping organization is displayed to the left of the receiving organization.
+- Trace results for a specific organization are displayed by facility type.
+- If there are facility type shipping cycles in the supply chain&mdash;facility type A ships to B ships to C ships to A, for example&mdash;the facility types in the cycle are ordered by the latest event time at a facility and its most likely position in the supply chain (such as farm precedes distribution center, which precedes store).
+- Events displayed by facility type are grouped by specific facility.
+- Events displayed for a specific facility are ordered by timestamp.
+
+In some cases, additional trace UI display rules may be applied.
+
 ## How to trace
 
 The following procedure describes how to trace products in IBM Blockchain Transparent Supply™:

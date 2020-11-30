@@ -1,0 +1,105 @@
+---
+title: Data access control
+description: Description of data access control policies
+---
+
+<PageDescription>
+
+Providing your network of **IBM Blockchain Transparent Supply™** organizations
+with access to your data is controlled by your organization's **data access
+control policy**.
+
+</PageDescription>
+
+## Data access control policies
+
+Data access control policies grant data access to your partner
+organizations&mdash;your supply chain partners and business transaction
+partners&mdash;based on two factors: **data type** and **supply chain proximity**.
+
+**Attention**: For any data uploaded using the spreadsheets upload method or the
+XML upload method, your organization's **data access control policy** can be
+overridden by specifying an **Entitlement-Mode** value for that upload.
+
+**Data types:**
+
+1. Product and facility (location) data
+2. Product events
+3. Business transactions
+4. Documents
+5. User-defined data types (such as test results or temperature readings)
+
+**Supply chain proximity:**
+
+1. Transaction partner (direct exchange of the product instance); or
+2. Supply chain partner (shared product instance but no direct exchange).
+
+IBM Blockchain Transparent Supply™ provides a choice between two **data access control policies**
+for your organization:
+
+1. **Policy 1 - Source to destination transparency** OR
+2. **Policy 2 - One up, one down transparency**
+
+## Policy 1 - Source to destination transparency
+
+As the name suggests, the **Source to destination transparency** data access
+control policy enables your data to be shared up and down the full length of
+the supply chain for any specific product instance. However, any other
+organization along that supply chain can halt this sharing by restricting access
+to their data. You can therefore guarantee only that your transaction partners
+(which can be viewed as adjacent supply chain partners) can view your shared data.
+Your transaction partners always have the capability to block further sharing,
+because their data uploads are required in order to continue the chain of data access.
+
+For this reason, it is important to understand that the enablement of *sharing*
+your data with your intended supply chain partners does not necessarily guarantee
+their capability for *viewing* it.
+
+**Data shared with ALL supply chain partners and transaction partners:**
+Product events and product (item) and location (facility) data for a lot, pallet
+or container are shared with the organizations that send and/or receive that lot,
+pallet or container. Business transaction data (such as purchase orders and
+shipping notices) are always restricted to the transaction partner only.
+
+**Example:** ALL events and product and location data that reference the same
+peanut butter cookies lot are shared with all supply chain partners and transaction
+partners for the lot.
+
+**Data shared ONLY with the transaction partner:**
+Business transaction data, including Purchase Orders (PO), Despatch Advice (DA/ASN)
+and Receive Advice (RA) documents, are shared and visible **ONLY** to the transaction
+partner involved in the specific exchange of the product instance.
+
+**Example:** The Purchase Order for a peanut butter cookies lot, sent by the retailer
+to a supplier (transaction partners), is not shared with any other organization on
+the supply chain for the lot.
+
+**Note:** Any **user-defined data types** that reference the lot are **private**
+and viewable only by the uploading organization.
+
+## Policy 2 - One up, one down transparency
+
+As the name suggests, the **One up, one down transparency** policy is more restrictive
+than the **Source to destination transparency** policy. The One up, one down transparency
+policy limits sharing of all data to ONLY your transaction partners (which can be
+viewed as adjacent supply chain partners). Your transaction partners have no capability
+to share the data further up or down the supply chain.
+
+**Data shared only with the transaction partner:**
+Product events, product and location data, and transaction documents, including
+Purchase Orders (PO), Despatch Advice (DA/ASN), and Receive Advice (RA), are visible
+**ONLY** to the transaction partner involved in the specific exchange of the product
+instance.
+
+**Example:** Event data for the receiving of peanut butter cookie ingredients for the
+lot, uploaded by the ingredients receiver, is visible ONLY to the supplier of the
+ingredients (the transaction partner for the event).
+
+**Note:** Any **user-defined data types** that reference the lot are **private** and
+viewable only by the uploading organization.
+
+## Related topics
+
+- [Data entitlement mode](/reference/data-entitlement-mode)
+
+<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>
