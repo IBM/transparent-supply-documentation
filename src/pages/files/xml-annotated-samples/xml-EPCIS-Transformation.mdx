@@ -22,6 +22,7 @@ The following example shows example EPCIS Transformation Event data in XML:
   xmlns:example="http://ns.example.com/epcis"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" creationDate="2005-07-11T11:30:47.0Z" schemaVersion="1.2">
   <EPCISBody>
+  <!--ATTENTION. GS1 Transformation IDs are not supported.-->
     <EventList>
     <extension>
       <TransformationEvent>
@@ -35,10 +36,6 @@ The following example shows example EPCIS Transformation Event data in XML:
           <!--OPTIONAL. A unique ID (UUID) for the event. If not specified, the system generates an event ID.-->
           <!--RECOMMENDED. Supply a unique eventID (UUID) for disambiguation.-->
         </baseExtension>
-        <transformationID>urn:uuid:d0dccd98-ffb7-43ed-aaa2-8b47e465b833</transformationID>
-        <!--OPTIONAL. Unique ID to identify ongoing transformation.-->
-        <!--All inputs in all transformation events with same transformationID contribute to-->
-        <!--all outputs in all transformation events with that transformationID.-->
         <inputEPCList>
           <epc>urn:epc:id:sgtin:0614141.107346.2017</epc>
           <!--Additional entries go here-->
@@ -177,4 +174,4 @@ The following example shows example EPCIS Transformation Event data in XML:
 </epcis:EPCISDocument>
 ```
 
-<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>
+<PageCopyright>© Copyright IBM Corp. 2020, 2021 All Rights Reserved.</PageCopyright>

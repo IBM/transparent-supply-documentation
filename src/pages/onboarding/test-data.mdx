@@ -1,64 +1,41 @@
 ---
-title: Test data
-description: Uploading and sharing test data
+title: Supplier data
+description: Data requirements for supply chain suppliers
 ---
 
 <PageDescription>
 
-**IBM Blockchain Transparent Supply™** allows authorized users to upload test data, which can then be
-deleted by IBM Blockchain Transparent Supply™ support upon request. The XML message test namespace
-header identifies the data as test data.
+To onboard and use **IBM Blockchain Transparent Supply™**, product **suppliers** register,
+upload, and share the **data types** described below.
 
 </PageDescription>
 
-## Test namespace
+## Supplier data
 
-As opposed to **production namespace data**, **test namespace data** is not written
-to the IBM Blockchain Transparent Supply™ blockchain. However, test namespace data is fully available
-to authorized users through all IBM Blockchain Transparent Supply™ UI and API interfaces. Test namespace
-data therefore enables complete testing of user scenarios and generates the same
-results and user experience as production namespace data.
+The following data types must be uploaded by product suppliers (organizations):
 
-**Attention**: Test namespace data is not isolated from production namespace data
-within the user experience context. Test namespace data can therefore reference
-production namespace data, and vice versa, for testing purposes. **Your organization
-must therefore adopt and communicate to users methods for identifying test data and
-differentiating it from production data.**
+1. [**Unique product identifiers**](/reference/data-types#master-data) - Can include GS-1 GTINs
+or IBM Blockchain Transparent Supply™ product identifiers, mapping from **GTINs** to **SKUs** and **UPCs**,
+and product descriptions. If you do not have a GS-1 identifier for a product, you can
+choose to register for an IBM Blockchain Transparent Supply™ product identifier in the **Onboarding** module.
+2. [**Unique location identifiers**](/reference/data-types#master-data) - Can include **GS-1
+GLNs**, **IBM Blockchain Transparent Supply™ facility identifiers**, and **location descriptions**, such
+as facility type, number, address, and contact information. If you do not have a GS-1
+identifier for a facility, you can choose to register for an **IBM Blockchain Transparent Supply™ facility
+identifier** in the **Onboarding** module.
+3. [**Lot or batch identifier**](/reference/data-types#instancelot-master-data-(ilmd)) - The lot or
+batch number that uniquely identifies the shipment for the product instance.
+4. [**Events**](/reference/data-types#epcis-events) - Must include a time and date stamp and
+references to any **Purchase Orders**, **Despatch Advice (DA)**, **EPCIS Events** (with
+lot number), receiver **Disaggregation** and **Observation** events, processor **Disaggregation**,
+**Aggregation**, **Observation** and **Transformation** events, and shipper **Aggregation**
+and **Observation** events.
 
-To use a test namespace, the **IFT-Test-Namespace** header **must be** added to the
-REST API request for any data uploaded to IBM Blockchain Transparent Supply™. The IFT-Test-Namespace header
-value will be the name of the specified test namespace. If the namespace value does
-not already exist, IBM Blockchain Transparent Supply™ will create it.
-
-## How it works
-
-The following details summarize test namespace usage:
-
-* A test namespace can be used to delineate test data from production data.
-* A test namespace does not isolate test data from production data.
-* The IFT-Test-Namespace header is used to write data to a test namespace.
-* Each namespace name must be unique and identify your organization, such as `<solution>.<orgId>.test1`.
-* Multiple test namespaces can be created.
-* Test namespaces are not supported for Fresh Insights data.
-* Test namespaces and test data can be deleted by the IBM Blockchain Transparent Supply™ support team, upon request.
-* **You must record** and save the names of all test namespaces used in order to reference them in a delete request.
-* Test namespaces can be **defined ONLY through REST API calls**. Identifying test
-namespace data is not supported via UI data entries, spreadsheet uploads, or
-through the product scenarios builder.
-
-## Deleting test data
-
-Test data (IFT-Test-Namespace header) is not written to blockchain, which enables deletion.
-The data entitlement effects of deleting test data are as follows:
-
-1. Entitlement to specific test data is removed upon deletion of the test data.
-2. Entitlement to non-test data created by sharing test data persists upon deletion of the test data.
-
-For data sharing details, refer to [Data entitlement mode](/reference/data-entitlement-mode).
+Note: Additional [data types](/reference/data-types) are supported but not required.
 
 ## Related topics
 
+- [Test data](/onboarding/test-data)
 - [Data types](/reference/data-types)
-- [Data entitlement mode](/reference/data-entitlement-mode)
 
-<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>
+<PageCopyright>© Copyright IBM Corp. 2020, 2021 All Rights Reserved.</PageCopyright>

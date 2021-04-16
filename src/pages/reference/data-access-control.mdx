@@ -23,16 +23,16 @@ overridden by specifying an **Entitlement-Mode** value for that upload.
 
 **Data types:**
 
-1. Product and facility (location) data
-2. Product events
-3. Business transactions
-4. Documents
+1. Product (item) and facility (location) data
+2. Product events (Aggregation, Transformation, etc.)
+3. Business transactions (PO, DA, RA)
+4. Documents (PDFs and other files)
 5. User-defined data types (such as test results or temperature readings)
 
 **Supply chain proximity:**
 
-1. Transaction partner (direct exchange of the product instance); or
-2. Supply chain partner (shared product instance but no direct exchange).
+1. Transaction partner (direct exchange of the product instance -- item / EPC); or
+2. Supply chain partner (shared product instance but no direct exchange of item / EPC).
 
 IBM Blockchain Transparent Supply™ provides a choice between two **data access control policies**
 for your organization:
@@ -44,7 +44,7 @@ for your organization:
 
 As the name suggests, the **Source to destination transparency** data access
 control policy enables your data to be shared up and down the full length of
-the supply chain for any specific product instance. However, any other
+the supply chain for any specific product instance (item / EPC). However, any other
 organization along that supply chain can halt this sharing by restricting access
 to their data. You can therefore guarantee only that your transaction partners
 (which can be viewed as adjacent supply chain partners) can view your shared data.
@@ -56,9 +56,9 @@ your data with your intended supply chain partners does not necessarily guarante
 their capability for *viewing* it.
 
 **Data shared with ALL supply chain partners and transaction partners:**
-Product events and product (item) and location (facility) data for a lot, pallet
+Product events and product (item) and location (facility) data for a lot, pallet,
 or container are shared with the organizations that send and/or receive that lot,
-pallet or container. Business transaction data (such as purchase orders and
+pallet, or container. Business transaction data (such as purchase orders and
 shipping notices) are always restricted to the transaction partner only.
 
 **Example:** ALL events and product and location data that reference the same
@@ -66,8 +66,8 @@ peanut butter cookies lot are shared with all supply chain partners and transact
 partners for the lot.
 
 **Data shared ONLY with the transaction partner:**
-Business transaction data, including Purchase Orders (PO), Despatch Advice (DA/ASN)
-and Receive Advice (RA) documents, are shared and visible **ONLY** to the transaction
+Business transactions&mdash;including Purchase Order (PO), Despatch Advice (DA/ASN),
+and Receiving Advice (RA) data&mdash;are shared with and visible to **ONLY** the transaction
 partner involved in the specific exchange of the product instance.
 
 **Example:** The Purchase Order for a peanut butter cookies lot, sent by the retailer
@@ -86,8 +86,8 @@ viewed as adjacent supply chain partners). Your transaction partners have no cap
 to share the data further up or down the supply chain.
 
 **Data shared only with the transaction partner:**
-Product events, product and location data, and transaction documents, including
-Purchase Orders (PO), Despatch Advice (DA/ASN), and Receive Advice (RA), are visible
+Product events, product and location data, and transaction data&mdash;including
+Purchase Order (PO), Despatch Advice (DA/ASN), and Receive Advice (RA) documents&mdash;are visible
 **ONLY** to the transaction partner involved in the specific exchange of the product
 instance.
 
@@ -102,4 +102,4 @@ viewable only by the uploading organization.
 
 - [Data entitlement mode](/reference/data-entitlement-mode)
 
-<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>
+<PageCopyright>© Copyright IBM Corp. 2020, 2021 All Rights Reserved.</PageCopyright>
