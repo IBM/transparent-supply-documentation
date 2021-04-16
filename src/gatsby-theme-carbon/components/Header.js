@@ -40,7 +40,7 @@ const DocumentationHeader = () => {
           isActive={leftNavIsOpen}
         />
         <Link
-          className={`${headerName} ${ searchIsOpen ? collapsed : null}`}
+          className={`${headerName} ${searchIsOpen ? collapsed : null}`}
           to="/"
         >
           IBM Blockchain Transparent Supply™&nbsp;<span>Docs</span>

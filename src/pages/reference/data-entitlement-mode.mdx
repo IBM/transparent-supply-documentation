@@ -5,11 +5,11 @@ description: Description of data entitlement mode specifications
 
 <PageDescription>
 
-**IBM Blockchain Transparent Supply™** supports data entitlement (data access) specifications for
-all XML documents uploaded to the network. With the data access control
-policy selected by your organization, specifying an optional entitlement mode
-when uploading XML enables control over sharing data (such as events, transactions and
-documents) with other organizations.
+**IBM Blockchain Transparent Supply™** provides data entitlement (data access)
+specifications for all data uploaded to the ecosystem. Along with
+the [data access control](data-access-control) policy selected by your organization,
+entitlement mode enables control over sharing data (including events, transactions
+and documents) with your supply chain partner organizations.
 
 </PageDescription>
 
@@ -20,37 +20,42 @@ The data uploader can specify a data entitlement mode for each XML document at t
 time of submission, as follows:
 
 **Private**: The data is only visible to the submitting organization, unless it is
-shared via **explicit grants** (e.g. event data pertaining to an organization’s
-internal processes, or location master data for private locations).
+shared via **explicit grant** (e.g. event data pertaining to an organization’s
+internal processes, or location master data for private locations or pieces of
+equipment).
 
 **Restricted**: The data is shared only with the organizations that are **explicitly
 referenced** in the XML document. These are typically business transaction partners
-who are identified in Purchase Order, Despatch Advice (ASN) and Receiving Advice documents.
+that are identified in Purchase Order, Despatch Advice (aka ASN) and Receiving Advice
+transactions.
 
 **Linked**: The data is enabled for sharing with all organizations up and down the
-supply chain for a specific trade item (GTIN). These are typically supply chain events,
-which are shared through a process of cross-referencing data such as facility IDs and
-event IDs.
+supply chain for a specific trade item such as an SGTIN. These are typically supply
+chain events, which are shared through a process of cross-referencing data such as
+facility IDs and event IDs.
 
-**Default**: Applies the default entitlement mode per type of document, as described in
+**Default**: Applies the default entitlement mode per data type, as described in
 **Table 1** below.
 
-**Attention**: Specifying a **Data entitlement mode** on your data upload API calls
-supersedes your organization's data access control policy.
+**Attention**: Specifying a **data entitlement mode** with your data upload API calls
+supersedes your organization's [data access control](data-access-control) policy.
 
 ## Assigning entitlement mode on data submission
 
-Entitlement mode is specified using the **IFT-Entitlement-Mode** header in the data
-submission request. **If an entitlement mode is not specified**, the default entitlement
-mode is applied, based on the type of XML document (Table 1):
+Entitlement mode is specified using the **IFT-Entitlement-Mode** header in the
+XML data submission request. **If an entitlement mode is not specified**, the
+default entitlement mode is applied, based on the type of XML (Table 1):
 
 Table 1. Default entitlement modes
 
-| Default entitlement mode | Document type |
+| Default entitlement mode | Data type |
 | ---------------- | ------------- |
-| Restricted        | Purchase Order transactions, Despatch Advice transactions (DA/ASN), Receive Advice transactions      |
-| Linked    | EPCIS Events, Item master data, Location master data, Documents  |
-| Private  | Payload data |
+| Restricted        | Purchase Order transactions, Despatch Advice transactions (DA/ASN), Receiving Advice transactions      |
+| Linked    | EPCIS Events, Item master data, Location master data  |
+| Private  | Payload* <br /> Documents** |
+
+&#42; Data submitted as a Payload is expected to have explicit overrides for non-private use.
+&#42;&#42; Documents, including PDFs and other file and format types, uploaded using the Documents application.
 
 
 ### Valid entitlement mode headers on data submission
@@ -60,7 +65,7 @@ Table 1. Default entitlement modes
  - **Private:** **IFT-Entitlement-Mode: private**
 
 If no **IFT-Entitlement-Mode** header is provided on data submission, the default mode
-will be applied based on the XML document type, as described previously in Table 1.
+will be applied based on the XML data type, as described previously in Table 1.
 
 Specifying an invalid entitlement mode value will return the following error message:
 
@@ -70,4 +75,8 @@ Specifying an invalid entitlement mode value will return the following error mes
 }
 ```
 
-<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>
+## Related topics
+
+- [Data access control](/data-access-control)
+
+<PageCopyright>© Copyright IBM Corp. 2020, 2021 All Rights Reserved.</PageCopyright>

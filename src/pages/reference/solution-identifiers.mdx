@@ -1,49 +1,46 @@
 ---
-title: Solution identifiers
-description: Solution-specific product and facility identifiers
+title: Platform identifiers
+description: IBM Blockchain Transparent Supply™ product and facility identifiers
 ---
 
 <PageDescription>
 
-For transactions and events data submitted to IBM Blockchain Transparent Supply™, IBM Blockchain Transparent Supply™ identifiers
-can be used in place of their GS1/EPC counterparts to identify products, locations and logistic
-units. All IBM Blockchain Transparent Supply™ identifiers are fully-qualified URNs that follow <a href="https://www.ietf.org/rfc/rfc2141.txt" target="_blank">
-RFC 2141</a> (similar to GS1 URNs).
+For uploading product, location, transaction and event data, IBM Blockchain Transparent Supply™ platform
+identifiers can be used as an alternative to GS1. All platform identifier formats are fully-qualified URNs
+that follow <a href="https://www.ietf.org/rfc/rfc2141.txt" target="_blank">RFC 2141</a>.
 
 </PageDescription>
 
-## IBM Blockchain Transparent Supply™ identifiers
+## Identifier types
 
-If you have a GS1 registered Company Prefix, use it as your IBM Blockchain Transparent Supply™ organization
-prefix. Otherwise, a new IBM Blockchain Transparent Supply™ organization prefix can be provided for you.
+If you need identifiers that are not registered with GS1, **IBM Blockchain Transparent Supply™**
+can provide unique values for the following platform identifiers:
 
-In some instances, you may need to use identifiers that are not registered with GS1.
-For these cases, **IBM Blockchain Transparent Supply™** provides the following identifiers:
+- Organization prefix
+- Product identifiers (supports a lot or serial number)
+- Location (facility) identifiers (supports a sub-location extension)
+- Logistic unit identifiers
 
-- **IBM Blockchain Transparent Supply™ organization prefixes**
-- **IBM Blockchain Transparent Supply™ product identifiers** (supports a lot or serial number)
-- **IBM Blockchain Transparent Supply™ location (facility) identifiers** (supports a sub-location extension)
-- **IBM Blockchain Transparent Supply™ logistic unit identifiers**
+To upload data using a platform identifier, the fully-qualified URN must be specified.
 
-For each instance of an IBM Blockchain Transparent Supply™ identifier in your submitted data, the fully-qualified
-URN must be specified.
-
-## IBM Blockchain Transparent Supply™ organization prefixes
+## Organization prefixes
 
 IBM Blockchain Transparent Supply™ organization prefixes are 13 or more numeric digits. Each prefix
-is a unique identifier (UUID) and assigned to a single organization.
+is a unique identifier (UUID) and assigned to a single organization (for example: `1234567890123`)
 
-Example of an IBM Blockchain Transparent Supply™ organization prefix: `1234567890123`
+Attention: If your organization has a registered GS1 Company Prefix, use that value as your
+IBM Blockchain Transparent Supply™ organization prefix.
 
-## Format for IBM Blockchain Transparent Supply™ identifier fields
+## Solution identifier formats
 
-With the exception of IBM Blockchain Transparent Supply™ organization Prefixes, the IBM Blockchain Transparent Supply™ identifier
-fields referenced in this document are strings that follow the <a href="https://www.ietf.org/rfc/rfc2141.txt" target="_blank">
-RFC 2141</a> URN syntax specification (similar to GS1 URNs), with one restriction. IBM Blockchain Transparent Supply™
-identifier fields cannot contain a colon character `:` or a period character `.`, which are reserved
-for use as delimiters in IBM Blockchain Transparent Supply™ URNs.
+With the exception of organization prefixes, the IBM Blockchain Transparent Supply™ platform
+identifier formats referenced in this document are strings that follow the <a href="https://www.ietf.org/rfc/rfc2141.txt" target="_blank">
+RFC 2141</a> URN syntax specification (comparable to GS1 URNs), with one restriction. Platform
+identifiers cannot contain a colon `:`, comma `,` or period `.` character, which are reserved
+for use as URN delimiters.
 
-The following IBM Blockchain Transparent Supply™ identifier fields must conform to the IBM Blockchain Transparent Supply™ identifier field format:
+The following IBM Blockchain Transparent Supply™ platform identifiers must conform to the required URN format,
+which are described below:
 
 - `<Item Reference>`
 - `<Lot Number>`
@@ -52,9 +49,9 @@ The following IBM Blockchain Transparent Supply™ identifier fields must confor
 - `<Extension>`
 - `<Serial Reference>`
 
-## IBM Blockchain Transparent Supply™ identifiers - types and formats
+## Platform identifiers and formats
 
-Table 1 displays the IBM Blockchain Transparent Supply™ identifier types and URN formats:
+Table 1 displays the IBM Blockchain Transparent Supply™ identifiers and URN formats:
 
 **Table 1. IBM Blockchain Transparent Supply™ identifiers**
 
@@ -69,19 +66,19 @@ Table 1 displays the IBM Blockchain Transparent Supply™ identifier types and U
 | Public location type with Extension* | urn:ibm:ift:location:`<TYPE>`:ext:loc:`<ID>`.`<EXT>` <br /> urn:ibm:ift:location:unlocode:ext:loc:usnyc.import |
 | Logistic Unit | urn:ibm:ift:lpn:obj:`<Company Prefix>.<Serial Reference>` <br /> urn:ibm:ift:lpn:obj:1234567890123.pallet_12345678 |
 | Business Transaction identifier | urn:ibm:ift:bt:`<Company Prefix>.<Location Reference>.<Transaction Id>` <br />  urn:ibm:ift:bt:1234567890123.store_123.1234 |
-| FTPI |urn:ibm:ift:product:class:1234567890123.product-123 <br /> urn:ibm:ift:product:class:`<Company Prefix>.<Item Reference>` |
-| LFTPI | urn:ibm:ift:product:lot:class:1234567890123.product-123.lot4 <br /> urn:ibm:ift:product:lot:class:`<Company Prefix>.<Item Reference>.<Lot Number>` |
-| SFTPI | urn:ibm:ift:product:serial:obj:1234567890123.product-123.serial-number-4567 <br /> urn:ibm:ift:product:serial:obj:`<Company Prefix>.<Item Reference>.<Serial Number>` |
-| FTLI | urn:ibm:ift:location:loc:1234567890123.store-123 <br /> urn:ibm:ift:location:loc:`<Company Prefix>.<Location Reference>` |
-| SFTLI | urn:ibm:ift:location:extension:loc:1234567890123.store-123.toy-department <br /> urn:ibm:ift:location:extension:loc:`<Company Prefix>.<Location Reference>.<Extension>` |
-| FTLPN | urn:ibm:ift:lpn:obj:1234567890123.pallet-12345678 <br /> urn:ibm:ift:lpn:obj:`<Company Prefix>.<Serial Reference>` |
-| SSCC_LA | urn:ibm:provenance:ids:supplychain:aggregation:lpn:5012345.xyz123 <br /> urn:ibm:provenance:ids:supplychain:`<Document Type>`:lpn:`<Company Prefix>`.* |
-| IFT_ENTITY | urn:ibm:ift:bt:1234567890123.store-123.1234 <br /> urn:ibm:ift:bt:`<Company Prefix>.<Location Reference>.<Transaction Id>` |
-| IFT_DISPOSITION | urn:ibm:ift:bv:disp:destroyed <br /> urn:ibm:ift:bv:disp:`<Disposition>` <br /> Valid Dispositions = active, container_closed, damaged, destroyed, dispensed, disposed, encoded, expired, in_progress, in_transit, inactive, no_pedigree_match, non_sellable_other, partially_dispensed, recalled, reserved, retail_sold, returned, sellable_accessible, sellable_not_accessible, stolen, unknown |
+| TSPI (Transparent Supply Product Identifier) | urn:ibm:ift:product:class:1234567890123.product-123 <br /> urn:ibm:ift:product:class:`<Company Prefix>.<Item Reference>` |
+| TSPLI (Transparent Supply Product Lot Identifier) | urn:ibm:ift:product:lot:class:1234567890123.product-123.lot4 <br /> urn:ibm:ift:product:lot:class:`<Company Prefix>.<Item Reference>.<Lot Number>` |
+| TSPSI (Transparent Supply Product Serial Identifier) | urn:ibm:ift:product:serial:obj:1234567890123.product-123.serial-number-4567 <br /> urn:ibm:ift:product:serial:obj:`<Company Prefix>.<Item Reference>.<Serial Number>` |
+| TSLI (Transparent Supply Location Identifier) | urn:ibm:ift:location:loc:1234567890123.store-123 <br /> urn:ibm:ift:location:loc:`<Company Prefix>.<Location Reference>` |
+| TSLSI (Transparent Supply Location Serial Identifier) | urn:ibm:ift:location:extension:loc:1234567890123.store-123.toy-department <br /> urn:ibm:ift:location:extension:loc:`<Company Prefix>.<Location Reference>.<Extension>` |
+| TSLPI (Transparent Supply Location Pallet Identifier) | urn:ibm:ift:lpn:obj:1234567890123.pallet-12345678 <br /> urn:ibm:ift:lpn:obj:`<Company Prefix>.<Serial Reference>` |
+| SSCC_LA | urn:ibm:provenance:ids:supplychain:aggregation:lpn:5012345.xyz123 <br /> urn:ibm:provenance:ids:supplychain:`<Data Type>`:lpn:`<Company Prefix>`.* |
+| TS_ENTITY | urn:ibm:ift:bt:1234567890123.store-123.1234 <br /> urn:ibm:ift:bt:`<Company Prefix>.<Location Reference>.<Transaction Id>` |
+| TS_DISPOSITION | urn:ibm:ift:bv:disp:destroyed <br /> urn:ibm:ift:bv:disp:`<Disposition>` <br /> Valid Dispositions = active, container_closed, damaged, destroyed, dispensed, disposed, encoded, expired, in_progress, in_transit, inactive, no_pedigree_match, non_sellable_other, partially_dispensed, recalled, reserved, retail_sold, returned, sellable_accessible, sellable_not_accessible, stolen, unknown |
 
 Table 2 describes the **Public location type** identifier formats for publicly-owned ports, farms, and growing regions:
 
-&#42;**Table 2. IBM Blockchain Transparent Supply™ Public location type identifiers**
+&#42;**Table 2. IBM Blockchain Transparent Supply™ public location type identifiers**
 
 |  Element  | Syntax and example |
 | --- | --- |
@@ -100,4 +97,4 @@ Table 2 describes the **Public location type** identifier formats for publicly-o
 | `<ID>` | For **pma** - Any **lowercase two-character U.S. state abbreviation EXCEPT for ca and az** &#124; **yuma &#124; phoenix &#124; south_az &#124; north_ca &#124; salinas &#124; santa_maria &#124; south_ca &#124; imperial_vly &#124; coachella &#124; central_vly &#124; north_mx &#124; central_mx &#124; south_mx**  |
 | `<EXT>` | For **unlocode** only - **import** &#124; **export** |
 
-<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>
+<PageCopyright>© Copyright IBM Corp. 2020, 2021 All Rights Reserved.</PageCopyright>

@@ -26,15 +26,13 @@ must be used for each of these payload types.
 
 ## Attachment points
 
-A submitted payload should attach to an item (product ID), location (facility ID)
-or event (EPCIS Event ID). Include one of the following data points in your payload:
+A submitted payload should attach to an item (Product ID), an EPC, location
+(Facility ID) or event (EPCIS event ID). Include one of the following data points in your payload:
 
-1. Electronic Product Code (EPC) - Product Item or Lot (product ID) using the
-epcList element in the payload XML.
-2. Global Location Number (GLN) - Supply Chain Location (facility ID) using the
-locationList element in the payload XML.
-3. EPCIS Event ID - For a Commission, Decommission, Aggregation, Disaggregation,
-Transformation or Observation event using the eventIDList element in the payload XML.
+1. Product identifier - Product identifier using the `productList` element in the payload XML.
+2. Electronic Product Code (EPC) - An EPC-SSCC, FTLPN, SGTIN, SFTPI, LGTIN, or LFTPI using the `epcList` element in the payload XML.
+3. Location Identifier - Supply chain Location (Facility ID) using the `locationList` element in the payload XML.
+4. EPCIS Event ID - For a Commission, Decommission, Aggregation, Disaggregation, Transformation or Observation event using the `eventIDList` element in the payload XML.
 
 Note: The content type [examples below](#submit-payload-data) attach to an EPC:
 `<epc>urn:ibm:ift:product:serial:obj:1234567890123.LiveCow.lc11</epc>`
@@ -189,4 +187,4 @@ Use the **string** payload data type to upload any string. The **string** payloa
 
 - [Payload XML example](/files/xml-annotated-samples/xml-Payload)
 
-<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>
+<PageCopyright>© Copyright IBM Corp. 2020, 2021 All Rights Reserved.</PageCopyright>

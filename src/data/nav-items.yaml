@@ -106,10 +106,10 @@
       path: /building-apps/app-support-smart-contracts
 - title: Reference
   pages:
-    - title: GS1 standards
-      path: /reference/gs1-standards
-    - title: Solution identifiers
-      path: /reference/solution-identifiers
+    - title: GS1 identifiers
+      path: /reference/gs1-identifiers
+    - title: Platform identifiers
+      path: /reference/platform-identifiers
     - title: Data types
       path: /reference/data-types
     - title: Data access control

@@ -18,22 +18,22 @@ to **IBM Blockchain Transparent Supply™**.
 const request = require('request-promise');
 const errors  = require('request-promise/errors');
 
-export async function getToken(mmo_host: string,
-                               mmo_instance_id: string,
-                               mmo_solution_id: string,
-                               mmo_organization_id: string,
-                               apikey: string): Promise<string> {
-  const iamTokenData = await getBluemixIamToken(apikey);
-  return await exchangeToken(mmo_host, mmo_instance_id, mmo_solution_id , mmo_organization_id , iamTokenData);
+export async function getToken(
+  base_url: string,
+  organization_id: string,
+  apikey: string,
+): Promise<string> {
+  const iamTokenData = await getCloudIamToken(apikey);
+  return await exchangeToken(base_url, organization_id, iamTokenData);
 }
 
-export function getBluemixIamToken(apikey: string): Promise<BluemixIamToken> {
+function getCloudIamToken(apikey: string): Promise<CloudIamToken> {
   const parameters = {
     grant_type : 'urn:ibm:params:oauth:grant-type:apikey',
     apikey     : apikey
   };
   const requestOptions = {
-    uri: 'https://iam.ng.bluemix.net/oidc/token',
+    uri: 'https://iam.cloud.ibm.com/identity/token',
     method: 'POST',
     headers: {
       'Accept': 'application/json'
@@ -42,7 +42,7 @@ export function getBluemixIamToken(apikey: string): Promise<BluemixIamToken> {
     json: true
   };
   return request(requestOptions)
-    .then((resp: BluemixIamToken) => {
+    .then((resp: CloudIamToken) => {
       return resp;
     })
     .catch(errors.StatusCodeError, (rpError: any) => {
@@ -53,17 +53,14 @@ export function getBluemixIamToken(apikey: string): Promise<BluemixIamToken> {
     });
 }
 
-export function exchangeToken(mmo_host: string,
-                              mmo_instance_id: string,
-                              mmo_solution_id: string,
-                              mmo_organization_id: string,
-                              iamTokenData: BluemixIamToken): Promise<string> {
-  const mmo_endpoint_url = 'https://' + mmo_host + '/' + mmo_instance_id + '/onboarding' +
-                           '/v1/iam/exchange_token' +
-                           '/solution/' + mmo_solution_id +
-                           '/organization/' + mmo_organization_id;
+function exchangeToken(
+  base_url: string,
+  organization_id: string,
+  iamTokenData: CloudIamToken,
+): Promise<string> {
+  const endpoint_url = base_url + '/ift/api/identity-proxy/exchange_token/v1/organization/' + organization_id;
   const requestOptions = {
-    uri: mmo_endpoint_url,
+    uri: endpoint_url,
     method: 'POST',
     headers: {
       'Accept': 'application/json'
@@ -83,14 +80,14 @@ export function exchangeToken(mmo_host: string,
     });
 }
 
-export interface BluemixIamToken {
-  access_token : string;
-  token_type   : string;
-  expires_in   : number;
-  expiration   : number;
+interface CloudIamToken {
+  access_token: string;
+  token_type: string;
+  expires_in: number;
+  expiration: number;
 }
 
-export interface ExchangeTokenResponse {
+interface ExchangeTokenResponse {
   onboarding_token: string;
 }
 ```
@@ -100,4 +97,4 @@ export interface ExchangeTokenResponse {
 - [Java sample](/managing-users/java-sample)
 - [IIB sample](/managing-users/iib-sample)
 
-<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>
+<PageCopyright>© Copyright IBM Corp. 2020, 2021 All Rights Reserved.</PageCopyright>

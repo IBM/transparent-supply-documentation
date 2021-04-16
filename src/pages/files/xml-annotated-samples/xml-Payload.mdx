@@ -1,55 +1,63 @@
 ---
-title: Payload XML example
-description: Example of XML Payload data for upload
+title: Payload XML
+description: Example of XML payload data for upload
 ---
 
 <PageDescription>
 
-Payload data is uploaded in XML format, as shown in the
-example below.
+Payload data is uploaded in XML format, as shown in the example below.
 
 </PageDescription>
 
-## Payload XML example
+## Supported payload XML
 
-The following example shows example Payload data in XML:
+The following example shows example payload data in XML:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <ift:payload xmlns:ift="urn:ibm:ift:xsd:1">
-  <!-- XML message to communicate generic string-encoded payloads to IBM Blockchain Transparent Supply™.-->
-  <!-- NOTE : Comments for a field appear BELOW the field. -->
+  <!--XML message to communicate generic string-encoded payloads to IBM Blockchain Transparent Supply™-->
+  <!--ATTENTION: Comments for each field appear BELOW the field-->
   <payloadMessage>
     <payloadID>string</payloadID>
     <!--Mandatory: ID of this payload.-->
     <payloadTime>2018-09-28T21:49:45Z</payloadTime>
     <!--Optional: Timestamp for this payload message.-->
     <payloadContentType>application/json</payloadContentType>
-    <!--Optional: http content type of payload - application/json -->
+    <!--Optional: http content type of payload - application/json-->
     <payloadTypeURI>string</payloadTypeURI>
-    <!--Mandatory: URI for payload type - string or json triple or sensor -->
+    <!--Mandatory: URI for payload type - string or json triple or sensor-->
     <eventIDList>
       <eventID>eventID1</eventID>
       <eventID>eventID2</eventID>
     </eventIDList>
-    <!--Optional: List of events with which this payload is associated.-->
+    <!--Optional: List of events associated with this payload-->
     <epcList>
-      <!--Zero or more epc elements of type: GTIN, LGTIN, SGTIN, SSCC -->
       <epc>urn:epc:id:sscc:0614141.0123456789</epc>
       <epc>urn:ibm:ift:product:serial:obj:0614141000000.107346.2016</epc>
     </epcList>
-    <!--Optional: List of epcs with which this payload is associated.-->
+    <!--Optional: List of EPCs associated with this payload-->
+    <!--Zero or more EPC elements of GS1 type: LGTIN, SGTIN, SSCC or
+        IBM Blockchain Transparent Supply™ type: LFTPI, SFTPI, FTLPN (https://transparentsupply.ibm.com/ift/help/reference/solution-identifiers)-->
+    <productList>
+      <product><Indicator><CompanyPrefix><ItemRef><CheckDigit></product>
+      <product>urn:ibm:ift:product:class:1234567890123.ProductID</product>
+    </productList>
+    <!--Optional: List of product classes associated with this payload-->
+    <!--Product class level elements of GS1 type: GTIN or
+        IBM Blockchain Transparent Supply™ type: FTPI (https://transparentsupply.ibm.com/ift/help/reference/solution-identifiers/)-->
     <locationList>
-      <!--Location elements of type: EPC-SGLN or IBM Blockchain Transparent Supply™ location-with-extension -->
       <location>urn:epc:id:sgln:0614141.00777.0</location>
       <location>urn:ibm:ift:location:extension:loc:1234567890123.store-123.toy-department</location>
     </locationList>
-    <!--Optional: List of locations with which this payload is associated.-->
+    <!--Optional: List of locations associated with this payload-->
+    <!--Location elements of GS1 type: GLN, SGLN or
+        IBM Blockchain Transparent Supply™ type: FTLI, SFTLI (https://transparentsupply.ibm.com/ift/help/reference/solution-identifiers)-->
     <payload>string</payload>
     <!--Mandatory: payload - string or json triple or sensor -->
   </payloadMessage>
-  <!--Optional: Additional payloadMessage(s) can be added.-->
+  <!--Optional: Additional payloadMessage(s) can be added-->
 </ift:payload>
 ```
 
-<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>
+<PageCopyright>© Copyright IBM Corp. 2020, 2021 All Rights Reserved.</PageCopyright>

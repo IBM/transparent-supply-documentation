@@ -1,70 +1,71 @@
 ---
 title: Assign user roles
-description: How to assign roles to your human users
+description: How to assign roles to your registered users
 ---
 
 <PageDescription>
 
-**IBM Blockchain Transparent Supply™** includes defined static roles that grant authorization to
-human users, by registered <a target="_blank" href="https://www.ibm.com/account/us-en/signup/register.html">IBMid</a>,
-to execute certain network tasks on behalf of their **organization**. Assigning
-roles enables an **Account admin** to easily control the level of access provided to
-each user in their organization.
+**IBM Blockchain Transparent Supply™** includes defined static roles that grant authorization to users, by registered <a target="_blank" href="https://www.ibm.com/account/us-en/signup/register.html">IBMid</a>,
+to execute certain network tasks on behalf of their **organization**. Assigning roles enables an **Organization administrator** to easily control the level of access provided to each user in their organization.
 
 </PageDescription>
 
 
 ## Prerequisites
 
-When onboarding new users to IBM Blockchain Transparent Supply™, an **Account admin** must assign
-one or more roles to each user. Before assigning roles, the following prerequisites
+When onboarding new users to IBM Blockchain Transparent Supply, an **Organization administrator** must assign one or more roles to each user. Before assigning roles, the following prerequisites
 must be met:
 
-* Your **organization** and your **Account admin** **must be onboarded** to IBM Blockchain Transparent Supply™.
-* Each human user being onboarded must have a registered <a target="_blank" href="https://www.ibm.com/account/us-en/signup/register.html">IBMid</a>.
+* Your **organization** and your **Organization administrator** must be onboarded to IBM Blockchain Transparent Supply.
+* Each user being onboarded must have a registered <a target="_blank" href="https://www.ibm.com/account/us-en/signup/register.html">IBMid</a>.
 
 ## Roles and authorization
 
-The IBM Blockchain Transparent Supply™ defined roles and authorizations are detailed below (Table 1). Each registered
-human user can be assigned to multiple roles; system users are not assigned to roles. Note that
-ONLY the **Account admin** role inherits authorizations granted by other roles.
+The IBM Blockchain Transparent Supply™ defined roles and authorizations are detailed below (Table 1). Each registered user can be assigned to multiple roles; system IDs are not assigned to roles. Note that
 
 Table 1. IBM Blockchain Transparent Supply™ roles and authorization
 
 | User role | Authorization | Module |
 | --------- | ------------- | ------ |
-| **(All registered users)**  | View organization's IBM Blockchain Transparent Supply™ home page           | <a href={process.env.GATSBY_UI_URL + '/home'} target="_blank">Home</a> |
-|                             | Read and download all data uploaded by user's organization | <a href={process.env.GATSBY_UI_URL + '/manage-data/products'} target="_blank">Data</a> |
-|                             | Read all data shared with user's organization          | <a href={process.env.GATSBY_UI_URL + '/trace'} target="_blank">Trace</a> |
-|                             | View organization's IBM Blockchain Transparent Supply™ usage               | <a href={process.env.GATSBY_UI_URL + '/usageDashboard'} target="_blank">Activity</a> |
-|                             | Read documents owned by user's organization            | <a href={process.env.GATSBY_UI_URL + '/documents'} target="_blank">Documents</a> |
-|                             | Read documents shared with user's organization         | <a href={process.env.GATSBY_UI_URL + '/documents'} target="_blank">Documents</a> |
-|                             |                                                        |              |
-| **Onboarding team member**    | Upload data for user's organization                    | <a href={process.env.GATSBY_UI_URL + '/manage-data/products'} target="_blank">Data</a>         |
-|                             | Register products and facilities                       | <a href={process.env.GATSBY_UI_URL + '/self-guided-onboarding'} target="_blank">Onboarding</a>   |
-|                             | Build product scenarios                                | <a href={process.env.GATSBY_UI_URL + '/self-guided-onboarding'} target="_blank">Onboarding</a>   |
-|                             | Upload product scenario data                           | <a href={process.env.GATSBY_UI_URL + '/self-guided-onboarding'} target="_blank">Onboarding</a>   |
-|                             |                                                        |              |
-|  **General User**           | Create and modify documents for user's organization    | <a href={process.env.GATSBY_UI_URL + '/documents'} target="_blank">Documents</a> |
-|                             |                                                        |              |
-|  **Account Admin**           | Create and modify human users and system users         | <a href={process.env.GATSBY_UI_URL + '/manageUsers'} target="_blank">Users</a>        |
-|                             | Assign and modify user roles                           | <a href={process.env.GATSBY_UI_URL + '/manageUsers'} target="_blank">Users</a>         |
-|                             | Purchase and renew subscriptions to IBM Blockchain Transparent Supply™ modules | <a href={process.env.GATSBY_UI_URL + '/account-summary'} target="_blank">Membership</a>    |
-|                             |                                                        |              |
+| **All user roles**             | View organization's IBM Blockchain Transparent Supply™ home page | <a href={process.env.GATSBY_UI_URL + '/home'} target="_blank">Home</a>                         |
+|                                | Read and download all data uploaded by user's organization      | <a href={process.env.GATSBY_UI_URL + '/manage-data/products'} target="_blank">Data</a>         |
+|                                | Read all data shared with user's organization                   | <a href={process.env.GATSBY_UI_URL + '/trace'} target="_blank">Trace</a>                       |
+|                                | Read documents owned by user's organization                     | <a href={process.env.GATSBY_UI_URL + '/documents'} target="_blank">Documents</a>               |
+|                                | Read documents shared with user's organization                  | <a href={process.env.GATSBY_UI_URL + '/documents'} target="_blank">Documents</a>               |
+|                                | Create and modify documents for user's organization             | <a href={process.env.GATSBY_UI_URL + '/documents'} target="_blank">Documents</a>               |
+|                                |                                                                 |                                                                                                |
+| **Onboarding team**            | Upload data for user's organization                             | <a href={process.env.GATSBY_UI_URL + '/manage-data/products'} target="_blank">Data</a>         |
+|                                | Register products and facilities                                | <a href={process.env.GATSBY_UI_URL + '/self-guided-onboarding'} target="_blank">Onboarding</a> |
+|                                | Build product scenarios                                         | <a href={process.env.GATSBY_UI_URL + '/self-guided-onboarding'} target="_blank">Onboarding</a> |
+|                                | Upload product scenario data                                    | <a href={process.env.GATSBY_UI_URL + '/self-guided-onboarding'} target="_blank">Onboarding</a> |
+|                                |                                                                 |                                                                                                |
+| **Organization administrator** | Create and modify users and system IDs                          | <a href={process.env.GATSBY_UI_URL + '/manageUsers'} target="_blank">Users</a>                 |
+|                                | Assign and modify user roles                                    | <a href={process.env.GATSBY_UI_URL + '/manageUsers'} target="_blank">Users</a>                 |
+|                                | View organization's IBM Blockchain Transparent Supply™ usage     | <a href={process.env.GATSBY_UI_URL + '/usageDashboard'} target="_blank">Activity</a>           |
+|                                |                                                                 |                                                                                                |
+
+
+<!--
+
+  **&#42; Subscriptions required for optional modules**
+
+-->
 
 ## Add or modify role assignments
 
-An **Account admin** can add or modify user role assignments:
+An **Organization administrator** can add or modify user role assignments:
 
-1. Log in to <a href={process.env.GATSBY_UI_URL + '/'} target="_blank">IBM Blockchain Transparent Supply™</a> as an **Account admin**.
+1. Log in to <a href={process.env.GATSBY_UI_URL + '/'} target="_blank">IBM Blockchain Transparent Supply™</a> as an **Organization administrator**.
 1. Select the <a href={process.env.GATSBY_UI_URL + '/manageUsers'} target="_blank">**Users**</a> module.
-1. Select the **ACCOUNT USERS** tab.
-1. To add roles for a new human user, select the new user icon. Add the user and select the roles to assign.
-1. To modify roles assigned to a human user, select a user and click the edit icon. Select the roles to assign.
+1. Select the **Account users** tab.
+1. To add roles for a new user, select the new user icon. Add the user and select the roles to assign.
+1. To modify roles assigned to a user, select a user and click the edit icon. Select the roles to assign.
+
+Note: Roles are not assigned to System IDs.
 
 ## Related topics
 
 - [Log in as new user](/how-to/login-new-user)
 - <a href="https://www.ibm.com/account/us-en/signup/register.html" target="_blank">Get IBMid</a>
 
-<PageCopyright>© Copyright IBM Corp. 2020 All Rights Reserved.</PageCopyright>
+<PageCopyright>© Copyright IBM Corp. 2020, 2021 All Rights Reserved.</PageCopyright>
